@@ -1,49 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ArcadiaZoo</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Comfortaa&family=Inika:wght@400;700&family=Lexend+Mega&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Tokyo+Zoo&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <a href="#" class="admin">Admin</a>
-    <div class="login-form">
-      <form action="verificationAdmin.php" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur" />
-        <input type="password" name="password" placeholder="Mot de passe" />
-        <button type="submit">Se connecter</button>
-      </form>
-    </div>
-    <header>
-      <div class="background-image"></div>
-      <div class="header-container">
-        <div class="logo">
-          <img src="logo/logoArcadia.png" alt="ArcadiaLogo" />
-        </div>
-
-        <nav>
-          <ul>
-            <li class="active"><a href="index.html">ACCUEIL</a></li>
-            <li><a href="#">Animaux et Habitats</a></li>
-            <li><a href="#">SERVICES</a></li>
-            <li><a href="#">CONTACT</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<?php
+include 'header.php';
+?>
     <div class="background-section">
       <div class="container">
         <div class="row">
@@ -128,7 +85,11 @@
               />
               <div class="description">
                 <p>Explorez le monde mystérieux des crocodiles des marais</p>
-                <a href="description_image2.html">En savoir plus...</a>
+                <a href="description_image2.html"
+                  >En savoir plus...<img
+                    src="logo/iconeLien.png"
+                    alt="Logo En Savoir Plus"
+                /></a>
               </div>
             </div>
           </div>
@@ -143,7 +104,11 @@
                 <p>
                   Découvrez l'agilité du chamois, roi des sommets montagneux
                 </p>
-                <a href="description_image3.html">En savoir plus...</a>
+                <a href="description_image3.html"
+                  >En savoir plus...<img
+                    src="logo/iconeLien.png"
+                    alt="Logo En Savoir Plus"
+                /></a>
               </div>
             </div>
           </div>
@@ -182,90 +147,19 @@
       <div class="comments-space">
         <div class="row">
           <div class="col-md-4">
-            <h5>Pseudo</h5>
+            <h4>Pseudo</h4>
             <p>...</p>
           </div>
           <div class="col-md-4 text-center">
-            <h5>Date</h5>
+            <h4>Date</h4>
             <p>...</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h5>Commentaires</h5>
+            <h4>Commentaires</h4>
             <p>...</p>
           </div>
         </div>
       </div>
-
-      <footer class="custom-footer">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-6">
-                <img
-                  src="logo/logoArcadia.png"
-                  alt="Logo"
-                  class="logo img-fluid"
-                />
-              </div>
-              <div class="col-md-6">
-                <div class="text-center">
-                  <h2 class="title">Besoin d'aide ?</h2>
-                  <button class="btn btn-primary contact-button">
-                    Contacter nous
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-6 right-column">
-                <div class="text-center">
-                  <h2 class="title">Pratique</h2>
-                  <div class="practical-links">
-                    <a href="#" class="link-secondary">VENIR AU PARC</a><br />
-                    <a href="#" class="link-secondary">BILLETTERIE</a><br />
-                    <a href="#" class="link-secondary">CONTACT</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="text-center">
-                  <h2 class="title">Suivez nous</h2>
-                  <div class="social-icons">
-                    <img
-                      src="logo/facebook.png"
-                      alt="Facebook"
-                      class="social-icon"
-                    />
-                    <img
-                      src="logo/instagram.png"
-                      alt="Instagram"
-                      class="social-icon"
-                    />
-                    <img
-                      src="logo/tripadvisor.png"
-                      alt="tripadvisor"
-                      class="social-icon"
-                    />
-                    <img src="logo/x.jpg" alt="x" class="social-icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p class="text-muted small">
-              © 2024 MOHAMMAD Aowis Tous droits réservés
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </body>
-  <link rel="stylesheet" href="script.js" />
-</html>
+           <?php include('footer.php'); ?>
