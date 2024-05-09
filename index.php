@@ -63,7 +63,7 @@ include 'header.php';
                 alt="Image 1"
                 class="image img-fluid"
               />
-              <div class="description">
+              <div class="description-contain">
                 <p>
                   Rencontrez le roi de la savane - le lion. Découvrez sa majesté
                   et sa puissance
@@ -83,7 +83,7 @@ include 'header.php';
                 alt="Image 2"
                 class="image img-fluid"
               />
-              <div class="description">
+              <div class="description-contain">
                 <p>Explorez le monde mystérieux des crocodiles des marais</p>
                 <a href="description_image2.html"
                   >En savoir plus...<img
@@ -100,7 +100,7 @@ include 'header.php';
                 alt="Image 3"
                 class="image img-fluid"
               />
-              <div class="description">
+              <div class="description-contain">
                 <p>
                   Découvrez l'agilité du chamois, roi des sommets montagneux
                 </p>

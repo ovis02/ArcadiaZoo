@@ -25,25 +25,25 @@ header {
   margin-top: 10px;
 }
 
-nav {
+.header-nav {
   position: absolute;
   top: 240px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-nav ul {
+.header-nav ul {
   display: flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-nav ul li {
+.header-nav ul li {
   margin: 0;
 }
 
-nav ul li a {
+.header-nav ul li a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,8 @@ nav ul li a {
   color: #54331e;
 }
 
-nav ul li.active a {
+.header-nav ul li.active a,
+.service-nav ul li.active {
   background-color: #f78f2e; /* Change la couleur de fond pour la classe active */
 }
 
@@ -154,7 +155,7 @@ a.admin {
   height: 350px;
 }
 
-.description {
+.description-contain {
   bottom: -152px;
   left: 0;
   width: 350px;
@@ -165,7 +166,7 @@ a.admin {
   border-top: none;
 }
 
-.description p {
+.description-contain p {
   text-align: center;
   margin-bottom: 0;
   font-family: "Roboto", sans-serif;
@@ -173,7 +174,7 @@ a.admin {
   color: #54331e;
 }
 
-.description a {
+.description-contain a {
   display: block;
   text-align: right;
   font-family: "Roboto", sans-serif;
@@ -182,7 +183,7 @@ a.admin {
   text-decoration: none;
 }
 
-.description img {
+.description-contain img {
   width: 25px;
   height: 25px;
 }
@@ -257,6 +258,10 @@ h3 {
 .practical-links a {
   display: block;
   margin-bottom: 5px;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* Icônes de suivi */
@@ -308,4 +313,179 @@ h3 {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+/*...................Services..............*/
+
+.service-container {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-nav {
+  /* Modification de la classe ici */
+  background-color: #dae8e1;
+  max-height: 450px;
+  max-width: 250px;
+}
+
+.service-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.service-nav ul li {
+  padding: 20px;
+  font-size: 32px;
+  font-family: "Roboto", sans-serif;
+}
+.service-nav ul li a {
+  color: #54331e;
+  text-decoration: none;
+}
+
+.service-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  text-align: center;
+}
+
+.service-title {
+  font-size: 50px;
+  color: #54331e;
+  font-family: "Zen Tokyo Zoo", sans-serif;
+  margin-top: 30px;
+}
+
+.intro {
+  font-size: 20px;
+  color: #54331e;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  margin-top: 50px;
+}
+
+/*.................................Section services......................*/
+
+.section-services {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.service1,
+.service2,
+.service3,
+.service4,
+.service5,
+.service6 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.description,
+.service {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .service1 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .service1 .description {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+.service img {
+  max-width: 600px;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+.description {
+  width: 600px;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  color: white;
+  text-align: center;
+}
+
+.serv-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.description p {
+  font-size: 16px;
+}
+
+.serv-title,
+.description p {
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/*Animals*/
+
+.background-section-desert {
+  background-image: url("desert/desert.jpg");
+}
+
+.background-section-jungle {
+  background-image: url("jungle/jungle.jpg");
+}
+
+.background-section-mountain {
+  background-image: url("montagne/montagne.jpg");
+}
+
+.background-section-marais {
+  background-image: url("marais/marais.jpg");
+}
+
+.background-section-savane {
+  background-image: url("savane/savane.jpg");
+}
+
+.background-section-desert,
+.background-section-jungle,
+.background-section-mountain,
+.background-section-marais,
+.background-section-savane {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.animals-title {
+  font-size: 50px;
+  color: white;
+  font-family: "Zen Tokyo Zoo", sans-serif;
+  margin-top: 30px;
+}
+
+.intro-animals {
+  font-size: 20px;
+  color: white;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.animals-intro {
+  background-color: rgba(0, 0, 0, 0.25);
 }

@@ -34,13 +34,13 @@
           <img src="logo/logoArcadia.png" alt="ArcadiaLogo" />
         </div>
 
-        <nav>
-          <ul>
+       <nav class="header-nav">
+    <ul>
         <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="index.php">ACCUEIL</a></li>
-        <li <?php if(basename($_SERVER['PHP_SELF']) == 'animals.php') echo 'class="active"'; ?>><a href="animals.php">Animaux et Habitats</a></li>
+        <li <?php if(basename($_SERVER['PHP_SELF']) == 'desert.php') echo 'class="active"'; ?>><a href="desert.php">Animaux et Habitats</a></li>
         <li <?php if(basename($_SERVER['PHP_SELF']) == 'services.php') echo 'class="active"'; ?>><a href="services.php">SERVICES</a></li>
         <li <?php if(basename($_SERVER['PHP_SELF']) == 'formulaire.php') echo 'class="active"'; ?>><a href="formulaire.php">CONTACT</a></li>
-          </ul>
-        </nav>
+    </ul>
+</nav>
       </div>
     </header>

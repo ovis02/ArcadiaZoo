@@ -12,7 +12,7 @@
               <div class="col-md-6">
                 <div class="text-center">
                   <h5 class="title">Besoin d'aide ?</h5>
-                   <a href="formulaire.php" class="contact-button"><button class="btn btn-primary contact-button">
+                   <a href="formulaire.php" class="contact-button">  <button class="btn btn-primary contact-button" style="background-color: #197c2f;">
                     Contacter nous
                   </button></a>
                 </div>
