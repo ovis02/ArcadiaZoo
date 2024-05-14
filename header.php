@@ -43,4 +43,28 @@
     </ul>
 </nav>
       </div>
+<div class="burger-container">
+    <a href="#" id="logo-burger-button">
+        <img
+            id="logo-burger"
+            src="logo/LOGO.png"
+            alt="logo-burger"
+            height="40px"
+            width="40px"
+            class="logo-burger"
+        />
+    </a>
+</div>
+
+<div id="vertical-navbar" class="vertical-navbar">
+    <ul>
+        <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="index.php">ACCUEIL</a></li>
+        <li <?php if(basename($_SERVER['PHP_SELF']) == 'desert.php') echo 'class="active"'; ?>><a href="desert.php">Animaux et Habitats</a></li>
+        <li <?php if(basename($_SERVER['PHP_SELF']) == 'services.php') echo 'class="active"'; ?>><a href="services.php">SERVICES</a></li>
+        <li <?php if(basename($_SERVER['PHP_SELF']) == 'formulaire.php') echo 'class="active"'; ?>><a href="formulaire.php">CONTACT</a></li>
+    </ul>
+    <button id="close-button">Fermer</button>
+</div>
+
+
     </header>

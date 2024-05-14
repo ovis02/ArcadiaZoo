@@ -16,7 +16,8 @@ include 'header.php';
       <div class="col-md-9 content animals-intro">
         <h1 class="animals-title">Desert</h1>
         <p class="intro-animals">
-Bienvenue dans le désert, un monde de vastes étendues arides et de ciels infinis. Ici, la vie s'épanouit malgré l'adversité, avec des créatures extraordinaires adaptées à ce milieu hostile. Rencontrez le cobra royal, le fennec, la vipère du desert et d'autres encore, chacun démontrant une résilience remarquable dans ce paysage désolé mais magnifique.</p>
+
+Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage. Explorez notre désert reconstitué, un monde de vastes enclos rocailleux et de ciels infinis. Ici, la vie prospère malgré les défis, avec des créatures extraordinaires adaptées à ce milieu unique. Rencontrez le majestueux cobra royal, le charmant fennec, la redoutable vipère du désert, le gracieux dromadaire et l'insaisissable iguane du désert, chacun illustrant une résilience remarquable dans ce paysage désolé mais magnifique.</p>
       </div>
     </div>
   </div>
@@ -40,6 +41,7 @@ Bienvenue dans le désert, un monde de vastes étendues arides et de ciels infin
           />
         </article>
          </div>
+         <hr class="service-divider">
          <div class="service2">
         <article class="service">
           <img
@@ -60,6 +62,7 @@ Bienvenue dans le désert, un monde de vastes étendues arides et de ciels infin
           </p>
         </article>
       </div>
+      <hr class="service-divider">
       <div class="service3">
        
         <article class="description">
@@ -80,6 +83,7 @@ Bienvenue dans le désert, un monde de vastes étendues arides et de ciels infin
           />
         </article>
       </div>
+      <hr class="service-divider">
       <div class="service4">
         <article class="service">
           <img
@@ -100,6 +104,7 @@ Bienvenue dans le désert, un monde de vastes étendues arides et de ciels infin
 
         </article>
       </div>
+      <hr class="service-divider">
       <div class="service5">
       
         <article class="description">

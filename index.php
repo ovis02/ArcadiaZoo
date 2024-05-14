@@ -42,7 +42,7 @@ include 'header.php';
           </div>
           <div class="col-lg-6">
             <div class="image-container">
-              <img src="jungle/tigre.jpg" alt="Tigre" class="img-fluid" />
+              <img id="main-image" src="jungle/tigre.jpg" alt="Tigre" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ include 'header.php';
                   Rencontrez le roi de la savane - le lion. Découvrez sa majesté
                   et sa puissance
                 </p>
-                <a href="description_image1.html"
+                <a href="savane.php#lion"
                   >En savoir plus...<img
                     src="logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
@@ -85,7 +85,7 @@ include 'header.php';
               />
               <div class="description-contain">
                 <p>Explorez le monde mystérieux des crocodiles des marais</p>
-                <a href="description_image2.html"
+                <a href="marais.php#croco"
                   >En savoir plus...<img
                     src="logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
@@ -96,15 +96,15 @@ include 'header.php';
           <div class="col-lg-4">
             <div class="rectangle">
               <img
-                src="montagne/chamois.jpg"
+                src="montagne/loup.jpg"
                 alt="Image 3"
                 class="image img-fluid"
               />
               <div class="description-contain">
                 <p>
-                  Découvrez l'agilité du chamois, roi des sommets montagneux
+                  Plongez dans l'essence majestueuse du loup gris, maître des forêts sauvages
                 </p>
-                <a href="description_image3.html"
+                <a href="mountain.php#loup"
                   >En savoir plus...<img
                     src="logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
@@ -144,22 +144,29 @@ include 'header.php';
           </form>
         </div>
       </div>
-      <div class="comments-space">
-        <div class="row">
-          <div class="col-md-4">
-            <h4>Pseudo</h4>
-            <p>...</p>
-          </div>
-          <div class="col-md-4 text-center">
-            <h4>Date</h4>
-            <p>...</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Commentaires</h4>
-            <p>...</p>
-          </div>
-        </div>
+    <div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="comment-info">
+        <h4>Pseudo</h4>
+        <p>...</p>
       </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="comment-info text-center">
+        <h4>Date</h4>
+        <p>...</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="comment-content">
+        <h4>Commentaires</h4>
+        <p>...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
            <?php include('footer.php'); ?>

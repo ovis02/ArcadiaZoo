@@ -47,6 +47,7 @@ include 'header.php';
           />
         </article>
          </div>
+         <hr class="service-divider">
          <div class="service2">
         <article class="service">
           <img
@@ -67,6 +68,7 @@ include 'header.php';
 
         </article>
       </div>
+      <hr class="service-divider">
       <div class="service3">
        
         <article class="description">
@@ -89,7 +91,8 @@ include 'header.php';
           />
         </article>
       </div>
-      <div class="service4">
+      <hr class="service-divider">
+      <div class="service4 " id="loup">
         <article class="service">
           <img
             src="montagne/loup.jpg"
@@ -111,6 +114,7 @@ include 'header.php';
 
         </article>
       </div>
+      <hr class="service-divider">
       <div class="service5">
       
         <article class="description">

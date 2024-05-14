@@ -6,11 +6,11 @@ include 'header.php';
     <div class="row">
       <nav class="col-md-3 service-nav"> 
         <ul>
-          <li><a href="#">Billeterie</a></li>
-          <li><a href="#">Accès & Horaires</a></li>
-          <li><a href="#">Petit Train</a></li>
-          <li><a href="#">Guide</a></li>
-          <li><a href="#">Restauration</a></li>
+          <li><a href="#ticket">Billeterie</a></li>
+          <li><a href="#time">Accès & Horaires</a></li>
+          <li><a href="#train">Petit Train</a></li>
+          <li><a href="#guide">Guide</a></li>
+          <li><a href="#restaurant">Restauration</a></li>
         </ul>
       </nav>
       <div class="col-md-9 content">
@@ -20,7 +20,7 @@ include 'header.php';
     </div>
   </div>
 <section class="section-services">
-      <div class="service1">      
+      <div class="service1" id="ticket">      
         <article class="description">
           <h2 class="serv-title">Billetterie</h2>
           <p>
@@ -34,7 +34,8 @@ include 'header.php';
           />
         </article>
          </div>
-         <div class="service2">
+         <hr class="service-divider">
+         <div class="service2" id="time">
         <article class="service">
           <img
             src="services/zoo.jpg"
@@ -56,7 +57,8 @@ Samedi et dimanche : 10h00 - 19h00
           </p>
         </article>
       </div>
-      <div class="service3">
+      <hr class="service-divider">
+      <div class="service3" id="train">
        
         <article class="description">
           <h2 class="serv-title">Le petit train</h2>
@@ -73,7 +75,8 @@ guider à travers les merveilles de la nature, tout en profitant d'une vue impre
           />
         </article>
       </div>
-      <div class="service4">
+      <hr class="service-divider">
+      <div class="service4" id="guide">
         <article class="service">
           <img
             src="services/guide.jpg"
@@ -90,7 +93,8 @@ Profitez de l'opportunité de découvrir notre zoo aux côtés de nos guides exp
           </p>
         </article>
       </div>
-      <div class="service5">
+      <hr class="service-divider">
+      <div class="service5" id="restaurant">
       
         <article class="description">
           <h2 class="serv-title">Restauration</h2>
