@@ -31,7 +31,7 @@ Vétérinaire : Responsable de la santé et du bien-être des animaux du zoo, fo
 
 - PHP : Langage de programmation côté serveur.
 - MySQL : Système de gestion de base de données relationnelle.
-- Base de données non relationnelle : Utilisée pour le système de comptage et d'analyse des avis et des formulaires de contact.
+- Base de données non relationnelle MongoDB: Utilisée pour le système de comptage des animaux.
 
 # État actuel
 
