@@ -61,7 +61,7 @@ header {
 .service-nav ul li.active,
 .vertical-navbar ul li.active a,
 .vertical-navbar ul li.active {
-  background-color: #f78f2e; /* Change la couleur de fond pour la classe active */
+  background-color: #f78f2e;
 }
 
 .burger-container {
@@ -343,8 +343,9 @@ h3 {
 .service-nav ul li {
   padding: 20px;
   font-size: 32px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inika", serif;
 }
+
 .service-nav ul li a {
   color: #54331e;
   text-decoration: none;
@@ -474,7 +475,6 @@ h3 {
   line-height: 1.5;
   font-family: "Roboto", sans-serif;
   margin-top: 50px;
-  font-weight: bold;
 }
 
 .animals-intro {
@@ -502,9 +502,24 @@ h3 {
     width: 100px;
     height: 90px;
   }
+  /*formulaire admin*/
+  a.admin {
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+  }
 
+  .login-form {
+    top: 50px;
+    right: 10px;
+    width: 90%;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  /* Positionnement du burger */
   .burger-container {
-    /* Positionnement du burger en bas à droite du header */
     position: absolute;
     top: 60px;
     right: 0;
@@ -621,7 +636,7 @@ h3 {
   .comment-content p {
     font-size: 12px;
   }
-  /*animalsFormatMobile*/
+  /*...............animalsFormatMobile..........*/
   .animals-title {
     font-size: 24px;
     margin-top: 10px;
@@ -632,9 +647,7 @@ h3 {
     margin-top: 10px;
   }
 
-  /*ServiceMobileFormat*/
-
-  /*barre nav verticale mobile service*/
+  /*............ServiceMobileFormat............*/
 
   .service-container {
     flex-direction: column;
@@ -729,7 +742,7 @@ h3 {
   }
   .service-divider {
     width: 80%;
-    border-bottom: 2px solid #54331e; /* Couleur et style de la séparation */
+    border-bottom: 2px solid white;
     margin: 20px auto;
   }
 }
