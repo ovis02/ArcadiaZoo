@@ -20,13 +20,18 @@
   </head>
   <body>
     <a href="#" class="admin">Admin</a>
-    <div class="login-form">
-      <form action="verificationAdmin.php" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur" />
-        <input type="password" name="password" placeholder="Mot de passe" />
-        <button type="submit">Se connecter</button>
-      </form>
-    </div>
+<div class="login-form">
+  <form action="verification.php" method="POST">
+    <input type="text" name="username" placeholder="Nom d'utilisateur" />
+    <input type="password" name="password" placeholder="Mot de passe" />
+    <select name="role">
+      <option value="admin">Admin</option>
+      <option value="employee">Employé</option>
+      <option value="veterinarian">Vétérinaire</option>
+    </select>
+    <button type="submit">Se connecter</button>
+  </form>
+</div>
     <header>
       <div class="background-image"></div>
       <div class="header-container">

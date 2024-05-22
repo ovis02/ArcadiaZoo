@@ -1,4 +1,10 @@
 <?php
+// Inclure le fichier de connexion à la base de données
+include_once "connexion_bd.php";
+
+// Sélectionner les avis validés
+$sql = "SELECT pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 1 ORDER BY date_creation DESC";
+$stmt = $pdo->query($sql);
 include 'header.php';
 ?>
     <div class="background-section">
@@ -117,56 +123,52 @@ include 'header.php';
       <div class="container-fluid">
         <div class="transparent-rectangle">
           <h3>Laisser un avis</h3>
-          <form>
-            <div class="form-group">
-              <label for="pseudo">Pseudo :</label>
-              <input type="text" class="form-control" id="pseudo" />
-            </div>
-            <div class="form-group">
-              <label for="email">Email :</label>
-              <input type="email" class="form-control" id="email" />
-            </div>
-            <div class="form-group">
-              <label for="commentaire">Commentaire :</label>
-              <textarea
-                class="form-control"
-                id="commentaire"
-                rows="5"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-submit"
-              style="background-color: #dae8e1"
-            >
-              Laisser un avis
-            </button>
-          </form>
+   <form action="traitement_avis.php" method="POST">
+                <div class="form-group">
+                    <label for="pseudo">Pseudo :</label>
+                    <input type="text" class="form-control" id="pseudo" name="pseudo" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="email" class="form-control" id="email" name="email" />
+                </div>
+                <div class="form-group">
+                    <label for="commentaire">Commentaire :</label>
+                    <textarea class="form-control" id="commentaire" name="commentaire" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit" style="background-color: #dae8e1">Laisser un avis</button>
+            </form>
+
         </div>
       </div>
-    <div class="container">
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <div class="comment-info">
-        <h4>Pseudo</h4>
-        <p>...</p>
-      </div>
+      
+    <!-- Section pour afficher les avis validés -->
+ <div class="container">
+        <?php while ($row = $stmt->fetch()): ?>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="comment-info">
+                    <h4>Pseudo</h4>
+                    <p><?php echo htmlspecialchars($row['pseudo']); ?></p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="comment-info">
+                    <h4>Date</h4>
+                    <p><?php echo htmlspecialchars($row['date_creation']); ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="comment-content">
+                    <h4>Commentaires</h4>
+                    <p><?php echo htmlspecialchars($row['commentaire']); ?></p>
+                </div>
+            </div>
+        </div>
+        <?php endwhile; ?>
     </div>
-    <div class="col-md-4 mb-3">
-      <div class="comment-info text-center">
-        <h4>Date</h4>
-        <p>...</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="comment-content">
-        <h4>Commentaires</h4>
-        <p>...</p>
-      </div>
-    </div>
-  </div>
 </div>
 
            <?php include('footer.php'); ?>
