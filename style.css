@@ -481,6 +481,39 @@ h3 {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
+/* Conteneur du bouton "J'aime" */
+.like-button-container {
+  text-align: right;
+  margin-top: 10px;
+}
+
+/* Style du bouton "J'aime" */
+button.jaime-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button.jaime-btn:hover {
+  transform: scale(1.1);
+}
+
+/*button info animals*/
+.info {
+  background-color: #dae8e1;
+  color: #54331e;
+  border: none;
+  font-size: auto;
+  border-radius: 5px;
+}
+
+.info:hover {
+  background-color: #c8d4cc;
+}
+
 @media (max-width: 834px) {
   /*header*/
   header {

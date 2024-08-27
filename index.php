@@ -138,7 +138,6 @@ include 'header.php';
                 </div>
                 <button type="submit" class="btn btn-submit" style="background-color: #dae8e1">Laisser un avis</button>
             </form>
-
         </div>
       </div>
       

@@ -35,13 +35,20 @@ include 'header.php';
 <p>
   Prénom : Crac <br>
   Race : Castor <br>
+            <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+            </p>
+<div style="display: none">
   Habitat : Marais et cours d'eau <br>
   État de l'animal : <br>
   Nourriture proposée : écorce, branches, plantes aquatiques <br>
   Grammage de la nourriture : 1 à 2 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Crac" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -59,32 +66,49 @@ include 'header.php';
           />
         </article>
         <article class="description">
-    
+    <p>
   Prénom : Godzilla <br>
   Race : Crocodile du Nil <br>
+   <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+  </p>
+           
+<div style="display: none">
   Habitat : Marais et cours d'eau <br>
   État de l'animal : <br>
   Nourriture proposée : viande de poulet, poisson, bœuf <br>
   Grammage de la nourriture : 2 à 5 kg <br>
   Date de passage : 00/00/2024
-</p>
 
+</div>
+<div class="like-button-container">
+  <button id="increment-godzilla" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
       </div>
       <hr class="service-divider">
       <div class="service3">
        
         <article class="description">
-
+<p>
   Prénom : Pumba <br>
   Race : Hippopotame <br>
+        <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+        </p>
+<div style="display: none">
   Habitat : Marais et cours d'eau <br>
   État de l'animal : <br>
   Nourriture proposée : foin, herbe, légumes <br>
   Grammage de la nourriture : 20 à 50 kg <br>
   Date de passage : 00/00/2024
-</p>
 
+</div>
+<div class="like-button-container">
+  <button id="increment-Pumba" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
         </article>
@@ -108,13 +132,21 @@ include 'header.php';
 <p>
   Prénom : Annie <br>
   Race : Lamantin <br>
+          <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Marais et cours d'eau <br>
   État de l'animal : <br>
   Nourriture proposée : laitue, algues, légumes aquatiques <br>
   Grammage de la nourriture : 30 à 50 kg <br>
   Date de passage : 00/00/2024
-</p>
 
+</div>
+<div class="like-button-container">
+  <button id="increment-Annie" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
 
@@ -128,14 +160,21 @@ include 'header.php';
 <p>
   Prénom : Shelly <br>
   Race : Tortue <br>
+            <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+            </p>
+<div style="display: none">
   Habitat : Marais et cours d'eau <br>
   État de l'animal : <br>
   Nourriture proposée : végétaux, fruits, vers de terre <br>
   Grammage de la nourriture : 100 à 200 g <br>
   Date de passage : 00/00/2024
-</p>
 
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Shelly" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
 

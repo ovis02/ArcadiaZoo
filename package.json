@@ -1,0 +1,26 @@
+{
+  "name": "arcadiazoo",
+  "version": "1.0.0",
+  "description": "ArcadiaZoo est une application web conçue pour gérer les activités du zoo Arcadia. Elle permet aux utilisateurs de gérer les habitats, les animaux, les services, les avis des visiteurs ainsi qu'un formulaire de contact.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ovis02/ArcadiaZoo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ovis02/ArcadiaZoo/issues"
+  },
+  "homepage": "https://github.com/ovis02/ArcadiaZoo#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.2.0",
+    "mongoose": "^8.5.4"
+  }
+}

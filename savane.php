@@ -37,14 +37,20 @@ include 'header.php';
 <p>
   Prénom : Tembo <br>
   Race : Éléphant d'Afrique <br>
+          <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : herbes, feuilles, écorce <br>
   Grammage de la nourriture : 100 à 300 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Tembo" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -65,23 +71,32 @@ include 'header.php';
 <p>
   Prénom : Jasiri <br>
   Race : Girafe <br>
+        <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+        </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : feuilles d'acacia, branches <br>
   Grammage de la nourriture : 30 à 75 kg <br>
   Date de passage : 00/00/2024
-</p>
+</div>
 <p>
   Prénom : Kito <br>
   Race : Girafe (Jeune) <br>
+          <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : lait maternel, feuilles tendres <br>
   Grammage de la nourriture : 5 à 15 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-JasiriKito" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
       </div>
       <hr class="service-divider">
@@ -92,14 +107,20 @@ include 'header.php';
 <p>
   Prénom : Raja <br>
   Race : Guépard <br>
+            <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+            </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : viande de poulet, agneau, mouton <br>
   Grammage de la nourriture : 2 à 4 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Raja" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
         </article>
          <article class="service">
@@ -122,13 +143,20 @@ include 'header.php';
 <p>
   Prénom : Simba <br>
   Race : Lion <br>
+         <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : viande de bœuf, poulet, poisson <br>
   Grammage de la nourriture : 5 à 10 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Simba" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
 
@@ -143,12 +171,20 @@ include 'header.php';
 <p>
   Prénom : Rhino, Rina et Rocco <br>
   Race : Rhinocéros <br>
+           <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+           </p>
+<div id="etat-animal" class="etat-animal-rhino" style="display: none;">
   Habitat : Savane <br>
   État des animaux : <br>
   Nourriture proposée : foin, herbes, branches <br>
   Grammage de la nourriture : 50 à 100 kg par rhinocéros <br>
   Date de passage : 00/00/2024
-</p>
+</div>
+<div class="like-button-container">
+  <button id="increment-rhinoFamily" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -172,14 +208,20 @@ include 'header.php';
 <p>
   Prénom : Zara <br>
   Race : Zèbre <br>
+             <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+             </p>
+<div style="display: none">
   Habitat : Savane <br>
   État de l'animal : <br>
   Nourriture proposée : herbes, feuilles, écorce <br>
   Grammage de la nourriture : 10 à 15 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Zara" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
 

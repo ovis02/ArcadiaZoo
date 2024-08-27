@@ -33,6 +33,8 @@ Vétérinaire : Responsable de la santé et du bien-être des animaux du zoo, fo
 - MySQL : Système de gestion de base de données relationnelle.
 - Base de données non relationnelle MongoDB: Utilisée pour le système de comptage des animaux.
 
+- lien heroku : https://arcazoo-40aeb8b73b17.herokuapp.com/services.php#time
+
 # État actuel
 
 Le site web d'ArcadiaZoo est actuellement en cours de développement. Il inclut une base de données MySQL pour stocker des informations sur les habitats, les animaux, les services, les avis et les formulaires de contact. L'application est en cours de développement pour répondre aux différents rôles d'utilisateur, y compris les administrateurs, les employés et les vétérinaires. Un système de comptage et d'analyse des avis et des formulaires de contact est en cours de développement, utilisant une base de données non relationnelle pour cette fonctionnalité spécifique.

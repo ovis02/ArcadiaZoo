@@ -31,12 +31,20 @@ include 'header.php';
  <p>
   Prénom : Killer <br>
   Race : Anaconda <br>
+       <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+       </p>
+<div style="display: none">
   Habitat : Forêts tropicales d'Amérique du Sud <br>
   État de l'animal : <br>
   Nourriture proposée : petits mammifères, oiseaux, poissons <br>
   Grammage de la nourriture : 1 à 2 kg <br>
   Date de passage : 00/00/2024
-</p>
+</div>
+<div class="like-button-container">
+  <button id="increment-Killer" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -57,13 +65,20 @@ include 'header.php';
           <p>
   Prénom : Garry <br>
   Race : Jaguar <br>
+         <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+         </p>
+<div style="display: none">
   Habitat : Forêts tropicales d'Amérique du Sud <br>
   État de l'animal : <br>
   Nourriture proposée : mammifères de taille moyenne, poissons, oiseaux <br>
   Grammage de la nourriture : 2 à 3 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Garry" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
       </div>
       <hr class="service-divider">
@@ -73,13 +88,20 @@ include 'header.php';
     <p>
   Prénom : Kaki <br>
   Race : Macaque <br>
+    <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+<div style="display: none;">
+  </p>
   Habitat : Forêts tropicales d'Asie <br>
   État de l'animal : <br>
   Nourriture proposée : fruits, graines, insectes <br>
   Grammage de la nourriture : 300 à 400 grammes <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Kaki" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
          <article class="service">
           <img
@@ -100,13 +122,21 @@ include 'header.php';
      <p>
   Prénom : Spin <br>
   Race : Perroquet Ara Rouge <br>
+      <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+      </p>
+<div style="display: none">
   Habitat : Forêts tropicales d'Amérique du Sud <br>
   État de l'animal : <br>
   Nourriture proposée : fruits, graines, noix <br>
   Grammage de la nourriture : 150 à 200 grammes <br>
   Date de passage : 00/00/2024
 </p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Spin" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
         </article>
       </div>
@@ -117,14 +147,20 @@ include 'header.php';
         <p>
   Prénom : Rex <br>
   Race : Tigre du Bengale <br>
+        <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+        </p>
+<div style="display: none">
   Habitat : Forêts tropicales et mangroves d'Asie du Sud <br>
   État de l'animal : <br>
   Nourriture proposée : cervidés, sangliers, buffles <br>
   Grammage de la nourriture : 5 à 7 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Rex" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img

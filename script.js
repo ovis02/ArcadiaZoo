@@ -91,3 +91,16 @@ function changeImage() {
 
 // Définir l'intervalle de temps pour changer l'image (par exemple, toutes les 5 secondes)
 const interval = setInterval(changeImage, 5000); // Temps en millisecondes entre chaque changement d'image
+
+function toggleInfo(button) {
+  const moreInfo = button.parentElement.nextElementSibling;
+
+  // Affichage des informations supplémentaires
+  if (moreInfo.style.display === "none") {
+    moreInfo.style.display = "block";
+    button.textContent = "Afficher moins...";
+  } else {
+    moreInfo.style.display = "none";
+    button.textContent = "En savoir plus...";
+  }
+}

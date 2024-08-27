@@ -27,12 +27,20 @@ Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage
           <p>
   Prénom : Nick <br>
   Race : Vipère des sables <br>
+         <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+         </p>
+<div style="display: none">
   Habitat : Zones désertiques d'Afrique du Nord et du Moyen-Orient <br>
   État de l'animal : <br>
   Nourriture proposée : petits mammifères, oiseaux, lézards <br>
   Grammage de la nourriture : 100 grammes <br>
   Date de passage : 00/00/2024
-</p>
+</div>
+<div class="like-button-container">
+  <button id="increment-Nick" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -53,13 +61,21 @@ Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage
           <p>
   Prénom : Feunard <br>
   Race : Fennec <br>
+         <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Déserts d'Afrique du Nord <br>
   État de l'animal : <br>
   Nourriture proposée : petits rongeurs, insectes, fruits <br>
   Grammage de la nourriture : 50 à 100 grammes <br>
   Date de passage : 00/00/2024
-
-          </p>
+  </div>
+      <div class="like-button-container">
+  <button id="increment-Feunard" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+   
+          </div>
         </article>
       </div>
       <hr class="service-divider">
@@ -69,12 +85,20 @@ Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage
         <p>
   Prénom : Abo <br>
   Race : Cobra royal <br>
+             <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+             </p>
+<div style="display: none">
   Habitat : Forêts tropicales, plaines et déserts d'Asie <br>
   État de l'animal : <br>
   Nourriture proposée : petits mammifères, oiseaux, reptiles <br>
   Grammage de la nourriture : 100 à 200 grammes <br>
   Date de passage : 00/00/2024
-</p>
+</div>
+<div class="like-button-container">
+  <button id="increment-Abo" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
          <article class="service">
           <img
@@ -95,13 +119,20 @@ Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage
       <p>
   Prénom : Doma <br>
   Race : Dromadaire <br>
+               <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+               </p>
+<div style="display: none">
   Habitat : Déserts d'Afrique du Nord et du Moyen-Orient <br>
   État de l'animal : <br>
   Nourriture proposée : herbes, feuilles, graines <br>
   Grammage de la nourriture : 5 à 10 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Doma" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
       </div>
       <hr class="service-divider">
@@ -111,13 +142,20 @@ Bienvenue dans notre zoo, une oasis de découverte au cœur de la nature sauvage
           <p>
   Prénom : Zed <br>
   Race : Iguane du désert <br>
+                 <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+                 </p>
+<div style="display: none">
   Habitat : Déserts d'Amérique du Nord <br>
   État de l'animal : <br>
   Nourriture proposée : végétation désertique, insectes <br>
   Grammage de la nourriture : 50 à 100 grammes <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Zed" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img

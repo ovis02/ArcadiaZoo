@@ -33,12 +33,21 @@ include 'header.php';
 <p>
   Prénom : Scott <br>
   Race : Aigle royal <br>
+          <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Régions montagneuses et falaises escarpées <br>
   État de l'animal : <br>
   Nourriture proposée : petits mammifères, oiseaux, reptiles <br>
   Grammage de la nourriture : 500 à 1000 grammes <br>
   Date de passage : 00/00/2024
-</p>
+
+</div>
+<div class="like-button-container">
+  <button id="increment-Scott" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
           <article class="service">
           <img
@@ -59,13 +68,20 @@ include 'header.php';
          <p>
   Prénom : Cricri <br>
   Race : Bouquetin <br>
+    <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+    </p>
+<div style="display: none">
   Habitat : Montagnes rocailleuses et pentes escarpées <br>
   État de l'animal : <br>
   Nourriture proposée : herbes alpines, lichens, petits arbustes <br>
   Grammage de la nourriture : 2 à 4 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-CriCri" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
       </div>
       <hr class="service-divider">
@@ -75,14 +91,20 @@ include 'header.php';
     <p>
   Prénom : Doug <br>
   Race : Chamois <br>
+      <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+<div style="display: none">
+  </p>
   Habitat : Montagnes rocailleuses et pentes escarpées <br>
   État de l'animal : <br>
   Nourriture proposée : herbes alpines, lichens, petits arbustes <br>
   Grammage de la nourriture : 2 à 4 kg <br>
   Date de passage : 00/00/2024
-</p>
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Doug" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
         </article>
          <article class="service">
           <img
@@ -103,13 +125,20 @@ include 'header.php';
     <p>
   Prénom : Wolf <br>
   Race : Loup gris <br>
+        <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+        </p>
+<div style="display: none">
   Habitat : Forêts et montagnes boisées <br>
   État de l'animal : <br>
   Nourriture proposée : viande de bœuf, poulet, poisson <br>
   Grammage de la nourriture : 2 à 3 kg <br>
   Date de passage : 00/00/2024
-</p>
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Wolf" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
 
         </article>
@@ -121,15 +150,20 @@ include 'header.php';
       <p>
   Prénom : Spog <br>
   Race : Marmotte <br>
+          <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
+          </p>
+<div style="display: none">
   Habitat : Montagnes rocheuses et prairies alpines <br>
   État de l'animal : <br>
   Nourriture proposée : herbes, racines, baies <br>
   Grammage de la nourriture : 200 à 400 grammes <br>
   Date de passage : 00/00/2024
-</p>
-
-
-
+</div>
+<div class="like-button-container">
+  <button id="increment-Spog" class="jaime-btn">
+    ❤️ J'aime
+  </button>
+</div>
 
         </article>
           <article class="service">
