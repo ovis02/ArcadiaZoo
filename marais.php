@@ -81,9 +81,10 @@ include 'header.php';
 
 </div>
 <div class="like-button-container">
-  <button id="increment-godzilla" class="jaime-btn">
+  <button id="increment-Godzilla" class="jaime-btn">
     ❤️ J'aime
   </button>
+  <p id="result"></p>
 </div>
         </article>
       </div>

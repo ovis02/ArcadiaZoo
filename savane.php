@@ -157,11 +157,6 @@ include 'header.php';
     ❤️ J'aime
   </button>
 </div>
-
-
-
-
-
         </article>
       </div>
       <hr class="service-divider">

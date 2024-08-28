@@ -89,7 +89,7 @@ include 'header.php';
   Prénom : Kaki <br>
   Race : Macaque <br>
     <button class="info" onclick="toggleInfo(this)">En savoir plus...</button>
-<div style="display: none;">
+<div style="display: none">
   </p>
   Habitat : Forêts tropicales d'Asie <br>
   État de l'animal : <br>

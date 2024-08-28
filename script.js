@@ -104,3 +104,29 @@ function toggleInfo(button) {
     button.textContent = "En savoir plus...";
   }
 }
+
+/*Compteur j'aime*/
+document
+  .getElementById("increment-Godzilla")
+  .addEventListener("click", async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/animal/Godzilla/click",
+        {
+          method: "POST",
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Compteur Godzilla incrémenté:", data);
+        document.getElementById(
+          "result"
+        ).innerHTML = `Godzilla: ${data.animal.views}`;
+      } else {
+        console.error("Erreur lors de l'incrémentation du compteur");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'incrémentation:", error);
+    }
+  });
