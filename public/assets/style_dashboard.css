@@ -77,3 +77,27 @@ button.info {
 .logout:hover {
   text-decoration: underline;
 }
+
+.contact-list {
+  margin: 20px;
+}
+
+.contact-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.contact-item button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.contact-item button:hover {
+  background-color: #e0e0e0;
+}
