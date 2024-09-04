@@ -1,48 +1,47 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express";
+import { MongoClient, ObjectId } from "mongodb";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 
 // Middleware
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
-// Connexion à MongoDB sans les options dépréciées
-mongoose.connect("mongodb://localhost:27017/ArcadiaZoo");
+// Configuration MongoDB
+const uri = "mongodb://localhost:27017";
+const client = new MongoClient(uri);
+const dbName = "arcadiaZoo";
+const collectionName = "animals";
 
-// Schéma et modèle MongoDB
-const animalViewSchema = new mongoose.Schema({
-  animal: { type: String, required: true },
-  views: { type: Number, default: 0 },
-});
+async function incrementViews(animalName) {
+  await client.connect();
+  const db = client.db(dbName);
+  const collection = db.collection(collectionName);
 
-const AnimalView = mongoose.model(
-  "AnimalView",
-  animalViewSchema,
-  "animalviews"
-);
+  const result = await collection.findOneAndUpdate(
+    { name: animalName },
+    { $inc: { views: 1 } },
+    { returnDocument: "after" }
+  );
 
-// Route pour incrémenter le compteur de vues pour Godzilla
+  return result.value;
+}
+
+// Endpoint pour incrémenter le compteur
 app.post("/animal/:name/click", async (req, res) => {
-  try {
-    const animalName = req.params.name;
-    let animal = await AnimalView.findOne({ animal: animalName });
+  const animalName = req.params.name;
 
-    if (animal) {
-      animal.views += 1;
-      await animal.save();
-      res
-        .status(200)
-        .json({ message: "Compteur incrémenté avec succès", animal });
+  try {
+    const updatedAnimal = await incrementViews(animalName);
+    if (updatedAnimal) {
+      res.json({ animal: updatedAnimal });
     } else {
-      animal = new AnimalView({ animal: animalName, views: 1 });
-      await animal.save();
-      res.status(201).json({ message: "Animal ajouté avec succès", animal });
+      res.status(404).json({ error: "Animal non trouvé" });
     }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur" });
   }
 });
 
