@@ -67,14 +67,16 @@ $stmtAvis = $pdo->query($sqlAvis);
                     <p>Commentaire : <?php echo htmlspecialchars($rowAvis['commentaire']); ?></p>
                     <p>Date de Soumission : <?php echo htmlspecialchars($rowAvis['date_creation']); ?></p>
                     
-                    <form action="valider_avis.php" method="POST" style="display: inline;">
-                        <input type="hidden" name="avis_id" value="<?php echo $rowAvis['id']; ?>">
-                        <button type="submit">Valider</button>
-                    </form>
-                    <form action="supprimer_avis.php" method="POST" style="display: inline;">
-                        <input type="hidden" name="avis_id" value="<?php echo $rowAvis['id']; ?>">
-                        <button type="submit">Supprimer</button>
-                    </form>
+<form action="../actions/avis/traitement_employee.php" method="POST" style="display: inline;">
+    <input type="hidden" name="id" value="<?php echo $rowAvis['id']; ?>">
+    <input type="hidden" name="action" value="valider">
+    <button type="submit">Valider</button>
+</form>
+<form action="../actions/avis/traitement_employee.php" method="POST" style="display: inline;">
+    <input type="hidden" name="id" value="<?php echo $rowAvis['id']; ?>">
+    <input type="hidden" name="action" value="supprimer">
+    <button type="submit">Supprimer</button>
+</form>
                 </div>
             <?php endwhile; ?>
         </section>

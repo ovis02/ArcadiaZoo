@@ -1,8 +1,11 @@
 <?php
+// Indiquer que la réponse sera au format JSON
+header('Content-Type: application/json');
+
 // Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclut le fichier de connexion à la base de données
-    include_once "connexion_bd.php";
+    include_once "../../config/connexion_bd.php";
 
     // Récupère et assainit les données soumises depuis le formulaire
     $pseudo = trim(htmlspecialchars($_POST['pseudo'], ENT_QUOTES, 'UTF-8'));
@@ -20,17 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Exécute la requête en liant les valeurs des paramètres
         $stmt->execute([$pseudo, $email, $commentaire]);
 
-        // Redirige l'utilisateur vers la page d'accueil après avoir soumis l'avis
-        header("Location: index.php");
-        exit();
+        // Répondre avec un message de succès
+        echo json_encode(['status' => 'success', 'message' => 'Votre avis a été soumis avec succès.']);
     } else {
-        // Redirige l'utilisateur vers la page d'accueil avec un message d'erreur
-        header("Location: index.php?error=invalid_input");
-        exit();
+        // Répondre avec un message d'erreur
+        echo json_encode(['status' => 'error', 'message' => 'Données invalides. Veuillez réessayer.']);
     }
 } else {
-    // Redirige l'utilisateur vers la page d'accueil si le formulaire n'a pas été soumis directement
-    header("Location: index.php");
-    exit();
+    // Répondre avec une erreur si la requête n'est pas de type POST
+    echo json_encode(['status' => 'error', 'message' => 'Requête non autorisée.']);
 }
 ?>

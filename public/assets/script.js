@@ -105,7 +105,7 @@ function toggleInfo(button) {
   }
 }
 
-/*fonction j'aime*/
+/*fonction j'aime
 document
   .getElementById("increment-Godzilla")
   .addEventListener("click", async () => {
@@ -129,4 +129,41 @@ document
     } catch (error) {
       console.error("Erreur lors de l'incrémentation:", error);
     }
-  });
+  });*/
+
+//fonction ajax pour la soumission de l'avis sans recharger la page
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("avis_form");
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+      console.log("Formulaire soumis");
+
+      let formData = new FormData(this);
+
+      fetch("../../actions/avis/traitement_avis.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Réponse reçue :", data);
+
+          let messageDiv = document.getElementById("message");
+          if (data.status === "success") {
+            messageDiv.style.color = "green";
+          } else {
+            messageDiv.style.color = "red";
+          }
+          messageDiv.innerHTML = data.message;
+          messageDiv.style.display = "block";
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la soumission du formulaire :", error);
+        });
+    });
+  } else {
+    console.error("Le formulaire avec l'ID 'avis_form' est introuvable.");
+  }
+});

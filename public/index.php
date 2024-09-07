@@ -123,7 +123,7 @@ include '../views/includes/header.php';
       <div class="container-fluid">
         <div class="transparent-rectangle">
           <h3>Laisser un avis</h3>
-   <form action="../actions/traitement_avis.php" method="POST">
+   <form id="avis_form">
                 <div class="form-group">
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" class="form-control" id="pseudo" name="pseudo" />
@@ -138,9 +138,11 @@ include '../views/includes/header.php';
                 </div>
                 <button type="submit" class="btn btn-submit" style="background-color: #dae8e1">Laisser un avis</button>
             </form>
+            <!-- Div pour afficher le message -->
+   
         </div>
       </div>
-      
+       <div id="message" style="display: none;"></div>
     <!-- Section pour afficher les avis validés -->
  <div class="container">
         <?php while ($row = $stmt->fetch()): ?>
