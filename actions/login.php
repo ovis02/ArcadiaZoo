@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($user['role'] === 'employee') {
             header("Location: ../public/employee_dashboard.php");
         } else {
-            header("Location: ../public/veterinarian_dashboard.php");
+            header("Location: ../public/veterinarian_dashboard");
         }
         exit();
     } else {

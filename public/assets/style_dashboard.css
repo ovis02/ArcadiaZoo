@@ -1,103 +1,215 @@
-/* style_dashboard.css */
-
+/* Styles généraux */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: url("fondecran/fondEcranFooter.jpg") no-repeat center center fixed;
+  background: url("../assets/fondecran/fondEcranFooter.jpg") no-repeat center
+    center fixed;
   background-size: cover;
   color: #333;
 }
 
 header {
-  text-align: center;
-  padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+h1,
+h2 {
+  color: #333;
+  text-align: center;
 }
 
 .container {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
-  margin: 20px;
-  flex-wrap: wrap;
-}
-
-section {
-  width: 30%;
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-h2 {
-  text-align: center;
-}
-
-.message-item,
-.avis-item,
+/* Styles des items */
 .animal-item {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  background-color: #eaf0f1;
+  border: 1px solid #b0bec5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  margin-top: 10px;
+/* Couleur marron pour les textes */
+h2,
+th,
+td {
+  color: #4b2e1f; /* Marron */
+}
+
+p,
+label {
+  color: #3b3b3b;
+}
+
+/* Boutons avec touches de vert */
+button,
+.btn {
+  background-color: #5cb85c; /* Vert */
+  color: white;
   padding: 8px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #5cb85c;
-  color: white;
+  margin-top: 10px;
 }
 
-button.delete {
+button:hover,
+.btn:hover {
+  background-color: #4cae4c;
+}
+
+button.delete,
+.btn-danger {
   background-color: #d9534f;
 }
 
-button.info {
-  background-color: #0275d8;
+button.delete:hover,
+.btn-danger:hover {
+  background-color: #c9302c;
 }
 
-.additional-info {
-  margin-top: 10px;
+button.info,
+.btn-info {
+  background-color: #5bc0de;
 }
 
+button.info:hover,
+.btn-info:hover {
+  background-color: #31b0d5;
+}
+
+button.edit {
+  background-color: #f39c12;
+}
+
+button.edit:hover {
+  background-color: #e67e22;
+}
+
+/* Styles pour les tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td input,
+td button {
+  width: 100%;
+}
+
+table td input[type="text"],
+table td input[type="number"],
+table td input[type="datetime-local"] {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+table td button {
+  background-color: #2980b9;
+  color: white;
+}
+
+table td button:hover {
+  background-color: #3498db;
+}
+
+/* Styles pour la section des services */
+.service-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.service-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.service-section .table {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.service-section .table thead th {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.service-section .table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.service-section .table tbody td {
+  vertical-align: middle;
+}
+
+.service-section .btn-warning {
+  margin-right: 5px;
+}
+
+/* Lien de déconnexion */
 .logout {
-  display: block;
+  display: inline-block;
   margin-top: 10px;
-  text-align: center;
-  color: #d9534f;
+  color: white;
+  background-color: #d9534f;
+  padding: 8px 16px;
   text-decoration: none;
+  border-radius: 5px;
 }
 
 .logout:hover {
-  text-decoration: underline;
+  background-color: #c9302c;
 }
 
-.contact-list {
-  margin: 20px;
-}
+/* Adaptations pour rendre responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
 
-.contact-item {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
+  .animal-item {
+    margin-bottom: 15px;
+  }
 
-.contact-item button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
+  table {
+    font-size: 14px;
+  }
 
-.contact-item button:hover {
-  background-color: #e0e0e0;
+  th,
+  td {
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="datetime-local"] {
+    font-size: 10px;
+    min-width: 80px;
+  }
 }
