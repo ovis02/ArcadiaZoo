@@ -10,7 +10,7 @@ $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 try {
     // Création d'une instance PDO
     $pdo = new PDO($dsn, $user, $pass);
-    // Définir le mode d'erreur PDO sur Exception
+    // Défini le mode d'erreur PDO sur Exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     // En cas d'erreur, afficher un message et arrêter le script

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nom = $_POST['nom'];
                 $description = $_POST['description'];
 
-                // Préparer et exécuter la requête de mise à jour
+                // Prépare et exécute la requête de mise à jour
                 $query = $pdo->prepare("UPDATE services SET nom = :nom, description = :description WHERE id = :id");
                 $query->execute([
                     'nom' => $nom,
@@ -26,18 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'id' => $serviceId
                 ]);
 
-                // Redirection après la mise à jour
+                // Redirige après la mise à jour
                 header("Location: ../../public/employee_dashboard.php");
                 exit();
             } else {
                 echo "Nom et description sont requis pour la mise à jour.";
             }
         } elseif ($action === 'delete') {
-            // Préparer et exécuter la requête de suppression
+            // Prépare et exécuter la requête de suppression
             $query = $pdo->prepare("DELETE FROM services WHERE id = :id");
             $query->execute(['id' => $serviceId]);
 
-            // Redirection après la suppression
+            // Redirige après la suppression
             header("Location: ../../public/employee_dashboard.php");
             exit();
         }

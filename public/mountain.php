@@ -5,12 +5,12 @@ include '../config/connexion_bd.php'; // Connexion à la base de données avec P
 // Prénoms des animaux de cette page
 $animalNames = ['Scott', 'Cricri', 'Doug', 'Wolf', 'Spog'];
 
-// Récupérer les informations des animaux par leur prénom
+// Récupére les informations des animaux par leur prénom
 $query = $pdo->prepare("SELECT * FROM animals WHERE prenom IN (".str_repeat('?,', count($animalNames)-1)."?)");
 $query->execute($animalNames);
 $animals = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Organiser les données par prénom
+// Organise les données par prénom
 $animalsByName = [];
 foreach ($animals as $animal) {
     $animalsByName[$animal['prenom']] = $animal;
@@ -58,7 +58,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Scott" class="jaime-btn">❤️ J'aime</button>
+          <button id="increment-Scott" class="jaime-btn" data-animal="Scott">❤️ J'aime</button>
         </div>
       </article>
       <article class="service">
@@ -87,7 +87,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Cricri" class="jaime-btn">❤️ J'aime</button>
+          <button id="increment-Cricri" class="jaime-btn" data-animal="CriCri">❤️ J'aime</button>
         </div>
       </article>
     </div>
@@ -110,7 +110,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Doug" class="jaime-btn">❤️ J'aime</button>
+          <button id="increment-Doug" class="jaime-btn" data-animal="Doug">❤️ J'aime</button>
         </div>
       </article>
       <article class="service">
@@ -139,7 +139,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Wolf" class="jaime-btn">❤️ J'aime</button>
+          <button id="increment-Wolf" class="jaime-btn" data-animal="Wolf">❤️ J'aime</button>
         </div>
       </article>
     </div>
@@ -162,7 +162,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Spog" class="jaime-btn">❤️ J'aime</button>
+          <button id="increment-Spog" class="jaime-btn" data-animal="Spog">❤️ J'aime</button>
         </div>
       </article>
       <article class="service">

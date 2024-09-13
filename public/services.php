@@ -2,12 +2,12 @@
 include '../views/includes/header.php';
 include '../config/connexion_bd.php'; // Connexion à la base de données avec PDO
 
-// Récupérer les services
+// Récupére les services
 $query = $pdo->prepare("SELECT * FROM services WHERE id BETWEEN 1 AND 6");
 $query->execute();
 $services = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Organiser les services par ID
+// Organise les services par ID
 $servicesById = [];
 foreach ($services as $service) {
     $servicesById[$service['id']] = $service;

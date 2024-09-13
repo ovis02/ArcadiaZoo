@@ -2,7 +2,7 @@
 session_start();
 include '../../config/connexion_bd.php';
 
-// Vérifier si l'utilisateur est un admin
+// Vérifie si l'utilisateur est un admin
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: ../../views/includes/header.php");
     exit();
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hasher le mot de passe
     $hashedPassword = md5($password);  // Si possible, utilisez password_hash à la place de md5
 
-    // Insérer le nouvel utilisateur dans la base de données
+    // Insére le nouvel utilisateur dans la base de données
     $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':role' => $role
     ]);
 
-    // Rediriger vers le tableau de bord admin après la création
+    // Redirige vers le tableau de bord admin après la création
     header("Location: ../../public/admin_dashboard.php");
     exit();
 }

@@ -1,5 +1,5 @@
 <?php
-// Indiquer que la réponse sera au format JSON
+// Indique que la réponse sera au format JSON
 header('Content-Type: application/json');
 
 // Vérifie si le formulaire a été soumis
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(['status' => 'error', 'message' => 'Données invalides. Veuillez réessayer.']);
     }
 } else {
-    // Répondre avec une erreur si la requête n'est pas de type POST
+    // Répond avec une erreur si la requête n'est pas de type POST
     echo json_encode(['status' => 'error', 'message' => 'Requête non autorisée.']);
 }
 ?>

@@ -2,7 +2,7 @@
 // Inclure le fichier de connexion à la base de données
 include_once "../config/connexion_bd.php";
 
-// Sélectionner les avis validés
+// Sélectionne les avis validés
 $sql = "SELECT pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 1 ORDER BY date_creation DESC";
 $stmt = $pdo->query($sql);
 include '../views/includes/header.php';

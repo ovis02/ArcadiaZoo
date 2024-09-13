@@ -5,12 +5,12 @@ include '../config/connexion_bd.php'; // Connexion à la base de données
 // Prénoms des animaux du désert
 $animalNames = ['Nick', 'Feunard', 'Abo', 'Doma', 'Zed'];
 
-// Récupérer les informations des animaux par leur prénom
+// Récupére les informations des animaux par leur prénom
 $query = $pdo->prepare("SELECT * FROM animals WHERE prenom IN (".str_repeat('?,', count($animalNames)-1)."?)");
 $query->execute($animalNames);
 $animals = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Organiser les données par prénom
+// Organise les données par prénom
 $animalsByName = [];
 foreach ($animals as $animal) {
     $animalsByName[$animal['prenom']] = $animal;
@@ -56,7 +56,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Nick" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Nick" class="jaime-btn" data-animal="Nick">❤️ J'aime</button>
       </div>
     </article>
     <article class="service">
@@ -85,7 +85,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Feunard" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Feunard" class="jaime-btn" data-animal="Feunard">❤️ J'aime</button>
       </div>
     </article>
   </div>
@@ -108,7 +108,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Abo" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Abo" class="jaime-btn" data-animal="Abo">❤️ J'aime</button>
       </div>
     </article>
     <article class="service">
@@ -137,7 +137,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Doma" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Doma" class="jaime-btn" data-animal="Doma">❤️ J'aime</button>
       </div>
     </article>
   </div>
@@ -154,13 +154,13 @@ foreach ($animals as $animal) {
       <div style="display: none">
         Habitat : Déserts d'Amérique du Nord <br>
         État de l'animal : <?php echo htmlspecialchars($animalsByName['Zed']['etat_animal']); ?> <br>
-        Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Zed']['nourriture_proposee']); ?>
+        Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Zed']['nourriture_proposee']); ?><br>
         Grammage de la nourriture : <?php echo htmlspecialchars($animalsByName['Zed']['grammage_nourriture']); ?> <br>
         Date de passage : <?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($animalsByName['Zed']['date_passage']))); ?>
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Zed" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Zed" class="jaime-btn" data-animal="Zed">❤️ J'aime</button>
       </div>
     </article>
     <article class="service">

@@ -53,6 +53,16 @@ app.post("/animal/:name/click", async (req, res) => {
   }
 });
 
+// Route pour récupérer tous les animaux et leurs compteurs de vues
+app.get("/animals", async (req, res) => {
+  try {
+    const animals = await AnimalView.find({});
+    res.status(200).json(animals);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Route par défaut pour la racine
 app.get("/", (req, res) => {
   res.send(
@@ -60,7 +70,7 @@ app.get("/", (req, res) => {
   );
 });
 
-// Démarrer le serveur
+// Démarre le serveur
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

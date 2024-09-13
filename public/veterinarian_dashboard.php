@@ -1,14 +1,14 @@
 <?php
 include '../config/connexion_bd.php'; // Connexion à la base de données
 
-// Vérifier si l'utilisateur est connecté en tant que vétérinaire
+// Vérifie si l'utilisateur est connecté en tant que vétérinaire
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'veterinarian') {
     header("Location: ../views/includes/header.php");
     exit();
 }
 
-// Récupérer les informations de tous les animaux
+// Récupére les informations de tous les animaux
 $query = $pdo->prepare("SELECT * FROM animals");
 $query->execute();
 $animals = $query->fetchAll(PDO::FETCH_ASSOC);

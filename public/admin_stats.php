@@ -1,3 +1,9 @@
+<?php
+// une requête vers le serveur Node.js pour récupérer les animaux
+$response = file_get_contents('http://localhost:4000/animals');
+$animals = json_decode($response, true);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,10 +15,17 @@
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="text-center">
+ 
+           <header class="text-center mb-4">
         <h1>Statistiques des Animaux</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Lien vers l'interface administrateur -->
+            <a href="admin_dashboard.php" class="btn btn-primary">Retour au Tableau de Bord Admin</a>
+            <!-- Bouton de déconnexion -->
+            <a href="../config/logout.php" class="logout btn btn-danger">Déconnexion</a>
+        </div>
     </header>
+  
 
     <!-- Tableau des animaux et des compteurs de "J'aime" -->
     <section class="container my-5">

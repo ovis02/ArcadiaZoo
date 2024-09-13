@@ -2,7 +2,7 @@
 session_start();
 include '../config/connexion_bd.php';
 
-// Vérifier si l'utilisateur est connecté en tant qu'employé
+// Vérifie si l'utilisateur est connecté en tant qu'employé
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'employee') {
     header("Location: ../views/includes/header.php");
     exit();
@@ -10,20 +10,20 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'employee') {
 
 $user = $_SESSION['user'];
 
-// Récupérer les messages non lus depuis la base de données
+// Récupére les messages non lus depuis la base de données
 $sqlMessages = "SELECT id, email, motif, description, date_creation, status FROM Contact ORDER BY date_creation DESC";
 $stmtMessages = $pdo->query($sqlMessages);
 
-// Récupérer les avis non validés depuis la base de données
+// Récupére les avis non validés depuis la base de données
 $sqlAvis = "SELECT id, pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 0 ORDER BY date_creation DESC";
 $stmtAvis = $pdo->query($sqlAvis);
 
-// Récupérer les informations de tous les animaux pour l'affichage et modification
+// Récupére les informations de tous les animaux pour l'affichage et modification
 $sqlAnimals = "SELECT * FROM animals";
 $stmtAnimals = $pdo->query($sqlAnimals);
 
 
-// Récupérer les services depuis la base de données
+// Récupére les services depuis la base de données
 $sqlServices = "SELECT id, nom, description FROM services";
 $stmtServices = $pdo->query($sqlServices);
 ?>

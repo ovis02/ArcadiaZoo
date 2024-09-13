@@ -5,12 +5,12 @@ include '../config/connexion_bd.php'; // Connexion à la base de données avec P
 // Prénoms des animaux de la savane
 $animalNames = ['Tembo', 'Jasiri', 'Kito', 'Raja', 'Simba', 'RhinoFamily', 'Zuri'];
 
-// Récupérer les informations des animaux par leur prénom
+// Récupére les informations des animaux par leur prénom
 $query = $pdo->prepare("SELECT * FROM animals WHERE prenom IN (".str_repeat('?,', count($animalNames)-1)."?)");
 $query->execute($animalNames);
 $animals = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Organiser les données par prénom
+// Organise les données par prénom
 $animalsByName = [];
 foreach ($animals as $animal) {
     $animalsByName[$animal['prenom']] = $animal;
@@ -57,7 +57,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-Tembo" class="jaime-btn">
+          <button id="increment-Tembo" class="jaime-btn" data-animal="Tembo">
             ❤️ J'aime
           </button>
         </div>
@@ -102,7 +102,7 @@ foreach ($animals as $animal) {
 
         </div>
         <div class="like-button-container">
-          <button id="increment-JasiriKito" class="jaime-btn">
+          <button id="increment-JasiriKito" class="jaime-btn" data-animal="JasiriKito">
             ❤️ J'aime
           </button>
         </div>
@@ -126,7 +126,7 @@ Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Raja']['nourr
           Date de passage : <?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($animalsByName['Raja']['date_passage']))); ?>
         </div>
         <div class="like-button-container">
-          <button id="increment-Raja" class="jaime-btn">
+          <button id="increment-Raja" class="jaime-btn" data-animal="Raja">
             ❤️ J'aime
           </button>
         </div>
@@ -156,7 +156,7 @@ Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Raja']['nourr
           Date de passage : <?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($animalsByName['Simba']['date_passage']))); ?>
         </div>
         <div class="like-button-container">
-          <button id="increment-Simba" class="jaime-btn">
+          <button id="increment-Simba" class="jaime-btn" data-animal="Simba">
             ❤️ J'aime
           </button>
         </div>
@@ -180,7 +180,7 @@ Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Raja']['nourr
           Date de passage : <?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($animalsByName['RhinoFamily']['date_passage']))); ?>
         </div>
         <div class="like-button-container">
-          <button id="increment-RhinoFamily" class="jaime-btn">
+          <button id="increment-RhinoFamily" class="jaime-btn" data-animal="RhinoFamily">
             ❤️ J'aime
           </button>
         </div>
@@ -210,7 +210,7 @@ Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Raja']['nourr
           Date de passage : <?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($animalsByName['Zuri']['date_passage']))); ?>
         </div>
         <div class="like-button-container">
-          <button id="increment-Zuri" class="jaime-btn">
+          <button id="increment-Zuri" class="jaime-btn" data-animal="Zuri">
             ❤️ J'aime
           </button>
         </div>

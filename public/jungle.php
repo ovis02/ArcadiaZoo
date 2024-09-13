@@ -5,12 +5,12 @@ include '../config/connexion_bd.php'; // Connexion à la base de données
 // Prénoms des animaux du désert
 $animalNames = ['Killer', 'Garry', 'Kaki', 'Spin', 'Rex'];
 
-// Récupérer les informations des animaux par leur prénom
+// Récupére les informations des animaux par leur prénom
 $query = $pdo->prepare("SELECT * FROM animals WHERE prenom IN (".str_repeat('?,', count($animalNames)-1)."?)");
 $query->execute($animalNames);
 $animals = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Organiser les données par prénom
+// Organise les données par prénom
 $animalsByName = [];
 foreach ($animals as $animal) {
     $animalsByName[$animal['prenom']] = $animal;
@@ -56,7 +56,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Killer" class="jaime-btn">
+        <button id="increment-Killer" class="jaime-btn" data-animal="Killer">
           ❤️ J'aime
         </button>
       </div>
@@ -87,7 +87,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Garry" class="jaime-btn">
+        <button id="increment-Garry" class="jaime-btn" data-animal="Garry">
           ❤️ J'aime
         </button>
       </div>
@@ -112,7 +112,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Kaki" class="jaime-btn">
+        <button id="increment-Kaki" class="jaime-btn" data-animal="Kaki">
           ❤️ J'aime
         </button>
       </div>
@@ -143,7 +143,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Spin" class="jaime-btn">
+        <button id="increment-Spin" class="jaime-btn" data-animal="Spin">
           ❤️ J'aime
         </button>
       </div>
@@ -168,7 +168,7 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Rex" class="jaime-btn">
+        <button id="increment-Rex" class="jaime-btn" data-animal="Rex">
           ❤️ J'aime
         </button>
       </div>

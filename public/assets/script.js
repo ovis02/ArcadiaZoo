@@ -95,7 +95,7 @@ const interval = setInterval(changeImage, 5000); // Temps en millisecondes entre
 function toggleInfo(button) {
   const moreInfo = button.parentElement.nextElementSibling;
 
-  // Affichage des informations supplémentaires
+  // Affichage des informations supplémentaires sur les animaux
   if (moreInfo.style.display === "none") {
     moreInfo.style.display = "block";
     button.textContent = "Afficher moins...";
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Ajoute un event listener à tous les boutons "J'aime"
+// Ajoute un évenement à tous les boutons "J'aime"
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".jaime-btn").forEach((button) => {
     button.addEventListener("click", async () => {
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           console.log(`${animalName} compteur incrémenté :`, data.animal.views);
 
-          // Mettre à jour le compteur sur la page
+          // Met à jour le compteur sur la page
           const resultDiv = document.querySelector(`#result-${animalName}`);
           if (resultDiv) {
             resultDiv.textContent = `${animalName}: ${data.animal.views}`;

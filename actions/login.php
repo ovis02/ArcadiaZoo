@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Rechercher l'utilisateur dans la base de données
+    // Recherche l'utilisateur dans la base de données
     $sql = "SELECT id, username, password, role FROM Users WHERE username = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'role' => $user['role']
         ];
         
-        // Redirection en fonction du rôle
+        // Redirige en fonction du rôle
         if ($user['role'] === 'admin') {
             header("Location: ../public/admin_dashboard.php");
         } elseif ($user['role'] === 'employee') {

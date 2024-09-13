@@ -2,7 +2,7 @@
 session_start();
 include '../config/connexion_bd.php';
 
-// Vérifier si l'utilisateur est connecté en tant qu'administrateur
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: ../views/includes/header.php");
     exit();
@@ -10,11 +10,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 
 $user = $_SESSION['user'];
 
-// Récupérer les services depuis la base de données
+// Récupére les services depuis la base de données
 $sqlServices = "SELECT id, nom, description FROM services";
 $stmtServices = $pdo->query($sqlServices);
 
-// Récupérer les comptes utilisateurs
+// Récupére les comptes utilisateurs
 $sqlUsers = "SELECT id, username, role FROM users";
 $stmtUsers = $pdo->query($sqlUsers);
 
