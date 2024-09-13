@@ -67,7 +67,7 @@ foreach ($animals as $animal) {
       <img src="assets/marais/castor.jpg" onclick="agrandirImage(this)" />
     </article>
   </div>
-  <hr class="service-divider">
+  <hr id="croco" class="service-divider">
 
   <!-- Animal 2: Godzilla - Crocodile du Nil -->
   <div class="service2">
@@ -89,7 +89,8 @@ foreach ($animals as $animal) {
 
       </div>
       <div class="like-button-container">
-        <button id="increment-Godzilla" class="jaime-btn">❤️ J'aime</button>
+        <button id="increment-Godzilla" class="jaime-btn" data-animal="Godzilla">❤️ J'aime</button>
+        <div id="result-Godzilla">Godzilla: 0</div> <!-- Ce div affichera le nombre de "J'aime" -->
       </div>
     </article>
   </div>

@@ -117,7 +117,7 @@ foreach ($animals as $animal) {
         <img src="assets/montagne/chamois.jpg" onclick="agrandirImage(this)" />
       </article>
     </div>
-    <hr class="service-divider">
+    <hr id="loup" class="service-divider">
 
     <!-- Animal 4: Wolf - Loup gris -->
     <div class="service4">

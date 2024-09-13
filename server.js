@@ -1,50 +1,66 @@
 import express from "express";
-import { MongoClient, ObjectId } from "mongodb";
+import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Configuration MongoDB
-const uri = "mongodb://localhost:27017";
-const client = new MongoClient(uri);
-const dbName = "arcadiaZoo";
-const collectionName = "animals";
+// Connexion à MongoDB
+mongoose
+  .connect("mongodb://localhost:27017/ArcadiaZoo")
+  .then(() => {
+    console.log("Connexion à MongoDB réussie");
+  })
+  .catch((err) => {
+    console.error("Erreur de connexion à MongoDB :", err.message);
+  });
 
-async function incrementViews(animalName) {
-  await client.connect();
-  const db = client.db(dbName);
-  const collection = db.collection(collectionName);
+// Schéma et modèle MongoDB pour les vues d'animaux
+const animalViewSchema = new mongoose.Schema({
+  animal: { type: String, required: true },
+  views: { type: Number, default: 0 },
+});
 
-  const result = await collection.findOneAndUpdate(
-    { name: animalName },
-    { $inc: { views: 1 } },
-    { returnDocument: "after" }
-  );
+const AnimalView = mongoose.model(
+  "AnimalView",
+  animalViewSchema,
+  "animalviews"
+);
 
-  return result.value;
-}
-
-// Endpoint pour incrémenter le compteur
+// Route pour incrémenter le compteur de vues pour un animal spécifique
 app.post("/animal/:name/click", async (req, res) => {
-  const animalName = req.params.name;
-
   try {
-    const updatedAnimal = await incrementViews(animalName);
-    if (updatedAnimal) {
-      res.json({ animal: updatedAnimal });
+    const animalName = req.params.name;
+    let animal = await AnimalView.findOne({ animal: animalName });
+
+    if (animal) {
+      animal.views += 1;
+      await animal.save();
+      res
+        .status(200)
+        .json({ message: "Compteur incrémenté avec succès", animal });
     } else {
-      res.status(404).json({ error: "Animal non trouvé" });
+      animal = new AnimalView({ animal: animalName, views: 1 });
+      await animal.save();
+      res.status(201).json({ message: "Animal ajouté avec succès", animal });
     }
-  } catch (error) {
-    res.status(500).json({ error: "Erreur serveur" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
+// Route par défaut pour la racine
+app.get("/", (req, res) => {
+  res.send(
+    "Bienvenue sur le serveur ArcadiaZoo API. Utilisez les routes spécifiques pour interagir."
+  );
+});
+
+// Démarrer le serveur
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

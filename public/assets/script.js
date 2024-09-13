@@ -105,32 +105,6 @@ function toggleInfo(button) {
   }
 }
 
-/*fonction j'aime
-document
-  .getElementById("increment-Godzilla")
-  .addEventListener("click", async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/animal/Godzilla/click",
-        {
-          method: "POST",
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Compteur Godzilla incrémenté:", data);
-        document.getElementById(
-          "result"
-        ).innerHTML = `Godzilla: ${data.animal.views}`;
-      } else {
-        console.error("Erreur lors de l'incrémentation du compteur");
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'incrémentation:", error);
-    }
-  });*/
-
 //fonction ajax pour la soumission de l'avis sans recharger la page
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("avis_form");
@@ -166,4 +140,38 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("Le formulaire avec l'ID 'avis_form' est introuvable.");
   }
+});
+
+// Ajoute un event listener à tous les boutons "J'aime"
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".jaime-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const animalName =
+        button.getAttribute("data-animal") || button.id.split("-")[1];
+
+      try {
+        const response = await fetch(
+          `http://localhost:4000/animal/${animalName}/click`,
+          {
+            method: "POST",
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(`${animalName} compteur incrémenté :`, data.animal.views);
+
+          // Mettre à jour le compteur sur la page
+          const resultDiv = document.querySelector(`#result-${animalName}`);
+          if (resultDiv) {
+            resultDiv.textContent = `${animalName}: ${data.animal.views}`;
+          }
+        } else {
+          console.error("Erreur lors de l'incrémentation du compteur");
+        }
+      } catch (error) {
+        console.error("Erreur lors de l'incrémentation:", error);
+      }
+    });
+  });
 });

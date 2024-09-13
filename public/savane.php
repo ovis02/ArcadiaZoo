@@ -135,7 +135,7 @@ Nourriture proposée : <?php echo htmlspecialchars($animalsByName['Raja']['nourr
         <img src="assets/savane/guepard.jpg" onclick="agrandirImage(this)" />
       </article>
     </div>
-    <hr class="service-divider">
+    <hr id="lion" class="service-divider">
 
     <!-- Animal 5: Simba - Lion -->
     <div class="service4">
