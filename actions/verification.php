@@ -34,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Identifiants invalides, redirige vers la page de connexion avec un message d'erreur
-        header("Location: ../public/index.php?error=invalid_credentials");
+        header("Location: ../index.php?error=invalid_credentials");
         exit();
     }
 } else {
     // Redirige vers la page de connexion si la méthode de requête n'est pas POST
-    header("Location: ../public/index.php");
+    header("Location: ../index.php");
     exit();
 }
 ?>

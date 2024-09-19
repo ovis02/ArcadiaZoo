@@ -3,7 +3,7 @@ session_start();
 include '../../config/connexion_bd.php'; // Connexion à la base de données
 
 if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] !== 'employee' && $_SESSION['user']['role'] !== 'admin')) {
-    header("Location: ../../public/index.php");
+    header("Location: ../../index.php");
     exit();
 }
 

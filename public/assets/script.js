@@ -75,10 +75,10 @@ adminLink.addEventListener("click", (event) => {
 
 // Liste des chemins d'accès des images à faire défiler
 const imagePaths = [
-  "assets/jungle/tigre.jpg",
-  "assets/savane/elephant.jpg",
-  "assets/marais/hipopotame.jpg",
-  "assets/savane/lion.jpg",
+  "public/assets/jungle/tigre.jpg",
+  "public/assets/savane/elephant.jpg",
+  "public/assets/marais/hipopotame.jpg",
+  "public/assets/savane/lion.jpg",
 ];
 const imageElement = document.getElementById("main-image");
 let currentIndex = 0;
