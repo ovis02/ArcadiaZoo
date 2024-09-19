@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST['role'];
 
     // Requête SQL pour vérifier les identifiants dans la base de données
-    $sql = "SELECT * FROM Users WHERE username = ? AND password = MD5(?) AND role = ?";
+    $sql = "SELECT * FROM users WHERE username = ? AND password = MD5(?) AND role = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username, $password, $role]);
     $user = $stmt->fetch();
