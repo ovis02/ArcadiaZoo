@@ -1,11 +1,11 @@
 <?php
 // Inclure le fichier de connexion à la base de données
-include_once __DIR__ . '/../config/connexion_bd.php';
+include_once "config/connexion_bd.php";
 
 // Sélectionne les avis validés
 $sql = "SELECT pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 1 ORDER BY date_creation DESC";
 $stmt = $pdo->query($sql);
-include __DIR__ . '/../views/includes/header.php';
+include 'views/includes/header.php';
 ?>
     <div class="background-section">
       <div class="container">
@@ -172,4 +172,4 @@ include __DIR__ . '/../views/includes/header.php';
     </div>
 </div>
 
-           <?php include __DIR__ . '/../views/includes/footer.php'; ?>
+           <?php include 'views/includes/footer.php'; ?>
