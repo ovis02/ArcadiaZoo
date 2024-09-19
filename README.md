@@ -79,13 +79,13 @@ Si vous souhaitez tester l'application en local, voici les étapes à suivre :
 
 https://github.com/ovis02/ArcadiaZoo.git
 
-Verifiez bien que vous etes sur la branche test.
+Verifiez bien que vous etes sur la branche test
 
 Installer les dépendences php et Node.js
 
 ## Déploiement
 
-Le projet est entièrement fonctionnel et déployé sur Heroku.
+Le projet est entièrement fonctionnel et déployé sur Heroku : https://arcazoo-40aeb8b73b17.herokuapp.com/
 
 Mohammad Aowis
 Développeur Web
