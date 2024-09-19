@@ -3,7 +3,7 @@
 include_once "config/connexion_bd.php";
 
 // Sélectionne les avis validés
-$sql = "SELECT pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 1 ORDER BY date_creation DESC";
+$sql = "SELECT pseudo, commentaire, date_creation FROM avis WHERE est_valide = 1 ORDER BY date_creation DESC";
 $stmt = $pdo->query($sql);
 include 'views/includes/header.php';
 ?>
