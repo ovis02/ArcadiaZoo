@@ -41,7 +41,7 @@
 
        <nav class="header-nav">
  <ul>
-    <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="../../public/index.php">ACCUEIL</a></li>
+    <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="../../index.php">ACCUEIL</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'desert.php') echo 'class="active"'; ?>><a href="../../public/desert.php">Animaux et Habitats</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'services.php') echo 'class="active"'; ?>><a href="../../public/services.php">SERVICES</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'formulaire.php') echo 'class="active"'; ?>><a href="../../public/formulaire.php">CONTACT</a></li>
@@ -64,7 +64,7 @@
 </div>
 <div id="vertical-navbar" class="vertical-navbar">
    <ul>
-    <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="../../public/index.php">ACCUEIL</a></li>
+    <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="../../index.php">ACCUEIL</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'desert.php') echo 'class="active"'; ?>><a href="../../public/desert.php">Animaux et Habitats</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'services.php') echo 'class="active"'; ?>><a href="../../public/services.php">SERVICES</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF']) == 'formulaire.php') echo 'class="active"'; ?>><a href="../../public/formulaire.php">CONTACT</a></li>
