@@ -1,11 +1,11 @@
 <?php
 // Inclure le fichier de connexion à la base de données
-include_once "../config/connexion_bd.php";
+include_once "config/connexion_bd.php";
 
 // Sélectionne les avis validés
 $sql = "SELECT pseudo, commentaire, date_creation FROM avis WHERE est_valide = 1 ORDER BY date_creation DESC";
 $stmt = $pdo->query($sql);
-include '../views/includes/header.php';
+include 'views/includes/header.php';
 ?>
     <div class="background-section">
       <div class="container">
@@ -48,7 +48,7 @@ include '../views/includes/header.php';
           </div>
           <div class="col-lg-6">
             <div class="image-container">
-              <img id="main-image" src="assets/jungle/tigre.jpg" alt="Tigre" class="img-fluid" />
+              <img id="main-image" src="public/assets/jungle/tigre.jpg" alt="Tigre" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ include '../views/includes/header.php';
           <div class="col-lg-4">
             <div class="rectangle">
               <img
-                src="assets/savane/lion.jpg"
+                src="public/assets/savane/lion.jpg"
                 alt="Image 1"
                 class="image img-fluid"
               />
@@ -74,9 +74,9 @@ include '../views/includes/header.php';
                   Rencontrez le roi de la savane - le lion. Découvrez sa majesté
                   et sa puissance
                 </p>
-                <a href="savane.php#lion"
+                <a href="public/savane.php#lion"
                   >En savoir plus...<img
-                    src="assets/logo/iconeLien.png"
+                    src="public/assets/logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
                 /></a>
               </div>
@@ -85,15 +85,15 @@ include '../views/includes/header.php';
           <div class="col-lg-4">
             <div class="rectangle">
               <img
-                src="assets/marais/crocodilenil.jpg"
+                src="public/assets/marais/crocodilenil.jpg"
                 alt="Image 2"
                 class="image img-fluid"
               />
               <div class="description-contain">
                 <p>Explorez le monde mystérieux des crocodiles des marais</p>
-                <a href="marais.php#croco"
+                <a href="public/marais.php#croco"
                   >En savoir plus...<img
-                    src="assets/logo/iconeLien.png"
+                    src="public/assets/logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
                 /></a>
               </div>
@@ -102,7 +102,7 @@ include '../views/includes/header.php';
           <div class="col-lg-4">
             <div class="rectangle">
               <img
-                src="assets/montagne/loup.jpg"
+                src="public/assets/montagne/loup.jpg"
                 alt="Image 3"
                 class="image img-fluid"
               />
@@ -110,9 +110,9 @@ include '../views/includes/header.php';
                 <p>
                   Plongez dans l'essence majestueuse du loup gris, maître des forêts sauvages
                 </p>
-                <a href="mountain.php#loup"
+                <a href="public/mountain.php#loup"
                   >En savoir plus...<img
-                    src="assets/logo/iconeLien.png"
+                    src="public/assets/logo/iconeLien.png"
                     alt="Logo En Savoir Plus"
                 /></a>
               </div>
@@ -138,12 +138,12 @@ include '../views/includes/header.php';
                 </div>
                 <button type="submit" class="btn btn-submit" style="background-color: #dae8e1">Laisser un avis</button>
             </form>
-            <!-- Div pour afficher le message -->
+            <!-- div for message -->
    
         </div>
       </div>
        <div id="message" style="display: none;"></div>
-    <!-- Section pour afficher les avis validés -->
+    <!-- Section for valid comments -->
  <div class="container">
         <?php while ($row = $stmt->fetch()): ?>
         <div class="row mb-3">
@@ -172,4 +172,4 @@ include '../views/includes/header.php';
     </div>
 </div>
 
-           <?php include '../views/includes/footer.php'; ?>
+           <?php include 'views/includes/footer.php'; ?>
