@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifie que les données sont valides
     if ($pseudo && $email && $commentaire) {
         // Prépare la requête SQL pour insérer l'avis dans la base de données
-        $sql = "INSERT INTO Avis (pseudo, email, commentaire) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO avis (pseudo, email, commentaire) VALUES (?, ?, ?)";
 
         // Prépare la requête
         $stmt = $pdo->prepare($sql);
