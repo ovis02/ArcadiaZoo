@@ -4,7 +4,7 @@ include '../../config/connexion_bd.php';
 
 if (isset($_POST['contact_id'])) {
     $contact_id = $_POST['contact_id'];
-    $sql = "DELETE FROM Contact WHERE id = ?";
+    $sql = "DELETE FROM contact WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$contact_id]);
 }

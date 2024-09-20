@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $motif = $_POST['motif'];
     $description = $_POST['description'];
 
-    $sql = "INSERT INTO Contact (email, motif, description, date_creation, status) 
+    $sql = "INSERT INTO contact (email, motif, description, date_creation, status) 
             VALUES (?, ?, ?, NOW(), 'non lu')";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email, $motif, $description]);
