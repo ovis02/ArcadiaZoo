@@ -11,11 +11,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'employee') {
 $user = $_SESSION['user'];
 
 // Récupére les messages non lus depuis la base de données
-$sqlMessages = "SELECT id, email, motif, description, date_creation, status FROM Contact ORDER BY date_creation DESC";
+$sqlMessages = "SELECT id, email, motif, description, date_creation, status FROM contact ORDER BY date_creation DESC";
 $stmtMessages = $pdo->query($sqlMessages);
 
 // Récupére les avis non validés depuis la base de données
-$sqlAvis = "SELECT id, pseudo, commentaire, date_creation FROM Avis WHERE est_valide = 0 ORDER BY date_creation DESC";
+$sqlAvis = "SELECT id, pseudo, commentaire, date_creation FROM avis WHERE est_valide = 0 ORDER BY date_creation DESC";
 $stmtAvis = $pdo->query($sqlAvis);
 
 // Récupére les informations de tous les animaux pour l'affichage et modification

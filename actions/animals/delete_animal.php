@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SESSION['user']['role'] === 'admin') {
         // Redirige vers l'administrateur
         header("Location: ../../public/admin_dashboard.php");
-    } elseif ($_SESSION['user']['role'] === 'veterinarian') {
-        // Redirige vers vétérinaire
-        header("Location: ../../public/veterinarian_dashboard.php");
+    } elseif ($_SESSION['user']['role'] === 'employee') {
+        // Redirige vers employe
+        header("Location: ../../public/employee_dashboard.php");
     }
 
     exit();
