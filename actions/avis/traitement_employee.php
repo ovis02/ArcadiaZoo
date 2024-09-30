@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($action === 'valider') {
         // Valide l'avis (mettre est_valide à 1)
-        $sql = "UPDATE Avis SET est_valide = 1 WHERE id = :id";
+        $sql = "UPDATE avis SET est_valide = 1 WHERE id = :id";
     } elseif ($action === 'supprimer') {
         // Supprime l'avis
         $sql = "DELETE FROM Avis WHERE id = :id";
