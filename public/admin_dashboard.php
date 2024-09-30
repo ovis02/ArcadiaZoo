@@ -174,7 +174,7 @@ $animals = $query->fetchAll(PDO::FETCH_ASSOC);
                 <select id="animal" name="animal" class="form-select">
                     <option value="">Tous les animaux</option>
                     <?php
-                    // Récupérer la liste unique des prénoms des animaux pour le filtre
+                    // Récupere la liste unique des prénoms des animaux pour le filtre
                     $animalListQuery = $pdo->query("SELECT DISTINCT prenom FROM animals");
                     while ($animalRow = $animalListQuery->fetch(PDO::FETCH_ASSOC)) {
                         $selected = ($animalRow['prenom'] === $animalFilter) ? 'selected' : '';

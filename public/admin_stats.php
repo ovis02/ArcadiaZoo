@@ -1,6 +1,9 @@
 <?php
-// une requête vers le serveur Node.js pour récupérer les animaux
-$response = file_get_contents('http://localhost:4000/animals');
+// Déterminer l'URL du serveur Node.js
+$nodeServerUrl = getenv('NODE_SERVER_URL') ?: 'http://localhost:4000';
+
+// Une requête vers le serveur Node.js pour récupérer les animaux
+$response = file_get_contents($nodeServerUrl . '/animals');
 $animals = json_decode($response, true);
 ?>
 
@@ -15,50 +18,49 @@ $animals = json_decode($response, true);
 </head>
 <body>
 
- 
-           <header class="text-center mb-4">
-        <h1>Statistiques des Animaux</h1>
-        <div class="d-flex justify-content-between align-items-center">
-            <!-- Lien vers l'interface administrateur -->
-            <a href="admin_dashboard.php" class="btn btn-primary">Retour au Tableau de Bord Admin</a>
-            <!-- Bouton de déconnexion -->
-            <a href="../config/logout.php" class="logout btn btn-danger">Déconnexion</a>
-        </div>
-    </header>
-  
+<header class="text-center mb-4">
+    <h1>Statistiques des Animaux</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- Lien vers l'interface administrateur -->
+        <a href="admin_dashboard.php" class="btn btn-primary">Retour au Tableau de Bord Admin</a>
+        <!-- Bouton de déconnexion -->
+        <a href="../config/logout.php" class="logout btn btn-danger">Déconnexion</a>
+    </div>
+</header>
 
-    <!-- Tableau des animaux et des compteurs de "J'aime" -->
-    <section class="container my-5">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Nom de l'animal</th>
-                    <th scope="col">Nombre de "J'aime"</th>
-                </tr>
-            </thead>
-          <tbody>
-    <?php foreach ($animals as $animal): ?>
-    <tr>
-        <!-- Colonne pour le nom de l'animal -->
-        <td><?php echo htmlspecialchars($animal['animal']); ?></td>
+<!-- Tableau des animaux et des compteurs de "J'aime" -->
+<section class="container my-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom de l'animal</th>
+                <th scope="col">Nombre de "J'aime"</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($animals as $animal): ?>
+            <tr>
+                <!-- Colonne pour le nom de l'animal -->
+                <td><?php echo htmlspecialchars($animal['animal']); ?></td>
 
-        <!-- Colonne pour afficher le compteur de "J'aime" -->
-        <td>
-            <!-- Div qui sera mis à jour avec le nombre de "J'aime" -->
-            <div id="result-<?php echo htmlspecialchars($animal['animal']); ?>">
-                <?php echo htmlspecialchars($animal['animal']); ?>: <?php echo htmlspecialchars($animal['views']); ?>
-            </div>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
-        </table>
-    </section>
+                <!-- Colonne pour afficher le compteur de "J'aime" -->
+                <td>
+                    <!-- Div qui sera mis à jour avec le nombre de "J'aime" -->
+                    <div id="result-<?php echo htmlspecialchars($animal['animal']); ?>">
+                        <?php echo htmlspecialchars($animal['animal']); ?>: <?php echo htmlspecialchars($animal['views']); ?>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</section>
 
-    <!-- FOOTER -->
-    <footer class="text-center py-4">
-        © 2024 MOHAMMAD Aowis
-    </footer>
+<!-- FOOTER -->
+<footer class="text-center py-4">
+    © 2024 MOHAMMAD Aowis
+</footer>
+
 <script src="assets/script.js"></script>
 </body>
 </html>

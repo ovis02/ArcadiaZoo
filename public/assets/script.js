@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Ajoute un évenement à tous les boutons "J'aime"
+// Ajoute un événement à tous les boutons "J'aime"
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".jaime-btn").forEach((button) => {
     button.addEventListener("click", async () => {
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const response = await fetch(
-          `http://localhost:4000/animal/${animalName}/click`,
+          `${window.location.origin}/animal/${animalName}/click`, // Utilise l'URL de l'application
           {
             method: "POST",
           }

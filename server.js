@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000; // Utilise le port défini par Heroku ou 4000 localement
 
 // Middleware
 app.use(cors());
@@ -11,7 +11,10 @@ app.use(express.json());
 
 // Connexion à MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/ArcadiaZoo")
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connexion à MongoDB réussie");
   })
@@ -72,5 +75,5 @@ app.get("/", (req, res) => {
 
 // Démarre le serveur
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port: ${port}`); // Affiche le port en cours d'écoute
 });
