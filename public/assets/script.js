@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const animalName =
         button.getAttribute("data-animal") || button.id.split("-")[1];
 
-      // Détermine l'URL du serveur Node.js hébergé sur Heroku
+      // Détermine l'URL du serveur Node.js hébergé sur Heroku.
       const serverUrl = `https://arcazoo-40aeb8b73b17.herokuapp.com/animal/${animalName}/click`;
 
       try {
