@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.getAttribute("data-animal") || button.id.split("-")[1];
 
       // Déterminer l'URL du serveur Node.js
-      const serverUrl = `${window.location.origin}/animal/${animalName}/click`;
+      const serverUrl = `${window.location.origin}/animal/${animalName}/click`; // Utilise l'URL de l'application
 
       try {
         const response = await fetch(serverUrl, {
