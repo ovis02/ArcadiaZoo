@@ -10,6 +10,7 @@ if ($response === FALSE) {
     die('Erreur lors de la récupération des animaux');
 }
 
+// Décoder la réponse JSON en un tableau associatif
 $animals = json_decode($response, true);
 
 // Vous pouvez maintenant utiliser la variable $animals pour afficher les données ou faire d'autres traitements.

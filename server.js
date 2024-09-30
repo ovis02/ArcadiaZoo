@@ -1,15 +1,26 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose"); // Importer mongoose
 
 const app = express();
 const port = process.env.PORT || 3000; // Utilise le port fourni par Heroku
 
 // URI de la base de données MongoDB
-const uri =
-  mongodb+srv://oves7860:<db_password>@arcadiazoo.dheoc.mongodb.net/?retryWrites=true&w=majority&appName=ArcadiaZoo;
-const client = new MongoClient(uri);
+const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ArcadiaZoo";
 
-// Middleware pour gérer les erreurs CORS
+// Connexion à MongoDB avec Mongoose
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connecté à MongoDB!");
+  })
+  .catch((err) => {
+    console.error("Erreur de connexion à MongoDB:", err);
+  });
+
+// Middleware pour gérer les erreurs
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -23,32 +34,26 @@ app.use((req, res, next) => {
   next();
 });
 
-// Démarre le client MongoDB
-client
-  .connect()
-  .then(() => {
-    console.log("Connecté à MongoDB!");
+// Modèle Mongoose pour les animaux
+const animalSchema = new mongoose.Schema({
+  animal: String,
+  views: Number,
+});
 
-    // Démarre le serveur
-    app.listen(port, () => {
-      console.log(`Le serveur est en écoute sur le port ${port}`);
-    });
-  })
-  .catch((err) => {
-    console.error("Erreur de connexion à MongoDB :", err);
-  });
+const Animal = mongoose.model("Animal", animalSchema);
 
-// Route GET pour récupérer tous les animaux
+// Route pour récupérer les animaux
 app.get("/animals", async (req, res) => {
   try {
-    const database = client.db("ArcadiaZoo");
-    const collection = database.collection("animalviews");
-
-    // Récupérer tous les animaux
-    const animals = await collection.find().toArray();
+    const animals = await Animal.find(); // Récupérer tous les animaux
     res.status(200).json(animals); // Retourne les animaux en format JSON
   } catch (err) {
     console.error("Erreur lors de la récupération des animaux :", err);
     res.status(500).send("Erreur de récupération des animaux : " + err.message);
   }
+});
+
+// Démarre le serveur
+app.listen(port, () => {
+  console.log(`Le serveur est en écoute sur le port ${port}`);
 });
