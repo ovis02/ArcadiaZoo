@@ -1,4 +1,8 @@
 <?php
+// Activer l'affichage des erreurs pour le débogage (à utiliser uniquement en développement)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Une requête vers le serveur Node.js pour récupérer les animaux
 $response = @file_get_contents('https://arcazoo-40aeb8b73b17.herokuapp.com/animals');
 
@@ -7,7 +11,10 @@ if ($response === FALSE) {
 }
 
 $animals = json_decode($response, true);
+
+// Vous pouvez maintenant utiliser la variable $animals pour afficher les données ou faire d'autres traitements.
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

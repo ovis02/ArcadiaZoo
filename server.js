@@ -52,6 +52,7 @@ app.post("/animal/:name/click", async (req, res) => {
       res.status(201).json({ message: "Animal ajouté avec succès", animal });
     }
   } catch (err) {
+    console.error("Erreur lors de l'incrémentation des vues :", err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -62,6 +63,7 @@ app.get("/animals", async (req, res) => {
     const animals = await AnimalView.find({});
     res.status(200).json(animals);
   } catch (err) {
+    console.error("Erreur lors de la récupération des animaux :", err.message);
     res.status(500).json({ error: err.message });
   }
 });
