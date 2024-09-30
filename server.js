@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000; // Utilise le port fourni par Heroku
 
 // URI de la base de données MongoDB
 const uri =
-  "mongodb+srv://oves7860:Mohammad786.@arcadiazoo.dheoc.mongodb.net/ArcadiaZoo?retryWrites=true&w=majority";
+  mongodb+srv://oves7860:<db_password>@arcadiazoo.dheoc.mongodb.net/?retryWrites=true&w=majority&appName=ArcadiaZoo;
 const client = new MongoClient(uri);
 
 // Middleware pour gérer les erreurs CORS
