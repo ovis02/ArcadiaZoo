@@ -3,21 +3,15 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-const port = process.env.PORT || 4000; // Utilise le port fourni par Heroku ou 4000 en local
+const port = process.env.PORT || 4000; // Utiliser le port défini par Heroku ou 4000 en local
 
-// Middleware pour autoriser le CORS (Cross-Origin Resource Sharing)
-app.use(
-  cors({
-    origin: "https://arcazoo-40aeb8b73b17.herokuapp.com", // L'URL de ton app Heroku
-  })
-);
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// Connexion à MongoDB Atlas via l'URI définie dans les variables d'environnement
-const mongoUri = process.env.MONGODB_URI;
-
+// Connexion à MongoDB
 mongoose
-  .connect(mongoUri, {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ArcadiaZoo", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -74,7 +68,9 @@ app.get("/animals", async (req, res) => {
 
 // Route par défaut pour la racine
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur le serveur ArcadiaZoo API.");
+  res.send(
+    "Bienvenue sur le serveur ArcadiaZoo API. Utilisez les routes spécifiques pour interagir."
+  );
 });
 
 // Démarre le serveur
