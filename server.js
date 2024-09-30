@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000; // Utilise le port fourni par Heroku
 
 // URI de la base de données MongoDB
-const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ArcadiaZoo";
+const uri = process.env.MONGODB_URI; // Assurez-vous que l'URI de production est configuré dans vos variables d'environnement
 
 // Connexion à MongoDB avec Mongoose
 mongoose
@@ -20,7 +20,7 @@ mongoose
     console.error("Erreur de connexion à MongoDB:", err);
   });
 
-// Middleware pour gérer les erreurs
+// Middleware pour gérer les erreurs et les CORS
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
