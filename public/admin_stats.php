@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Une requête vers le serveur Node.js pour récupérer les animaux
-$response = @file_get_contents('https://arcazoo-40aeb8b73b17.herokuapp.com');
+$response = @file_get_contents('https://arcazoo-40aeb8b73b17.herokuapp.com/animals');
 
 if ($response === FALSE) {
     die('Erreur lors de la récupération des animaux');

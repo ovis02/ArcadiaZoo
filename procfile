@@ -1,1 +1,2 @@
 web: vendor/bin/heroku-php-apache2 index.php
+worker: node server.js
