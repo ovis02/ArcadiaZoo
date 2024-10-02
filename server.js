@@ -1,11 +1,8 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 
-// Crée l'application Express
 const app = express();
-
-// Définit le port de manière dynamique pour Heroku ou 4000 en local
 const port = process.env.PORT || 4000;
 
 // Middleware
@@ -13,14 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 // Connexion à MongoDB Atlas
-const mongoURI =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://oves7860:Mohammad786.@arcadiazoo.mongodb.net/ArcadiaZoo?retryWrites=true&w=majority";
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://oves7860:Mohammad786.@arcadiazoo.dheoc.mongodb.net/ArcadiaZoo?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("Connexion à MongoDB Atlas réussie");
   })
