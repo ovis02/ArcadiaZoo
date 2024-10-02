@@ -144,22 +144,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Ajoute un évenement à tous les boutons "J'aime"
 document.addEventListener("DOMContentLoaded", () => {
-  const apiBaseUrl =
-    window.location.hostname === "localhost"
-      ? "http://localhost:4000"
-      : "https://arcazoo-40aeb8b73b17.herokuapp.com/"; // Remplacez par votre URL Heroku
-
   document.querySelectorAll(".jaime-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const animalName =
         button.getAttribute("data-animal") || button.id.split("-")[1];
 
-      // Désactiver le bouton pour éviter les clics multiples
-      button.disabled = true;
-
       try {
         const response = await fetch(
-          `${apiBaseUrl}/animal/${animalName}/click`,
+          `http://localhost:4000/animal/${animalName}/click`,
           {
             method: "POST",
           }
@@ -179,9 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (error) {
         console.error("Erreur lors de l'incrémentation:", error);
-      } finally {
-        // Réactiver le bouton après la requête
-        button.disabled = false;
       }
     });
   });

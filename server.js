@@ -1,59 +1,85 @@
 const express = require("express");
-const mongoose = require("mongoose"); // Importer mongoose
+const mongoose = require("mongoose");
+const cors = require("cors");
 
+// Crée l'application Express
 const app = express();
-const port = process.env.PORT || 3000; // Utilise le port fourni par Heroku
 
-// URI de la base de données MongoDB
-const uri = process.env.MONGODB_URI; // Assurez-vous que l'URI de production est configuré dans vos variables d'environnement
+// Définit le port de manière dynamique pour Heroku ou 4000 en local
+const port = process.env.PORT || 4000;
 
-// Connexion à MongoDB avec Mongoose
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Connexion à MongoDB Atlas
+const mongoURI =
+  process.env.MONGODB_URI ||
+  "mongodb+srv://oves7860:Mohammad786.@arcadiazoo.mongodb.net/ArcadiaZoo?retryWrites=true&w=majority";
 mongoose
-  .connect(uri, {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connecté à MongoDB!");
+    console.log("Connexion à MongoDB Atlas réussie");
   })
   .catch((err) => {
-    console.error("Erreur de connexion à MongoDB:", err);
+    console.error("Erreur de connexion à MongoDB Atlas :", err.message);
   });
 
-// Middleware pour gérer les erreurs et les CORS
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, content-type"
-  );
-  next();
+// Schéma et modèle MongoDB pour les vues d'animaux
+const animalViewSchema = new mongoose.Schema({
+  animal: { type: String, required: true },
+  views: { type: Number, default: 0 },
 });
 
-// Modèle Mongoose pour les animaux
-const animalSchema = new mongoose.Schema({
-  animal: String,
-  views: Number,
+const AnimalView = mongoose.model(
+  "AnimalView",
+  animalViewSchema,
+  "animalviews"
+);
+
+// Route pour incrémenter le compteur de vues pour un animal spécifique
+app.post("/animal/:name/click", async (req, res) => {
+  try {
+    const animalName = req.params.name;
+    let animal = await AnimalView.findOne({ animal: animalName });
+
+    if (animal) {
+      animal.views += 1;
+      await animal.save();
+      res
+        .status(200)
+        .json({ message: "Compteur incrémenté avec succès", animal });
+    } else {
+      animal = new AnimalView({ animal: animalName, views: 1 });
+      await animal.save();
+      res.status(201).json({ message: "Animal ajouté avec succès", animal });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-const Animal = mongoose.model("Animal", animalSchema);
-
-// Route pour récupérer les animaux
+// Route pour récupérer tous les animaux et leurs compteurs de vues
 app.get("/animals", async (req, res) => {
   try {
-    const animals = await Animal.find(); // Récupérer tous les animaux
-    res.status(200).json(animals); // Retourne les animaux en format JSON
+    const animals = await AnimalView.find({});
+    res.status(200).json(animals);
   } catch (err) {
-    console.error("Erreur lors de la récupération des animaux :", err);
-    res.status(500).send("Erreur de récupération des animaux : " + err.message);
+    res.status(500).json({ error: err.message });
   }
+});
+
+// Route par défaut pour la racine
+app.get("/", (req, res) => {
+  res.send(
+    "Bienvenue sur le serveur ArcadiaZoo API. Utilisez les routes spécifiques pour interagir."
+  );
 });
 
 // Démarre le serveur
 app.listen(port, () => {
-  console.log(`Le serveur est en écoute sur le port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
