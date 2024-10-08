@@ -4,7 +4,7 @@ include '../views/includes/header.php';
     <div class="screen">
       <h6 class="title-form">Contactez nous</h6>
       <div class="Formulaire">
-         <form action="../actions/message/traitement_contact.php" method="POST">
+         <form id="contactForm">
     <div class="form-group">
         <label for="email" class="form-label">Email</label>
         <input
@@ -45,5 +45,6 @@ include '../views/includes/header.php';
         <button type="submit" class="form-button">Envoyer</button>
     </div>
 </form>
+<div id="contact" style="display: none;"></div>
       </div>
 <?php include'../views/includes/footer.php'; ?>

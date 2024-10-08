@@ -105,6 +105,43 @@ function toggleInfo(button) {
   }
 }
 
+//formulaire de contact fetch asyncrone message de confirmation
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Empêche le rechargement de la page
+
+  var formData = new FormData(this);
+
+  fetch("../../actions/message/traitement_contact.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Récupère le div avec l'id 'contact'
+      var contactDiv = document.getElementById("contact");
+
+      // Affiche le message renvoyé par le serveur
+      contactDiv.style.display = "block";
+
+      // Change la couleur en fonction du succès ou de l'erreur
+      if (data.status === "success") {
+        contactDiv.style.color = "green"; // Couleur pour le succès
+      } else {
+        contactDiv.style.color = "red"; // Couleur pour les erreurs
+      }
+
+      // Affiche le message renvoyé
+      contactDiv.innerHTML = data.message;
+    })
+    .catch((error) => {
+      // En cas d'erreur dans la requête, affiche un message d'erreur
+      var contactDiv = document.getElementById("contact");
+      contactDiv.style.display = "block";
+      contactDiv.style.color = "red";
+      contactDiv.innerHTML = "Une erreur est survenue. Veuillez réessayer.";
+    });
+});
+
 //fonction ajax pour la soumission de l'avis sans recharger la page
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("avis_form");
@@ -146,28 +183,32 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".jaime-btn").forEach((button) => {
     button.addEventListener("click", async () => {
-      const animalName =
-        button.getAttribute("data-animal") || button.id.split("-")[1];
+      const animalName = button.getAttribute("data-animal");
 
       try {
         const response = await fetch(
           `http://localhost:4000/animal/${animalName}/click`,
           {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log(`${animalName} compteur incrémenté :`, data.animal.views);
+        const data = await response.json(); // Récupère la réponse en JSON
 
-          // Met à jour le compteur sur la page
+        // Vérifie le statut de la réponse
+        if (response.ok) {
+          // Affiche le message sur la page
           const resultDiv = document.querySelector(`#result-${animalName}`);
-          if (resultDiv) {
-            resultDiv.textContent = `${animalName}: ${data.animal.views}`;
-          }
+          resultDiv.textContent = data.message; // Affiche le message
+          resultDiv.style.color = "white"; // Couleur verte pour succès
         } else {
-          console.error("Erreur lors de l'incrémentation du compteur");
+          // Si une erreur se produit, affiche le message d'erreur
+          const resultDiv = document.querySelector(`#result-${animalName}`);
+          resultDiv.textContent = data.error || "Erreur inconnue";
+          resultDiv.style.color = "red"; // Couleur rouge pour erreur
         }
       } catch (error) {
         console.error("Erreur lors de l'incrémentation:", error);

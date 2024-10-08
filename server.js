@@ -7,7 +7,7 @@ const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Pour parser le JSON dans les requêtes
 
 // Connexion à MongoDB Atlas
 mongoose
@@ -35,23 +35,22 @@ const AnimalView = mongoose.model(
 
 // Route pour incrémenter le compteur de vues pour un animal spécifique
 app.post("/animal/:name/click", async (req, res) => {
-  try {
-    const animalName = req.params.name;
-    let animal = await AnimalView.findOne({ animal: animalName });
+  // Vérifie que la méthode est POST
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Méthode non autorisée" });
+  }
 
-    if (animal) {
-      animal.views += 1;
-      await animal.save();
-      res
-        .status(200)
-        .json({ message: "Compteur incrémenté avec succès", animal });
-    } else {
-      animal = new AnimalView({ animal: animalName, views: 1 });
-      await animal.save();
-      res.status(201).json({ message: "Animal ajouté avec succès", animal });
-    }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  const animalName = req.params.name;
+  let animal = await AnimalView.findOne({ animal: animalName });
+
+  if (animal) {
+    animal.views += 1;
+    await animal.save();
+    res.status(200).json({ message: "Merci pour votre vote", animal });
+  } else {
+    animal = new AnimalView({ animal: animalName, views: 1 });
+    await animal.save();
+    res.status(201).json({ message: "Animal ajouté avec succès", animal });
   }
 });
 

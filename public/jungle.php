@@ -59,6 +59,7 @@ foreach ($animals as $animal) {
         <button id="increment-Killer" class="jaime-btn" data-animal="Killer">
           ❤️ J'aime
         </button>
+        <div id="result-Killer"></div>
       </div>
     </article>
     <article class="service">

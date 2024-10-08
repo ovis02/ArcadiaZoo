@@ -17,5 +17,3 @@ try {
     // En cas d'erreur, afficher un message et arrêter le script
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
-?>
-

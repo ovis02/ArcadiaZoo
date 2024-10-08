@@ -318,6 +318,12 @@ h3 {
   background-attachment: fixed;
 }
 
+#contact {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /*...................Services..............*/
 
 .service-container {

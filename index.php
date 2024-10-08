@@ -146,7 +146,7 @@ include 'views/includes/header.php';
     <!-- Section for valid comments -->
  <div class="container">
         <?php while ($row = $stmt->fetch()): ?>
-        <div class="row mb-3">
+        <div class="row mt-3 mb-3">
             <div class="col-md-4">
                 <div class="comment-info">
                     <h4>Pseudo</h4>
