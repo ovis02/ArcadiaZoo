@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     $motif = trim(htmlspecialchars($_POST['motif'], ENT_QUOTES, 'UTF-8'));
     $description = trim(htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8'));
-
     // Vérifie que les données sont valides
     if ($email && $motif && $description) {
         // Prépare la requête SQL pour insérer les données dans la base de données

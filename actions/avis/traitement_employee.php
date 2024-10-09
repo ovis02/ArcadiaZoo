@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql = "UPDATE avis SET est_valide = 1 WHERE id = :id";
     } elseif ($action === 'supprimer') {
         // Supprime l'avis
-        $sql = "DELETE FROM Avis WHERE id = :id";
+        $sql = "DELETE FROM avis WHERE id = :id";
     }
 
     $stmt = $pdo->prepare($sql);

@@ -105,41 +105,58 @@ function toggleInfo(button) {
   }
 }
 
-//formulaire de contact fetch asyncrone message de confirmation
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Empêche le rechargement de la page
+// Fonction pour gérer la soumission du formulaire de contact
+document.addEventListener("DOMContentLoaded", function () {
+  const contactForm = document.getElementById("contactForm");
 
-  var formData = new FormData(this);
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault(); // Empêche le rechargement de la page
 
-  fetch("../../actions/message/traitement_contact.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // Récupère le div avec l'id 'contact'
-      var contactDiv = document.getElementById("contact");
+      const formData = new FormData(this);
 
-      // Affiche le message renvoyé par le serveur
-      contactDiv.style.display = "block";
+      fetch("../../actions/message/traitement_contact.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          // Vérifie si la réponse est OK
+          if (!response.ok) {
+            throw new Error("Erreur lors de l'envoi du message");
+          }
+          return response.json(); // Récupère la réponse en JSON
+        })
+        .then((data) => {
+          // Récupère le div avec l'id 'contact'
+          const contactDiv = document.getElementById("contact");
 
-      // Change la couleur en fonction du succès ou de l'erreur
-      if (data.status === "success") {
-        contactDiv.style.color = "green"; // Couleur pour le succès
-      } else {
-        contactDiv.style.color = "red"; // Couleur pour les erreurs
-      }
+          // Affiche le message renvoyé par le serveur
+          contactDiv.style.display = "block";
 
-      // Affiche le message renvoyé
-      contactDiv.innerHTML = data.message;
-    })
-    .catch((error) => {
-      // En cas d'erreur dans la requête, affiche un message d'erreur
-      var contactDiv = document.getElementById("contact");
-      contactDiv.style.display = "block";
-      contactDiv.style.color = "red";
-      contactDiv.innerHTML = "Une erreur est survenue. Veuillez réessayer.";
+          // Change la couleur en fonction du succès ou de l'erreur
+          if (data.status === "success") {
+            contactDiv.style.color = "green"; // Couleur pour le succès
+          } else {
+            contactDiv.style.color = "red"; // Couleur pour les erreurs
+          }
+
+          // Affiche le message renvoyé
+          contactDiv.innerHTML = data.message;
+        })
+        .catch((error) => {
+          // En cas d'erreur dans la requête, affiche un message d'erreur
+          const contactDiv = document.getElementById("contact");
+          contactDiv.style.display = "block";
+          contactDiv.style.color = "red";
+          contactDiv.innerHTML = "Une erreur est survenue. Veuillez réessayer.";
+          console.error("Erreur lors de l'envoi du message :", error);
+        });
     });
+  } else {
+    console.error(
+      "Le formulaire de contact avec l'ID 'contactForm' est introuvable."
+    );
+  }
 });
 
 //fonction ajax pour la soumission de l'avis sans recharger la page

@@ -4,16 +4,13 @@ import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 4000;
-
 // Middleware
 app.use(cors());
-app.use(express.json()); // Pour parser le JSON dans les requêtes
+app.use(express.json());
 
-// Connexion à MongoDB Atlas
+// Connexion à MongoDB Atlas (en utilisant la variable d'environnement)
 mongoose
-  .connect(
-    "mongodb+srv://oves7860:Mohammad786.@arcadiazoo.dheoc.mongodb.net/ArcadiaZoo?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connexion à MongoDB Atlas réussie");
   })
