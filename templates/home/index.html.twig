@@ -1,0 +1,90 @@
+{# templates/home/index.html.twig #} {% extends 'base.html.twig' %} {% block
+title %}Bienvenue à Arcadia{% endblock %} {% block content %}
+<div class="background-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="presentation-container">
+          <div class="text-container">
+            <h1>Bienvenue à Arcadia</h1>
+            <p>
+              Bienvenue à Arcadia, le zoo où la nature prend vie ! Plongez dans
+              un monde fascinant où la diversité des habitats rencontre la
+              richesse de la faune.<br />
+              Explorez la majesté de la savane, où le rugissement des lions
+              résonne au loin, tandis que les éléphants parcourent paisiblement
+              les vastes plaines...
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="image-container">
+          <img
+            id="main-image"
+            src="{{ asset('assets/images/jungle/tigre.jpg') }}"
+            alt="Tigre"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="centered-section">
+    <h2>Explorez la diversité de nos habitats</h2>
+    <p>
+      Rencontrez nos animaux emblématiques de la savane, des marais et des
+      montagnes, et plongez dans leurs mondes fascinants.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/savane/lion.jpg') }}"
+            alt="Image 1"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>
+              Rencontrez le roi de la savane - le lion. Découvrez sa majesté et
+              sa puissance
+            </p>
+            <a href="{{ path('app_savane') }}#lion">En savoir plus...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/marais/crocodilenil.jpg') }}"
+            alt="Image 2"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>Explorez le monde mystérieux des crocodiles des marais</p>
+            <a href="{{ path('app_marais') }}#croco">En savoir plus...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/montagne/loup.jpg') }}"
+            alt="Image 3"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>
+              Plongez dans l'essence majestueuse du loup gris, maître des forêts
+              sauvages
+            </p>
+            <a href="{{ path('app_mountain') }}#loup">En savoir plus...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

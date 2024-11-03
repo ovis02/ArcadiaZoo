@@ -1,0 +1,74 @@
+<header>
+  <div class="background-image"></div>
+  <div class="header-container">
+    <div class="logo">
+      <img
+        src="{{ asset('assets/images/logo/logoArcadia.png') }}"
+        alt="ArcadiaLogo"
+      />
+    </div>
+
+    <nav class="header-nav">
+      <ul>
+        <li
+          class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}"
+        >
+          <a href="{{ path('app_home') }}">ACCUEIL</a>
+        </li>
+        <li
+          class="{% if app.request.attributes.get('_route') == 'app_desert' %}active{% endif %}"
+        >
+          <a href="{{ path('app_desert') }}">Animaux et Habitats</a>
+        </li>
+        <li
+          class="{% if app.request.attributes.get('_route') == 'app_services' %}active{% endif %}"
+        >
+          <a href="{{ path('app_services') }}">SERVICES</a>
+        </li>
+        <li
+          class="{% if app.request.attributes.get('_route') == 'app_formulaire' %}active{% endif %}"
+        >
+          <a href="{{ path('app_formulaire') }}">CONTACT</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="burger-container">
+    <a href="#" id="logo-burger-button">
+      <img
+        id="logo-burger"
+        src="{{ asset('assets/images/logo/LOGO.png') }}"
+        alt="logo-burger"
+        height="40px"
+        width="40px"
+        class="logo-burger"
+      />
+    </a>
+  </div>
+  <div id="vertical-navbar" class="vertical-navbar">
+    <ul>
+      <li
+        class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}"
+      >
+        <a href="{{ path('app_home') }}">ACCUEIL</a>
+      </li>
+      <li
+        class="{% if app.request.attributes.get('_route') == 'app_desert' %}active{% endif %}"
+      >
+        <a href="{{ path('app_desert') }}">Animaux et Habitats</a>
+      </li>
+      <li
+        class="{% if app.request.attributes.get('_route') == 'app_services' %}active{% endif %}"
+      >
+        <a href="{{ path('app_services') }}">SERVICES</a>
+      </li>
+      <li
+        class="{% if app.request.attributes.get('_route') == 'app_formulaire' %}active{% endif %}"
+      >
+        <a href="{{ path('app_formulaire') }}">CONTACT</a>
+      </li>
+    </ul>
+    <button id="close-button">Fermer</button>
+  </div>
+</header>
