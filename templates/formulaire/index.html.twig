@@ -3,7 +3,7 @@ block content %}
 <div class="screen">
   <h6 class="title-form">Contactez-nous</h6>
   <div class="Formulaire">
-    {{ form_start(form) }}
+    {{ form_start(form, { attr: { id: "contactForm" } }) }}
     {{ form_row(form.email) }}
     {{ form_row(form.motif) }}
     {{ form_row(form.description) }}
@@ -11,6 +11,9 @@ block content %}
       <button type="submit" class="form-button">Envoyer</button>
     </div>
     {{ form_end(form) }}
+    <!-- message succes ou erreur -->
+    <div id="message-contact"></div>
   </div>
 </div>
+
 {% endblock %}

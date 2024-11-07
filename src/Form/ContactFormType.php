@@ -12,14 +12,18 @@ class ContactFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('motif')
-            ->add('description')
-            ->add('date_creation', null, [
-                'widget' => 'single_text',
+            ->add('email', null, [
+                'attr' => ['class' => 'form-control form-group'], // Classe pour le champ email
+                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
             ])
-            ->add('status')
-        ;
+            ->add('motif', null, [
+                'attr' => ['class' => 'form-control form-group'], // Classe pour le champ motif
+                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
+            ])
+            ->add('description', null, [
+                'attr' => ['class' => 'form-control form-group form-description'], // Classe pour le champ description
+                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -29,3 +33,4 @@ class ContactFormType extends AbstractType
         ]);
     }
 }
+
