@@ -29,6 +29,11 @@ class Avis
     #[ORM\Column]
     private ?bool $est_valide = null;
 
+     public function __construct()
+    {
+        $this->date_creation = new \DateTime(); // Définit la date actuelle automatiquement
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -71,7 +71,11 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
               Rencontrez le roi de la savane - le lion. Découvrez sa majesté et
               sa puissance
             </p>
-            <a href="{{ path('app_savane') }}#lion">En savoir plus...</a>
+            <a href="{{ path('app_savane') }}#lion"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
           </div>
         </div>
       </div>
@@ -84,7 +88,11 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
           />
           <div class="description-contain">
             <p>Explorez le monde mystérieux des crocodiles des marais</p>
-            <a href="{{ path('app_marais') }}#croco">En savoir plus...</a>
+            <a href="{{ path('app_marais') }}#croco"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
           </div>
         </div>
       </div>
@@ -100,11 +108,36 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
               Plongez dans l'essence majestueuse du loup gris, maître des forêts
               sauvages
             </p>
-            <a href="{{ path('app_mountain') }}#loup">En savoir plus...</a>
+            <a href="{{ path('app_mountain') }}#loup"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="container-fluid">
+    <div class="transparent-rectangle">
+      <h3>Laisser un avis</h3>
+      {{ form_start(form, { attr: { id: "avis_form" } }) }}
+      {{ form_row(form.pseudo) }}
+      {{ form_row(form.email) }}
+      {{ form_row(form.commentaire) }}
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-submit"
+          style="background-color: #dae8e1"
+        >
+          Laisser un avis
+        </button>
+      </div>
+      {{ form_end(form) }}
+    </div>
+    <!-- message de confirmation -->
+    <div id="message" style="display: none"></div>
   </div>
 </div>
 {% endblock %}
