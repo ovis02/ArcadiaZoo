@@ -23,22 +23,15 @@ class Contact
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTimeInterface $date_creation = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $status = null;
+    #[ORM\Column(type: "string", length: 20, options: ["default" => "non lu"])]
+    private string $status = "non lu";
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -49,7 +42,6 @@ class Contact
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -61,7 +53,6 @@ class Contact
     public function setMotif(string $motif): static
     {
         $this->motif = $motif;
-
         return $this;
     }
 
@@ -73,7 +64,6 @@ class Contact
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -85,11 +75,10 @@ class Contact
     public function setDateCreation(\DateTimeInterface $date_creation): static
     {
         $this->date_creation = $date_creation;
-
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -97,7 +86,6 @@ class Contact
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 }

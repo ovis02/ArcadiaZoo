@@ -18,19 +18,10 @@ security:
       lazy: true
       provider: app_user_provider
       custom_authenticator: App\Security\AppLoginAuthenticator
+      entry_point: App\Security\AppLoginAuthenticator # Ajout de l'entry_point pour spécifier l'authentificateur
       logout:
         path: app_logout
-        # où rediriger après la déconnexion
         target: app_login
-
-      # Ajout de la gestion de la connexion via le formulaire
-      form_login:
-        login_path: app_login
-        check_path: app_login
-        default_target_path: /home # Redirection après la connexion réussie par défaut
-
-      # Gestion de la redirection selon le rôle après la connexion
-      success_handler: App\Security\AuthenticationSuccessHandler
 
   # Gestion des règles d'accès (accès aux pages en fonction des rôles)
   access_control:

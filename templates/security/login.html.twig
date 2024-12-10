@@ -1,31 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'user_base.html.twig' %} {% block title %}Connexion Zoo{% endblock %}
+{% block content %}
+<div class="screen">
+  <div class="login-form-container">
+    <h1 class="title-login">Connectez-vous</h1>
+    <form method="post" class="login-form">
+      {% if error %}
+      <div class="alert alert-danger">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+      </div>
+      {% endif %} {% if app.user %}
+      <div class="mb-3">
+        Vous êtes connecté en tant que {{ app.user.userIdentifier }},
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+      </div>
+      {% endif %}
 
-{% block title %}Log in!{% endblock %}
+      <div class="form-group">
+        <label for="inputEmail" class="form-label">Adresse email</label>
+        <input
+          type="email"
+          value="{{ last_username }}"
+          name="email"
+          id="inputEmail"
+          class="form-control"
+          autocomplete="email"
+          required
+          autofocus
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="form-label">Mot de passe</label>
+        <input
+          type="password"
+          name="password"
+          id="inputPassword"
+          class="form-control"
+          autocomplete="current-password"
+          required
+        />
+      </div>
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+      <input
+        type="hidden"
+        name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+      />
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+      <button class="btn-submit" type="submit">Connexion</button>
+    </form>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    <!-- Bouton pour revenir à la page d'accueil -->
+    <div class="text-center mt-3">
+      <a href="{{ path('app_home') }}" class="btn btn-secondary"
+        >Retour à l'accueil</a
+      >
+    </div>
+  </div>
+</div>
 {% endblock %}

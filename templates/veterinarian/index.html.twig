@@ -1,0 +1,11 @@
+{% extends 'user_base.html.twig' %} {% block title %}Hello Veterinarian{%
+endblock %} {% block body %}
+
+<header class="bg-light py-3 text-center">
+  <h1>Bienvenue, {{ app.user.email }}!</h1>
+  <p>Vous êtes connecté en tant que<strong>Vétérinaire</strong>.</p>
+  <a href="{{ path('app_logout') }}" class="logout btn btn-danger"
+    >Déconnexion</a
+  >
+</header>
+{% endblock %}

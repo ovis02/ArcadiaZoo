@@ -1,0 +1,14 @@
+{% extends 'user_base.html.twig' %} {% block title %}Interface Employé{%
+endblock %} {% block content %}
+<header class="bg-light py-3 text-center">
+  <h1>Bienvenue, {{ app.user.email }}!</h1>
+  <p>Vous êtes connecté en tant qu'<strong>Employé</strong>.</p>
+  <a href="{{ path('app_logout') }}" class="logout btn btn-danger"
+    >Déconnexion</a
+  >
+</header>
+<section class="container py-4">
+  <h2>Fonctionnalités Employé</h2>
+  <p>Ici, vous pouvez gérer vos tâches spécifiques en tant qu'employé.</p>
+</section>
+{% endblock %}

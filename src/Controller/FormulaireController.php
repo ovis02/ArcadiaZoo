@@ -25,6 +25,9 @@ class FormulaireController extends AbstractController
             $contact->setEmail($form->get('email')->getData());
             $contact->setMotif($form->get('motif')->getData());
             $contact->setDescription($form->get('description')->getData());
+            $contact->setDateCreation(new \DateTime()); // Définit la date actuelle
+            $contact->setStatus("non lu"); // Par défaut, le statut est "non lu"
+
 
             // Enregistrement des données dans la base de données
             $entityManager->persist($contact);
