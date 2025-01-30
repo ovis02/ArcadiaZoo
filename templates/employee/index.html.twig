@@ -7,8 +7,52 @@ endblock %} {% block content %}
     >Déconnexion</a
   >
 </header>
+
 <section class="container py-4">
-  <h2>Fonctionnalités Employé</h2>
-  <p>Ici, vous pouvez gérer vos tâches spécifiques en tant qu'employé.</p>
+  <h2>Liste des Avis</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Pseudo</th>
+        <th>Email</th>
+        <th>Commentaire</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for avis in avisList %}
+      <tr>
+        <td>{{ avis.id }}</td>
+        <td>{{ avis.pseudo }}</td>
+        <td>{{ avis.email }}</td>
+        <td>{{ avis.commentaire }}</td>
+        <td>
+          {{ avis.dateCreation ? avis.dateCreation|date('Y-m-d') : 'Aucune date' }}
+        </td>
+        <td>{{ avis.estValide ? "Oui" : "Non" }}</td>
+        <td>
+          <button
+            onclick="validerAvis('{{ avis.id }}')"
+            {%
+            if
+            avis.estValide
+            %}disabled{%
+            endif
+            %}
+          >
+            Valider
+          </button>
+          <button onclick="supprimerAvis('{{ avis.id }}')">Supprimer</button>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4" class="text-center">Aucun avis disponible.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </section>
 {% endblock %}

@@ -138,6 +138,21 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
     </div>
     <!-- message de confirmation -->
     <div id="message" style="display: none"></div>
+    <!-- Affichage des avis validés -->
+    <div class="avis-valides">
+      <h3>Avis des visiteurs</h3>
+      {% for avis in avisValides %}
+      <div class="avis-item">
+        <p>
+          <strong>{{ avis.pseudo }}</strong> -
+          <em>{{ avis.createdAt|date('d/m/Y H:i') }}</em>
+        </p>
+        <p>{{ avis.commentaire }}</p>
+      </div>
+      {% else %}
+      <p>Aucun avis pour le moment.</p>
+      {% endfor %}
+    </div>
   </div>
+  {% endblock %}
 </div>
-{% endblock %}

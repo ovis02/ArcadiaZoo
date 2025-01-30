@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %} {% block title %}Habitat{% endblock %} {% block
+body %}
+<h1>Liste des Animaux</h1>
+<table border="1" cellpadding="10">
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Race</th>
+      <th>Habitat</th>
+      <th>État</th>
+      <th>Nourriture</th>
+      <th>Grammage</th>
+      <th>Date de Passage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for animal in animals %}
+    <tr>
+      <td>{{ animal.prenom }}</td>
+      <td>{{ animal.race }}</td>
+      <td>{{ animal.habitat }}</td>
+      <td>{{ animal.etatAnimal }}</td>
+      <td>{{ animal.nourritureProposee }}</td>
+      <td>{{ animal.grammageNourriture }}</td>
+      <td>{{ animal.datePassage|date('d/m/Y') }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="7">Aucun animal trouvé.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AnimalsRepository;
+use App\Repository\AnimalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AnimalsRepository::class)]
-class Animals
+#[ORM\Entity(repositoryClass: AnimalRepository::class)]
+class Animal
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,9 +21,6 @@ class Animals
     private ?string $race = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $habitat = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $etat_animal = null;
 
     #[ORM\Column(length: 255)]
@@ -35,16 +32,13 @@ class Animals
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_passage = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Habitat $habitat = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getPrenom(): ?string
@@ -67,18 +61,6 @@ class Animals
     public function setRace(string $race): static
     {
         $this->race = $race;
-
-        return $this;
-    }
-
-    public function getHabitat(): ?string
-    {
-        return $this->habitat;
-    }
-
-    public function setHabitat(string $habitat): static
-    {
-        $this->habitat = $habitat;
 
         return $this;
     }
@@ -127,6 +109,18 @@ class Animals
     public function setDatePassage(\DateTimeInterface $date_passage): static
     {
         $this->date_passage = $date_passage;
+
+        return $this;
+    }
+
+    public function getHabitat(): ?Habitat
+    {
+        return $this->habitat;
+    }
+
+    public function setHabitat(?Habitat $habitat): static
+    {
+        $this->habitat = $habitat;
 
         return $this;
     }

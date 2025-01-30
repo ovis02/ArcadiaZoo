@@ -35,12 +35,7 @@ content %}
       <div class="col-md-9 content animals-intro">
         <h1 class="animals-title">Montagne</h1>
         <p class="intro-animals">
-          Bienvenue dans les Montagnes, un monde d'altitude et de majesté au
-          cœur même de notre zoo. Découvrez l'aigle royal, le bouquetin, le
-          chamois, le loup et la marmotte, chacun parfaitement adapté à ce
-          royaume de sommets enneigés et de vallées verdoyantes.<br /><br />
-          Plongez dans cet habitat alpin où chaque pic et chaque vallée révèle
-          la beauté et la résilience de la vie sauvage des Montagnes.
+          {{ habitat.description }}
         </p>
       </div>
     </div>
@@ -50,18 +45,18 @@ content %}
     <div class="service1">
       <article class="description">
         <p>
-          Prénom : Scott <br />
-          Race : Aigle royal <br />
+          Prénom : {{ animal1.prenom }} <br />
+          Race : {{ animal1.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Régions montagneuses et falaises escarpées <br />
-          État de l'animal : <br />
-          Nourriture proposée : petits mammifères, oiseaux, reptiles <br />
-          Grammage de la nourriture : 500 à 1000 grammes <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal1.etatAnimal }} <br />
+          Nourriture proposée : {{ animal1.nourritureProposee }} <br />
+          Grammage de la nourriture : {{ animal1.grammagenourriture }} <br />
+          Date de passage : {{ animal1.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Scott" class="jaime-btn">❤️ J'aime</button>
@@ -85,18 +80,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Cricri <br />
-          Race : Bouquetin <br />
+          Prénom : {{ animal2.prenom }} <br />
+          Race : {{ animal2.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Montagnes rocailleuses et pentes escarpées <br />
-          État de l'animal : <br />
-          Nourriture proposée : herbes alpines, lichens, petits arbustes <br />
-          Grammage de la nourriture : 2 à 4 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal2.etatAnimal }}<br />
+          Nourriture proposée : {{ animal2.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal2.grammagenourriture }} <br />
+          Date de passage : {{ animal2.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-CriCri" class="jaime-btn">❤️ J'aime</button>
@@ -108,18 +103,18 @@ content %}
     <div class="service3">
       <article class="description">
         <p>
-          Prénom : Doug <br />
-          Race : Chamois <br />
+          Prénom : {{ animal3.prenom }} <br />
+          Race : {{ animal3.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Montagnes rocailleuses et pentes escarpées <br />
-          État de l'animal : <br />
-          Nourriture proposée : herbes alpines, lichens, petits arbustes <br />
-          Grammage de la nourriture : 2 à 4 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal3.etatAnimal }}<br />
+          Nourriture proposée : {{ animal3.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal3.grammagenourriture }} <br />
+          Date de passage : {{ animal3.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Doug" class="jaime-btn">❤️ J'aime</button>
@@ -143,18 +138,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Wolf <br />
-          Race : Loup gris <br />
+          Prénom : {{ animal4.prenom }} <br />
+          Race : {{ animal4.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Forêts et montagnes boisées <br />
-          État de l'animal : <br />
-          Nourriture proposée : viande de bœuf, poulet, poisson <br />
-          Grammage de la nourriture : 2 à 3 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal4.etatAnimal }}<br />
+          Nourriture proposée : {{ animal4.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal4.grammagenourriture }} <br />
+          Date de passage : {{ animal4.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Wolf" class="jaime-btn">❤️ J'aime</button>
@@ -166,25 +161,28 @@ content %}
     <div class="service5">
       <article class="description">
         <p>
-          Prénom : Spog <br />
-          Race : Marmotte <br />
+          Prénom : {{ animal5.prenom }} <br />
+          Race : {{ animal5.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Montagnes rocheuses et prairies alpines <br />
-          État de l'animal : <br />
-          Nourriture proposée : herbes, racines, baies <br />
-          Grammage de la nourriture : 200 à 400 grammes <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal5.etatAnimal }}<br />
+          Nourriture proposée : {{ animal5.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal5.grammagenourriture }} <br />
+          Date de passage : {{ animal5.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Spog" class="jaime-btn">❤️ J'aime</button>
         </div>
       </article>
       <article class="service">
-        <img src="assets/montagne/marmotte.jpg" onclick="agrandirImage(this)" />
+        <img
+          src="{{ asset('assets/images/montagne/marmotte.jpg') }}"
+          onclick="agrandirImage(this)"
+        />
       </article>
     </div>
   </section>

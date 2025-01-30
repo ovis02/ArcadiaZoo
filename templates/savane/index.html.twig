@@ -35,14 +35,7 @@ content %}
       <div class="col-md-9 content animals-intro">
         <h1 class="animals-title">Savane</h1>
         <p class="intro-animals">
-          Bienvenue dans la Savane, un vaste horizon de beauté naturelle au cœur
-          de notre zoo. Découvrez cet habitat emblématique où l'éléphant
-          d'Afrique, la girafe, le guépard, le lion, le rhinocéros et le zèbre
-          évoluent en harmonie.<br />
-          <br />
-          Parcourez ces étendues sauvages où chaque pas révèle la majesté de la
-          vie animale. Plongez dans ce monde fascinant où chaque créature
-          incarne la splendeur de la vie sauvage de la Savane.
+          {{ habitat.description }}
         </p>
       </div>
     </div>
@@ -52,18 +45,18 @@ content %}
     <div class="service1">
       <article class="description">
         <p>
-          Prénom : Tembo <br />
-          Race : Éléphant d'Afrique <br />
+          Prénom : {{ animal1.prenom }}<br />
+          Race : {{ animal1.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : herbes, feuilles, écorce <br />
-          Grammage de la nourriture : 100 à 300 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal1.etatAnimal }} <br />
+          Nourriture proposée : {{ animal1.nourritureProposee }} <br />
+          Grammage de la nourriture : {{ animal1.grammagenourriture }} <br />
+          Date de passage : {{ animal1.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Tembo" class="jaime-btn">❤️ J'aime</button>
@@ -87,32 +80,32 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Jasiri <br />
-          Race : Girafe <br />
+          Prénom : {{ animal2.prenom }} <br />
+          Race : {{ animal2.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
-          Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : feuilles d'acacia, branches <br />
-          Grammage de la nourriture : 30 à 75 kg <br />
-          Date de passage : 00/00/2024
+          Habitat : Forêts tropicales d'Amérique du Sud <br />
+          État de l'animal : {{ animal2.etatAnimal }}<br />
+          Nourriture proposée : {{ animal2.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal2.grammagenourriture }} <br />
+          Date de passage : {{ animal2.datePassage|date('d-m-Y H:i') }}
         </div>
         <p>
-          Prénom : Kito <br />
-          Race : Girafe (Jeune) <br />
+          Prénom : {{ animal3.prenom }} <br />
+          Race : {{ animal3.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : lait maternel, feuilles tendres <br />
-          Grammage de la nourriture : 5 à 15 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal3.etatAnimal }}<br />
+          Nourriture proposée : {{ animal3.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal3.grammagenourriture }} <br />
+          Date de passage : {{ animal3.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-JasiriKito" class="jaime-btn">❤️ J'aime</button>
@@ -124,18 +117,18 @@ content %}
     <div class="service3">
       <article class="description">
         <p>
-          Prénom : Raja <br />
-          Race : Guépard <br />
+          Prénom : {{ animal4.prenom }} <br />
+          Race : {{ animal4.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : viande de poulet, agneau, mouton <br />
-          Grammage de la nourriture : 2 à 4 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal4.etatAnimal }}<br />
+          Nourriture proposée : {{ animal4.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal4.grammagenourriture }} <br />
+          Date de passage : {{ animal4.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Raja" class="jaime-btn">❤️ J'aime</button>
@@ -159,18 +152,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Simba <br />
-          Race : Lion <br />
+          Prénom : {{ animal5.prenom }} <br />
+          Race : {{ animal5.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : viande de bœuf, poulet, poisson <br />
-          Grammage de la nourriture : 5 à 10 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal5.etatAnimal }}<br />
+          Nourriture proposée : {{ animal5.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal5.grammagenourriture }} <br />
+          Date de passage : {{ animal5.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Simba" class="jaime-btn">❤️ J'aime</button>
@@ -183,17 +176,17 @@ content %}
       <article class="description">
         <p>
           Prénom : Rhino, Rina et Rocco <br />
-          Race : Rhinocéros <br />
+          Race : {{ animal6.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div id="etat-animal" class="etat-animal-rhino" style="display: none">
           Habitat : Savane <br />
-          État des animaux : <br />
-          Nourriture proposée : foin, herbes, branches <br />
-          Grammage de la nourriture : 50 à 100 kg par rhinocéros <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal6.etatAnimal }}<br />
+          Nourriture proposée : {{ animal6.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal6.grammagenourriture }} <br />
+          Date de passage : {{ animal6.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-rhinoFamily" class="jaime-btn">
@@ -219,18 +212,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Zara <br />
-          Race : Zèbre <br />
+          Prénom : {{ animal7.prenom }} <br />
+          Race : {{ animal7.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Savane <br />
-          État de l'animal : <br />
-          Nourriture proposée : herbes, feuilles, écorce <br />
-          Grammage de la nourriture : 10 à 15 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal7.etatAnimal }}<br />
+          Nourriture proposée : {{ animal7.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal7.grammagenourriture }} <br />
+          Date de passage : {{ animal7.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Zara" class="jaime-btn">❤️ J'aime</button>

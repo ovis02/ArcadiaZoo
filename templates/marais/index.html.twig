@@ -36,11 +36,7 @@ content %}
       <div class="col-md-9 content animals-intro">
         <h1 class="animals-title">Marais</h1>
         <p class="intro-animals">
-          Bienvenue dans les Marais, un écosystème luxuriant au cœur de notre
-          zoo. Explorez cet habitat humide où le castor, le crocodile du Nil,
-          l'hippopotame, le lamantin et la tortue de Californie prospèrent.<br /><br />
-          Plongez dans ce monde aquatique où chaque créature révèle la beauté de
-          la vie sauvage des Marais.
+          {{ habitat.description }}
         </p>
       </div>
     </div>
@@ -50,18 +46,18 @@ content %}
     <div class="service1">
       <article class="description">
         <p>
-          Prénom : Crac <br />
-          Race : Castor <br />
+          Prénom : {{ animal1.prenom }}<br />
+          Race : {{ animal1.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Marais et cours d'eau <br />
-          État de l'animal : <br />
-          Nourriture proposée : écorce, branches, plantes aquatiques <br />
-          Grammage de la nourriture : 1 à 2 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal1.etatAnimal }} <br />
+          Nourriture proposée : {{ animal1.nourritureProposee }} <br />
+          Grammage de la nourriture : {{ animal1.grammagenourriture }} <br />
+          Date de passage : {{ animal1.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Crac" class="jaime-btn">❤️ J'aime</button>
@@ -85,18 +81,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Godzilla <br />
-          Race : Crocodile du Nil <br />
+          Prénom : {{ animal2.prenom }} <br />
+          Race : {{ animal2.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Marais et cours d'eau <br />
-          État de l'animal : <br />
-          Nourriture proposée : viande de poulet, poisson, bœuf <br />
-          Grammage de la nourriture : 2 à 5 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal2.etatAnimal }}<br />
+          Nourriture proposée : {{ animal2.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal2.grammagenourriture }} <br />
+          Date de passage : {{ animal2.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-godzilla" class="jaime-btn">❤️ J'aime</button>
@@ -108,18 +104,18 @@ content %}
     <div class="service3">
       <article class="description">
         <p>
-          Prénom : Pumba <br />
-          Race : Hippopotame <br />
+          Prénom : {{ animal3.prenom }} <br />
+          Race : {{ animal3.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Marais et cours d'eau <br />
-          État de l'animal : <br />
-          Nourriture proposée : foin, herbe, légumes <br />
-          Grammage de la nourriture : 20 à 50 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal3.etatAnimal }}<br />
+          Nourriture proposée : {{ animal3.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal3.grammagenourriture }} <br />
+          Date de passage : {{ animal3.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Pumba" class="jaime-btn">❤️ J'aime</button>
@@ -143,18 +139,18 @@ content %}
       </article>
       <article class="description">
         <p>
-          Prénom : Annie <br />
-          Race : Lamantin <br />
+          Prénom : {{ animal4.prenom }} <br />
+          Race : {{ animal4.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Marais et cours d'eau <br />
-          État de l'animal : <br />
-          Nourriture proposée : laitue, algues, légumes aquatiques <br />
-          Grammage de la nourriture : 30 à 50 kg <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal4.etatAnimal }}<br />
+          Nourriture proposée : {{ animal4.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal4.grammagenourriture }} <br />
+          Date de passage : {{ animal4.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Annie" class="jaime-btn">❤️ J'aime</button>
@@ -166,18 +162,18 @@ content %}
     <div class="service5">
       <article class="description">
         <p>
-          Prénom : Shelly <br />
-          Race : Tortue <br />
+          Prénom : {{ animal5.prenom }} <br />
+          Race : {{ animal5.race }} <br />
           <button class="info" onclick="toggleInfo(this)">
             En savoir plus...
           </button>
         </p>
         <div style="display: none">
           Habitat : Marais et cours d'eau <br />
-          État de l'animal : <br />
-          Nourriture proposée : végétaux, fruits, vers de terre <br />
-          Grammage de la nourriture : 100 à 200 g <br />
-          Date de passage : 00/00/2024
+          État de l'animal : {{ animal5.etatAnimal }}<br />
+          Nourriture proposée : {{ animal5.grammagenourriture }} <br />
+          Grammage de la nourriture : {{ animal5.grammagenourriture }} <br />
+          Date de passage : {{ animal5.datePassage|date('d-m-Y H:i') }}
         </div>
         <div class="like-button-container">
           <button id="increment-Shelly" class="jaime-btn">❤️ J'aime</button>
