@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,21 +22,42 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $race = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $etat_animal = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nourriture_proposee = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $etat = null;
 
-    #[ORM\Column]
-    private ?int $grammage_nourriture = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nourritureProposee = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_passage = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $grammage = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateDernierPassage = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Habitat $habitat = null;
+
+    /**
+     * @var Collection<int, Repas>
+     */
+    #[ORM\OneToMany(targetEntity: Repas::class, mappedBy: 'animal')]
+    private Collection $repas;
+
+    /**
+     * @var Collection<int, CompteRenduVeterinaire>
+     */
+    #[ORM\OneToMany(targetEntity: CompteRenduVeterinaire::class, mappedBy: 'animal')]
+    private Collection $compteRenduVeterinaires;
+
+    public function __construct()
+    {
+        $this->repas = new ArrayCollection();
+        $this->compteRenduVeterinaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -65,50 +88,62 @@ class Animal
         return $this;
     }
 
-    public function getEtatAnimal(): ?string
+    public function getImage(): ?string
     {
-        return $this->etat_animal;
+        return $this->image;
     }
 
-    public function setEtatAnimal(string $etat_animal): static
+    public function setImage(?string $image): static
     {
-        $this->etat_animal = $etat_animal;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?string $etat): static
+    {
+        $this->etat = $etat;
 
         return $this;
     }
 
     public function getNourritureProposee(): ?string
     {
-        return $this->nourriture_proposee;
+        return $this->nourritureProposee;
     }
 
-    public function setNourritureProposee(string $nourriture_proposee): static
+    public function setNourritureProposee(?string $nourritureProposee): static
     {
-        $this->nourriture_proposee = $nourriture_proposee;
+        $this->nourritureProposee = $nourritureProposee;
 
         return $this;
     }
 
-    public function getGrammageNourriture(): ?int
+    public function getGrammage(): ?float
     {
-        return $this->grammage_nourriture;
+        return $this->grammage;
     }
 
-    public function setGrammageNourriture(int $grammage_nourriture): static
+    public function setGrammage(?float $grammage): static
     {
-        $this->grammage_nourriture = $grammage_nourriture;
+        $this->grammage = $grammage;
 
         return $this;
     }
 
-    public function getDatePassage(): ?\DateTimeInterface
+    public function getDateDernierPassage(): ?\DateTimeInterface
     {
-        return $this->date_passage;
+        return $this->dateDernierPassage;
     }
 
-    public function setDatePassage(\DateTimeInterface $date_passage): static
+    public function setDateDernierPassage(?\DateTimeInterface $dateDernierPassage): static
     {
-        $this->date_passage = $date_passage;
+        $this->dateDernierPassage = $dateDernierPassage;
 
         return $this;
     }
@@ -121,6 +156,66 @@ class Animal
     public function setHabitat(?Habitat $habitat): static
     {
         $this->habitat = $habitat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Repas>
+     */
+    public function getRepas(): Collection
+    {
+        return $this->repas;
+    }
+
+    public function addRepa(Repas $repa): static
+    {
+        if (!$this->repas->contains($repa)) {
+            $this->repas->add($repa);
+            $repa->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepa(Repas $repa): static
+    {
+        if ($this->repas->removeElement($repa)) {
+            // set the owning side to null (unless already changed)
+            if ($repa->getAnimal() === $this) {
+                $repa->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteRenduVeterinaire>
+     */
+    public function getCompteRenduVeterinaires(): Collection
+    {
+        return $this->compteRenduVeterinaires;
+    }
+
+    public function addCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
+    {
+        if (!$this->compteRenduVeterinaires->contains($compteRenduVeterinaire)) {
+            $this->compteRenduVeterinaires->add($compteRenduVeterinaire);
+            $compteRenduVeterinaire->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
+    {
+        if ($this->compteRenduVeterinaires->removeElement($compteRenduVeterinaire)) {
+            // set the owning side to null (unless already changed)
+            if ($compteRenduVeterinaire->getAnimal() === $this) {
+                $compteRenduVeterinaire->setAnimal(null);
+            }
+        }
 
         return $this;
     }

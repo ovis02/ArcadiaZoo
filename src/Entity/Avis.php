@@ -17,33 +17,21 @@ class Avis
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $commentaire = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_creation = null;
+    private ?string $message = null;
 
     #[ORM\Column]
-    private ?bool $est_valide = null;
+    private ?bool $valide = null;
 
-     public function __construct()
-    {
-        $this->date_creation = new \DateTime(); // Définit la date actuelle automatiquement
-    }
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'avis')]
+    private ?User $validePar = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getPseudo(): ?string
@@ -58,50 +46,50 @@ class Avis
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getMessage(): ?string
     {
-        return $this->email;
+        return $this->message;
     }
 
-    public function setEmail(string $email): static
+    public function setMessage(string $message): static
     {
-        $this->email = $email;
+        $this->message = $message;
 
         return $this;
     }
 
-    public function getCommentaire(): ?string
+    public function isValide(): ?bool
     {
-        return $this->commentaire;
+        return $this->valide;
     }
 
-    public function setCommentaire(string $commentaire): static
+    public function setValide(bool $valide): static
     {
-        $this->commentaire = $commentaire;
+        $this->valide = $valide;
 
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->date_creation;
+        return $this->date;
     }
 
-    public function setDateCreation(\DateTimeInterface $date_creation): static
+    public function setDate(\DateTimeInterface $date): static
     {
-        $this->date_creation = $date_creation;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function isEstValide(): ?bool
+    public function getValidePar(): ?User
     {
-        return $this->est_valide;
+        return $this->validePar;
     }
 
-    public function setEstValide(bool $est_valide): static
+    public function setValidePar(?User $validePar): static
     {
-        $this->est_valide = $est_valide;
+        $this->validePar = $validePar;
 
         return $this;
     }

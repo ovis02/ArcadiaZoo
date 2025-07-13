@@ -138,21 +138,23 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
     </div>
     <!-- message de confirmation -->
     <div id="message" style="display: none"></div>
-    <!-- Affichage des avis validés -->
-    <div class="avis-valides">
+    <div class="container mt-4">
       <h3>Avis des visiteurs</h3>
-      {% for avis in avisValides %}
-      <div class="avis-item">
-        <p>
-          <strong>{{ avis.pseudo }}</strong> -
-          <em>{{ avis.createdAt|date('d/m/Y H:i') }}</em>
-        </p>
-        <p>{{ avis.commentaire }}</p>
+
+      {% if avisValides is empty %}
+      <p>Aucun avis validé pour le moment.</p>
+      {% else %} {% for avis in avisValides %}
+      <div class="card my-2 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ avis.pseudo }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ avis.dateCreation|date('d/m/Y') }}
+          </h6>
+          <p class="card-text">{{ avis.commentaire }}</p>
+        </div>
       </div>
-      {% else %}
-      <p>Aucun avis pour le moment.</p>
-      {% endfor %}
+      {% endfor %} {% endif %}
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

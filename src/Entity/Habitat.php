@@ -17,10 +17,13 @@ class Habitat
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+    private ?string $nom = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     /**
      * @var Collection<int, Animal>
@@ -38,14 +41,14 @@ class Habitat
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getNom(): ?string
     {
-        return $this->titre;
+        return $this->nom;
     }
 
-    public function setTitre(string $titre): static
+    public function setNom(string $nom): static
     {
-        $this->titre = $titre;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -55,9 +58,21 @@ class Habitat
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

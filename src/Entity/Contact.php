@@ -20,14 +20,17 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $motif = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private ?string $messageContact = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private ?\DateTimeInterface $date_creation = null;
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
 
-    #[ORM\Column(type: "string", length: 20, options: ["default" => "non lu"])]
-    private string $status = "non lu";
+    #[ORM\ManyToOne(inversedBy: 'contacts')]
+    private ?User $traitePar = null;
 
     public function getId(): ?int
     {
@@ -42,6 +45,7 @@ class Contact
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -53,32 +57,35 @@ class Contact
     public function setMotif(string $motif): static
     {
         $this->motif = $motif;
+
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->description;
+        return $this->date;
     }
 
-    public function setDescription(string $description): static
+    public function setDate(\DateTimeInterface $date): static
     {
-        $this->description = $description;
+        $this->date = $date;
+
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getMessageContact(): ?string
     {
-        return $this->date_creation;
+        return $this->messageContact;
     }
 
-    public function setDateCreation(\DateTimeInterface $date_creation): static
+    public function setMessageContact(string $messageContact): static
     {
-        $this->date_creation = $date_creation;
+        $this->messageContact = $messageContact;
+
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -86,6 +93,19 @@ class Contact
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getTraitePar(): ?User
+    {
+        return $this->traitePar;
+    }
+
+    public function setTraitePar(?User $traitePar): static
+    {
+        $this->traitePar = $traitePar;
+
         return $this;
     }
 }
