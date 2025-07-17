@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,27 +36,15 @@ class User
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    /**
-     * @var Collection<int, Avis>
-     */
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'validePar')]
     private Collection $avis;
 
-    /**
-     * @var Collection<int, Repas>
-     */
     #[ORM\OneToMany(targetEntity: Repas::class, mappedBy: 'ajoutePar')]
     private Collection $repasAjoutes;
 
-    /**
-     * @var Collection<int, CompteRenduVeterinaire>
-     */
     #[ORM\OneToMany(targetEntity: CompteRenduVeterinaire::class, mappedBy: 'veterinaire')]
     private Collection $compteRenduVeterinaires;
 
-    /**
-     * @var Collection<int, Contact>
-     */
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'traitePar')]
     private Collection $contacts;
 
@@ -79,7 +69,6 @@ class User
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -91,20 +80,32 @@ class User
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
     public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // À utiliser si tu stockes temporairement des données sensibles
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 
     public function getPrenom(): ?string
@@ -115,7 +116,6 @@ class User
     public function setPrenom(?string $prenom): static
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -127,7 +127,6 @@ class User
     public function setNom(?string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -139,13 +138,9 @@ class User
     public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Avis>
-     */
     public function getAvis(): Collection
     {
         return $this->avis;
@@ -164,7 +159,6 @@ class User
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
             if ($avi->getValidePar() === $this) {
                 $avi->setValidePar(null);
             }
@@ -173,9 +167,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Repas>
-     */
     public function getRepasAjoutes(): Collection
     {
         return $this->repasAjoutes;
@@ -194,7 +185,6 @@ class User
     public function removeRepasAjoute(Repas $repasAjoute): static
     {
         if ($this->repasAjoutes->removeElement($repasAjoute)) {
-            // set the owning side to null (unless already changed)
             if ($repasAjoute->getAjoutePar() === $this) {
                 $repasAjoute->setAjoutePar(null);
             }
@@ -203,9 +193,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, CompteRenduVeterinaire>
-     */
     public function getCompteRenduVeterinaires(): Collection
     {
         return $this->compteRenduVeterinaires;
@@ -224,7 +211,6 @@ class User
     public function removeCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
     {
         if ($this->compteRenduVeterinaires->removeElement($compteRenduVeterinaire)) {
-            // set the owning side to null (unless already changed)
             if ($compteRenduVeterinaire->getVeterinaire() === $this) {
                 $compteRenduVeterinaire->setVeterinaire(null);
             }
@@ -233,9 +219,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Contact>
-     */
     public function getContacts(): Collection
     {
         return $this->contacts;
@@ -254,7 +237,6 @@ class User
     public function removeContact(Contact $contact): static
     {
         if ($this->contacts->removeElement($contact)) {
-            // set the owning side to null (unless already changed)
             if ($contact->getTraitePar() === $this) {
                 $contact->setTraitePar(null);
             }
