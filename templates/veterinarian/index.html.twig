@@ -1,67 +1,10 @@
-{% extends 'user_base.html.twig' %} {% block title %}Gestion des Avis{% endblock
-%} {% block content %}
+{% extends 'user_base.html.twig' %} {% block title %}Interface Vétérinaire{%
+endblock %} {% block content %}
 <header class="bg-light py-3 text-center">
   <h1>Bienvenue, {{ app.user.email }}!</h1>
-  <p>Vous êtes connecté en tant que <strong>Employé</strong>.</p>
-  <a href="{{ path('app_logout') }}" class="logout btn btn-danger"
-    >Déconnexion</a
-  >
+  <p>Vous êtes connecté en tant que <strong>Vétérinaire</strong>.</p>
+  <a href="{{ path('app_logout') }}" class="logout btn btn-danger">
+    Déconnexion
+  </a>
 </header>
-
-<div class="container mt-4">
-  <h2 class="text-center">Gestion des Avis</h2>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Pseudo</th>
-        <th>Email</th>
-        <th>Commentaire</th>
-        <th>Date de Création</th>
-        <th>Validé</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for avis in avisList %}
-      <tr>
-        <td>{{ avis.id }}</td>
-        <td>{{ avis.pseudo }}</td>
-        <td>{{ avis.email }}</td>
-        <td>{{ avis.commentaire }}</td>
-        <td>{{ avis.dateCreation|date('Y-m-d') }}</td>
-        <td>
-          {% if avis.estValide %}
-          <span class="badge bg-success">Oui</span>
-          {% else %}
-          <span class="badge bg-danger">Non</span>
-          {% endif %}
-        </td>
-        <td>
-          {% if not avis.estValide %}
-          <button
-            class="btn btn-success btn-sm"
-            onclick="validerAvis('{{ avis.id }}')"
-          >
-            Valider
-          </button>
-          {% endif %}
-          <button
-            class="btn btn-danger btn-sm"
-            onclick="supprimerAvis('{{ avis.id }}')"
-          >
-            Supprimer
-          </button>
-        </td>
-      </tr>
-      {% else %}
-      <tr>
-        <td colspan="7" class="text-center">Aucun avis disponible.</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
 {% endblock %}
