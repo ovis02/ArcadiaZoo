@@ -1,8 +1,159 @@
-{% extends 'user_base.html.twig' %} {% block title %}Accueil{% endblock %} {%
-block content %}
-<div class="container text-center mt-5">
-  <h1>Bienvenue sur Arcadia Zoo</h1>
-  <p>Ceci est la page d'accueil. Connectez-vous pour accéder à votre espace.</p>
-  <a href="{{ path('app_login') }}" class="btn btn-primary mt-3">Connexion</a>
+{# templates/home/index.html.twig #} {% extends 'base.html.twig' %} {% block
+title %}Bienvenue à Arcadia{% endblock %} {% block content %}
+<div class="background-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="presentation-container">
+          <div class="text-container">
+            <h1>Bienvenue à Arcadia</h1>
+            <p>
+              Bienvenue à Arcadia, le zoo où la nature prend vie ! Plongez dans
+              un monde fascinant où la diversité des habitats rencontre la
+              richesse de la faune.<br />
+
+              Explorez la majesté de la savane, où le rugissement des lions
+              résonne au loin, tandis que les éléphants parcourent paisiblement
+              les vastes plaines. Observez avec émerveillement la grâce des
+              girafes se nourrissant des feuilles des acacias.<br />
+
+              Dans les profondeurs mystérieuses de la jungle, rencontrez les
+              regards pénétrants des tigres, rois indomptables de la canopée.
+              Laissez-vous enchanter par la mélodie des singes hurleurs et la
+              splendeur colorée des aras.<br />
+
+              En gravissant les sommets escarpés de nos montagnes, découvrez le
+              monde secret des bouquetins et des chamois, maîtres de
+              l'escalade.<br />
+
+              Plongez dans les étendues arides et envoûtantes du désert, où le
+              cobra royal règne en souverain solitaire. Émerveillez-vous devant
+              la résilience des dromadaires, symboles de l'adaptation aux
+              conditions extrêmes, ainsi que devant le regard fier du fennec, de
+              la vipère du désert et de l'iguane du désert.<br />
+
+              Explorez les marais luxuriants et secrets, où les hippopotames se
+              prélassent paisiblement parmi les roseaux.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="image-container">
+          <img
+            id="main-image"
+            src="{{ asset('assets/images/jungle/tigre.jpg') }}"
+            alt="Tigre"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="centered-section">
+    <h2>Explorez la diversité de nos habitats</h2>
+    <p>
+      Rencontrez nos animaux emblématiques de la savane, des marais et des
+      montagnes, et plongez dans leurs mondes fascinants.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/savane/lion.jpg') }}"
+            alt="Image 1"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>
+              Rencontrez le roi de la savane - le lion. Découvrez sa majesté et
+              sa puissance
+            </p>
+            <a href="{{ path('app_savane') }}#lion"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/marais/crocodilenil.jpg') }}"
+            alt="Image 2"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>Explorez le monde mystérieux des crocodiles des marais</p>
+            <a href="{{ path('app_marais') }}#croco"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="rectangle">
+          <img
+            src="{{ asset('assets/images/montagne/loup.jpg') }}"
+            alt="Image 3"
+            class="image img-fluid"
+          />
+          <div class="description-contain">
+            <p>
+              Plongez dans l'essence majestueuse du loup gris, maître des forêts
+              sauvages
+            </p>
+            <a href="{{ path('app_mountain') }}#loup"
+              >En savoir plus...<img
+                src="{{ asset('assets/images/logo/iconeLien.png') }}"
+                alt="Logo En Savoir Plus"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="transparent-rectangle">
+      <h3>Laisser un avis</h3>
+      {{ form_start(form, { attr: { id: "avis_form" } }) }}
+      {{ form_row(form.pseudo) }}
+      {{ form_row(form.message) }}
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-submit"
+          style="background-color: #dae8e1"
+        >
+          Laisser un avis
+        </button>
+      </div>
+      {{ form_end(form) }}
+    </div>
+    <!-- message de confirmation -->
+    <div id="message" style="display: none"></div>
+    <div class="container mt-4">
+      <h3>Avis des visiteurs</h3>
+
+      {% if avisValides is empty %}
+      <p>Aucun avis validé pour le moment.</p>
+      {% else %} {% for avis in avisValides %}
+      <div class="card my-2 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ avis.pseudo }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ avis.date|date('d/m/Y') }}
+          </h6>
+          <p class="card-text">{{ avis.message }}</p>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock %}

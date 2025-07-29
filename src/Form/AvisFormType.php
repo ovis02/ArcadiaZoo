@@ -15,26 +15,19 @@ class AvisFormType extends AbstractType
             ->add('pseudo', null, [
                 'attr' => [
                     'class' => 'form-control form-group',
-                    'id' => 'pseudo', // ID pour le champ pseudo
+                    'id' => 'pseudo',
                 ],
                 'label_attr' => ['class' => 'form-label'],
             ])
-            ->add('email', null, [
+            ->add('message', null, [
                 'attr' => [
                     'class' => 'form-control form-group',
-                    'id' => 'email', // ID pour le champ email
-                ],
-                'label_attr' => ['class' => 'form-label'],
-            ])
-            ->add('commentaire', null, [
-                'attr' => [
-                    'class' => 'form-control form-group',
-                    'id' => 'commentaire', // ID pour le champ commentaire
+                    'id' => 'commentaire',
                     'rows' => 5,
                 ],
                 'label_attr' => ['class' => 'form-label'],
             ]);
-         
+        // Pas de champs "valide", "validePar", "date" directement geré dans le controller
     }
 
     public function configureOptions(OptionsResolver $resolver): void

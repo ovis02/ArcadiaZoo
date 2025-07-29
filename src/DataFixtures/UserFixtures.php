@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
         $admin->setNom('Dupont');
         $admin->setDateCreation(new \DateTime());
         $manager->persist($admin);
-        $this->addReference('user-admin', $admin);
+        $this->addReference('user_admin_1', $admin);
 
         // EMPLOYÉ
         $employe = new User();
@@ -42,7 +42,7 @@ class UserFixtures extends Fixture
         $employe->setNom('Delaitre');
         $employe->setDateCreation(new \DateTime('-2 days'));
         $manager->persist($employe);
-        $this->addReference('user-employe', $employe);
+        $this->addReference('user_employe_2', $employe);
 
         // VÉTÉRINAIRE
         $veto = new User();
@@ -55,7 +55,8 @@ class UserFixtures extends Fixture
         $veto->setNom('Berthe');
         $veto->setDateCreation(new \DateTime('-1 week'));
         $manager->persist($veto);
-        $this->addReference('user-veterinaire', $veto);
+        $this->addReference('user_veterinaire_3', $veto);
+
 
         $manager->flush();
     }
