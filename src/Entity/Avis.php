@@ -29,6 +29,9 @@ class Avis
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?User $validePar = null;
 
+    #[ORM\Column(type: 'integer')]
+    private ?int $note = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -42,7 +45,6 @@ class Avis
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -54,7 +56,6 @@ class Avis
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -66,7 +67,6 @@ class Avis
     public function setValide(bool $valide): static
     {
         $this->valide = $valide;
-
         return $this;
     }
 
@@ -78,7 +78,6 @@ class Avis
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -90,7 +89,17 @@ class Avis
     public function setValidePar(?User $validePar): static
     {
         $this->validePar = $validePar;
+        return $this;
+    }
 
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(?int $note): static
+    {
+        $this->note = $note;
         return $this;
     }
 }

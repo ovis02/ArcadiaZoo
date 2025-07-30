@@ -123,6 +123,14 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
       <h3>Laisser un avis</h3>
       {{ form_start(form, { attr: { id: "avis_form" } }) }}
       {{ form_row(form.pseudo) }}
+
+      <div class="form-group">
+        <label for="note">Note :</label>
+        <div class="star-rating">
+          {{ form_widget(form.note) }}
+        </div>
+      </div>
+
       {{ form_row(form.message) }}
       <div class="text-center">
         <button
@@ -135,8 +143,10 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
       </div>
       {{ form_end(form) }}
     </div>
+
     <!-- message de confirmation -->
     <div id="message" style="display: none"></div>
+
     <div class="container mt-4">
       <h3>Avis des visiteurs</h3>
 
@@ -150,10 +160,11 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
             {{ avis.date|date('d/m/Y') }}
           </h6>
           <p class="card-text">{{ avis.message }}</p>
+          <p class="card-text">Note : {{ avis.note }} / 5 ⭐</p>
         </div>
       </div>
       {% endfor %} {% endif %}
     </div>
   </div>
+  {% endblock %}
 </div>
-{% endblock %}
