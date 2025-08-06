@@ -2,49 +2,33 @@
 
 namespace App\Controller;
 
-use App\Repository\AnimalRepository;
 use App\Repository\HabitatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 class SavaneController extends AbstractController
 {
-        private $habitatRepository;
-    private $animalRepository;
-
-    // Injection des repositories dans le constructeur
-    public function __construct(HabitatRepository $habitatRepository, AnimalRepository $animalRepository)
-    {
-        $this->habitatRepository = $habitatRepository;
-        $this->animalRepository = $animalRepository;
-    }
     #[Route('/savane', name: 'app_savane')]
-    public function index(): Response
+    public function index(HabitatRepository $habitatRepository): Response
     {
-      // Récupérer l'habitat "Savane"
-        $habitat = $this->habitatRepository->findOneBy(['titre' => 'Savane']);
+        $habitat = $habitatRepository->findOneBy(['nom' => 'Savane']);
 
-        // Récupérer 5 animaux spécifiques de l'habitat Marais
-        $animal1 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 21]);
-        $animal2 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 22]);
-        $animal3 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 23]);
-        $animal4 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 24]);
-        $animal5 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 25]);
-        $animal6 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 26]);
-        $animal7 = $this->animalRepository->findOneBy(['habitat' => $habitat, 'id' => 27]);
+        if (!$habitat) {
+            throw $this->createNotFoundException('Habitat "Savane" non trouvé.');
+        }
 
-        // Renvoyer à la vue avec l'habitat et les animaux spécifiques
+        $animaux = $habitat->getAnimals()->slice(0, 7);
+
         return $this->render('savane/index.html.twig', [
-           'habitat' => $habitat,
-            'animal1' => $animal1,
-            'animal2' => $animal2,
-            'animal3' => $animal3,
-            'animal4' => $animal4,
-            'animal5' => $animal5,
-            'animal6' => $animal6,
-            'animal7' => $animal7,
-
+            'habitat' => $habitat,
+            'animal1' => $animaux[0] ?? null,
+            'animal2' => $animaux[1] ?? null,
+            'animal3' => $animaux[2] ?? null,
+            'animal4' => $animaux[3] ?? null,
+            'animal5' => $animaux[4] ?? null,
+            'animal6' => $animaux[5] ?? null,
+            'animal7' => $animaux[6] ?? null,
         ]);
     }
 }
