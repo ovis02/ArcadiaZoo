@@ -15,20 +15,26 @@ class ContactFormType extends AbstractType
     {
         $builder
             ->add('email', null, [
-                'attr' => ['class' => 'form-control form-group'], // Classe pour le champ email
-                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
+                'attr' => ['class' => 'form-control form-group'],
+                'label_attr' => ['class' => 'form-label'],
                 'constraints' => [
-                    new NotBlank(), // Contrainte de champ obligatoire
-                    new Email(),    // Contrainte format email
+                    new NotBlank(),
+                    new Email(),
                 ],
             ])
             ->add('motif', null, [
-                'attr' => ['class' => 'form-control form-group'], // Classe pour le champ motif
-                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
+                'attr' => ['class' => 'form-control form-group'],
+                'label_attr' => ['class' => 'form-label'],
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
-            ->add('description', null, [
-                'attr' => ['class' => 'form-control form-group form-description'], // Classe pour le champ description
-                'label_attr' => ['class' => 'form-label'],         // Classe pour le label
+            ->add('messageContact', null, [
+                'attr' => ['class' => 'form-control form-group form-description'],
+                'label_attr' => ['class' => 'form-label'],
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ]);
     }
 

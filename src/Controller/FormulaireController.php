@@ -15,32 +15,31 @@ class FormulaireController extends AbstractController
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Création du formulaire de contact
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
 
         // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Création d'un nouvel objet Contact
-            $contact = new Contact();
-            $contact->setEmail($form->get('email')->getData());
-            $contact->setMotif($form->get('motif')->getData());
-            $contact->setDescription($form->get('description')->getData());
-            $contact->setDateCreation(new \DateTime()); // Définit la date actuelle
-            $contact->setStatus("non lu"); // Par défaut, le statut est "non lu"
+            /** @var Contact $contact */
+            $contact = $form->getData();
 
+            // On complète les champs automatiques non présents dans le formulaire
+            $contact->setDate(new \DateTime());
+            $contact->setStatus("non lu");
 
-            // Enregistrement des données dans la base de données
+            // Enregistrement en base
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // Retourner une réponse JSON pour indiquer que l'envoi a réussi
+            // Réponse AJAX en JSON (succès)
             return $this->json([
                 'status' => 'success',
                 'message' => 'Votre message a été envoyé avec succès.'
             ]);
         }
 
-        // Si le formulaire n'est pas valide, retourner une réponse JSON d'erreur
+        // Si le formulaire est soumis mais non valide
         if ($form->isSubmitted()) {
             return $this->json([
                 'status' => 'error',
@@ -48,7 +47,7 @@ class FormulaireController extends AbstractController
             ]);
         }
 
-        // Retourne la vue du formulaire si aucune soumission n'a été faite
+        // Affichage initial (si pas de requête AJAX ou accès direct à la page)
         return $this->render('formulaire/index.html.twig', [
             'form' => $form->createView(),
         ]);

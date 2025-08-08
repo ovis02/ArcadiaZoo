@@ -40,12 +40,14 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
       </div>
       <div class="col-lg-6">
         <div class="image-container">
-          <img
-            id="main-image"
-            src="{{ asset('assets/images/jungle/tigre.jpg') }}"
-            alt="Tigre"
-            class="img-fluid"
-          />
+          <div class="cadre-3d">
+            <img
+              id="main-image"
+              src="{{ asset('assets/images/jungle/tigre.jpg') }}"
+              alt="Tigre"
+              class="img-fluid"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -118,42 +120,64 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="transparent-rectangle">
-      <h3>Laisser un avis</h3>
+  <div class="container my-5 d-flex justify-content-center">
+    <div class="p-5 rounded shadow avis-form-wrapper">
+      <h3 class="text-center mb-4">Laisser un avis</h3>
+
       {{ form_start(form, { attr: { id: "avis_form" } }) }}
-      {{ form_row(form.pseudo) }}
 
-      <div class="form-group">
-        <label for="note">Note :</label>
-        <div class="star-rating">
-          {{ form_widget(form.note) }}
+      <div class="mb-3">
+        {{ form_label(form.pseudo) }}
+        {{ form_widget(form.pseudo, { attr: { class: "form-control" } }) }}
+        {{ form_errors(form.pseudo) }}
+      </div>
+
+      <div class="mb-3">
+        {{ form_label(form.note) }}
+        <div class="radio-note-horizontal">
+          <span class="note-label">Insatisfait</span>
+          <div class="radio-group">
+            {% for choice in form.note %}
+            <label class="radio-inline">
+              {{ form_widget(choice) }}
+              {{ choice.vars.label }}
+            </label>
+            {% endfor %}
+          </div>
+          <span class="note-label">Très satisfait</span>
         </div>
+        {{ form_errors(form.note) }}
       </div>
 
-      {{ form_row(form.message) }}
-      <div class="text-center">
-        <button
-          type="submit"
-          class="btn btn-submit"
-          style="background-color: #dae8e1"
-        >
-          Laisser un avis
-        </button>
+      <div class="mb-3">
+        {{ form_label(form.message) }}
+        {{
+          form_widget(form.message, {
+            attr: { class: "form-control", rows: 4 }
+          })
+        }}
+        {{ form_errors(form.message) }}
       </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success">Laisser un avis</button>
+      </div>
+
       {{ form_end(form) }}
     </div>
+  </div>
 
-    <!-- message de confirmation -->
-    <div id="message" style="display: none"></div>
+  <!-- message de confirmation -->
+  <div id="message" style="display: none"></div>
 
-    <div class="container mt-4">
-      <h3>Avis des visiteurs</h3>
+  <div class="container mt-4">
+    <h3 class="titre-avis">Avis des visiteurs</h3>
 
-      {% if avisValides is empty %}
-      <p>Aucun avis validé pour le moment.</p>
-      {% else %} {% for avis in avisValides %}
-      <div class="card my-2 shadow-sm">
+    {% if avisValides is empty %}
+    <p>Aucun avis validé pour le moment.</p>
+    {% else %} {% for avis in avisValides %}
+    <div class="avis-section">
+      <div class="card mb-5 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">{{ avis.pseudo }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">
@@ -163,8 +187,8 @@ title %}Bienvenue à Arcadia{% endblock %} {% block content %}
           <p class="card-text">Note : {{ avis.note }} / 5 ⭐</p>
         </div>
       </div>
-      {% endfor %} {% endif %}
     </div>
+    {% endfor %} {% endif %}
   </div>
 </div>
 {% endblock %}

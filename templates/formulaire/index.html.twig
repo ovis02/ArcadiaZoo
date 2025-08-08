@@ -6,7 +6,7 @@ block content %}
     {{ form_start(form, { attr: { id: "contactForm" } }) }}
     {{ form_row(form.email) }}
     {{ form_row(form.motif) }}
-    {{ form_row(form.description) }}
+    {{ form_row(form.messageContact) }}
     <div class="text-center">
       <button type="submit" class="form-button">Envoyer</button>
     </div>
@@ -15,5 +15,4 @@ block content %}
     <div id="message-contact"></div>
   </div>
 </div>
-
 {% endblock %}
