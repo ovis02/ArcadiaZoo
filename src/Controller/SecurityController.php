@@ -12,22 +12,39 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
+        // 🔹 Si déjà connecté → redirection directe selon le rôle
+        if ($this->getUser()) {
+            $roles = $this->getUser()->getRoles();
+
+            if (in_array('ROLE_ADMIN', $roles, true)) {
+                return $this->redirectToRoute('app_admin');
+            } elseif (in_array('ROLE_EMPLOYE', $roles, true)) {
+                return $this->redirectToRoute('app_employee');
+            } elseif (in_array('ROLE_VETERINAIRE', $roles, true)) {
+                return $this->redirectToRoute('app_veterinarian');
+            }
+
+            // Fallback si aucun rôle spécifique
+            return $this->redirectToRoute('app_home');
+        }
+
+        // 🔹 Récupère l'erreur de connexion s'il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // 🔹 Récupère le dernier email saisi
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // 🔹 Affiche la page de connexion
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error,
+            'error'         => $error,
         ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Symfony gère la déconnexion automatiquement, pas besoin d'implémenter ce code.
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        // Symfony gère la déconnexion automatiquement via security.yaml
+        throw new \LogicException('Cette méthode peut rester vide, Symfony gère la déconnexion.');
     }
 }

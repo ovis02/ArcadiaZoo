@@ -26,7 +26,7 @@ security:
   # Gestion des règles d'accès (accès aux pages en fonction des rôles)
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/veterinarian, roles: ROLE_VETERINARIAN }
-    - { path: ^/employee, roles: ROLE_EMPLOYEE }
+    - { path: ^/veterinarian, roles: ROLE_VETERINAIRE }
+    - { path: ^/employee, roles: ROLE_EMPLOYE }
     # Redirection par défaut si aucune règle ne correspond
     - { path: ^/home, roles: ROLE_USER }

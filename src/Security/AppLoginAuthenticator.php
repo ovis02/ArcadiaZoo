@@ -50,20 +50,20 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // Récupérer les rôles de l'utilisateur connecté
+        // Récupére les rôles de l'utilisateur connecté
         $roles = $token->getRoleNames();
 
         // Redirection selon les rôles
         if (in_array('ROLE_ADMIN', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin'));
-        } elseif (in_array('ROLE_EMPLOYEE', $roles)) {
+        } elseif (in_array('ROLE_EMPLOYE', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_employee'));
-        } elseif (in_array('ROLE_VETERINARIAN', $roles)) {
+        } elseif (in_array('ROLE_VETERINAIRE', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_veterinarian'));
         }
 
         // Par défaut : rediriger vers la page d'accueil
-        return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(Request $request): string
