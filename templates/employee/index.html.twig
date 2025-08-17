@@ -1,10 +1,547 @@
 {% extends 'user_base.html.twig' %} {% block title %}Interface Employé{%
 endblock %} {% block content %}
-<header class="bg-light py-3 text-center">
-  <h1>Bienvenue, {{ app.user.email }}!</h1>
-  <p>Vous êtes connecté en tant qu'<strong>Employé</strong>.</p>
-  <a href="{{ path('app_logout') }}" class="logout btn btn-danger">
-    Déconnexion
-  </a>
-</header>
-{% endblock %}
+<div class="zoo-dashboard">
+  {# scope #}
+
+  <header class="py-3 text-center">
+    <h1>Bienvenue, {{ app.user.email }}!</h1>
+    <p>Vous êtes connecté en tant qu'<strong>Employé</strong>.</p>
+    <a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnexion</a>
+  </header>
+
+  <div class="container mt-4 service-section">
+    {# ——— FLASH ——— #} {% for label, messages in app.flashes %} {% for m in
+    messages %}
+    <div
+      class="alert alert-{{
+        label == 'success' ? 'success' : label == 'error' ? 'danger' : 'info'
+      }}"
+    >
+      {{ m }}
+    </div>
+    {% endfor %} {% endfor %} {# ——— AVIS EN ATTENTE ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Avis à modérer</h2>
+      <table class="table zoo-table table-bordered table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>Pseudo</th>
+            <th>Message</th>
+            <th>Note</th>
+            <th>Date</th>
+            <th style="width: 220px">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for avis in avisEnAttente %}
+          <tr>
+            <td>{{ avis.pseudo }}</td>
+            <td>{{ avis.message }}</td>
+            <td>{{ avis.note }}</td>
+            <td>{{ avis.date ? avis.date|date('d/m/Y H:i') : '—' }}</td>
+            <td class="d-flex gap-2">
+              <form
+                method="post"
+                action="{{
+                  path('employee_avis_moderate', {
+                    id: avis.id,
+                    action: 'valider'
+                  })
+                }}"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('moderate_avis_' ~ avis.id) }}"
+                />
+                <button class="btn btn-success btn-sm w-100">Valider</button>
+              </form>
+              <form
+                method="post"
+                action="{{
+                  path('employee_avis_moderate', {
+                    id: avis.id,
+                    action: 'invalider'
+                  })
+                }}"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('moderate_avis_' ~ avis.id) }}"
+                />
+                <button class="btn btn-warning btn-sm w-100">Invalider</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">
+              Aucun avis en attente.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— AVIS INVALIDÉS ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Avis invalidés</h2>
+      <table class="table zoo-table table-bordered table-striped">
+        <thead class="table-warning">
+          <tr>
+            <th>Pseudo</th>
+            <th>Message</th>
+            <th>Note</th>
+            <th>Invalidé par</th>
+            <th>Date</th>
+            <th style="width: 140px">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for avis in avisInvalides %}
+          <tr>
+            <td>{{ avis.pseudo }}</td>
+            <td>{{ avis.message }}</td>
+            <td>{{ avis.note }}</td>
+            <td>{{ avis.validePar ? avis.validePar.email : "—" }}</td>
+            <td>{{ avis.date ? avis.date|date('d/m/Y H:i') : '—' }}</td>
+            <td>
+              <form
+                method="post"
+                action="{{
+                  path('employee_avis_moderate', {
+                    id: avis.id,
+                    action: 'valider'
+                  })
+                }}"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('moderate_avis_' ~ avis.id) }}"
+                />
+                <button class="btn btn-success btn-sm w-100">Valider</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">
+              Aucun avis invalidé.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— AVIS VALIDÉS ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Avis validés</h2>
+      <table class="table zoo-table table-bordered table-striped">
+        <thead class="table-success">
+          <tr>
+            <th>Pseudo</th>
+            <th>Message</th>
+            <th>Note</th>
+            <th>Validé par</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for avis in avisValides %}
+          <tr>
+            <td>{{ avis.pseudo }}</td>
+            <td>{{ avis.message }}</td>
+            <td>{{ avis.note }}</td>
+            <td>{{ avis.validePar ? avis.validePar.email : "—" }}</td>
+            <td>{{ avis.date ? avis.date|date('d/m/Y H:i') : '—' }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">
+              Aucun avis validé.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— CONTACTS À TRAITER ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Messages de contact — à traiter</h2>
+      <table class="table zoo-table table-bordered table-striped align-middle">
+        <thead class="table-warning">
+          <tr>
+            <th>Email</th>
+            <th>Motif</th>
+            <th>Message</th>
+            <th>Reçu le</th>
+            <th style="width: 220px">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in contactsEnAttente %}
+          <tr>
+            <td>{{ c.email }}</td>
+            <td>{{ c.motif }}</td>
+            <td class="text-wrap" style="max-width: 520px">
+              {{ c.messageContact|length > 180 ? c.messageContact|slice(0,180) ~ '…' : c.messageContact }}
+            </td>
+            <td>{{ c.date ? c.date|date('d/m/Y H:i') : '—' }}</td>
+            <td class="d-flex gap-2">
+              <form
+                method="post"
+                action="{{ path('employee_contact_resolve', { id: c.id }) }}"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('contact_resolve_' ~ c.id) }}"
+                />
+                <button class="btn btn-success btn-sm w-100">
+                  Marquer traité
+                </button>
+              </form>
+              <form
+                method="post"
+                action="{{ path('employee_contact_delete', { id: c.id }) }}"
+                onsubmit="return confirm('Supprimer ce message ?')"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('contact_delete_' ~ c.id) }}"
+                />
+                <button class="btn btn-danger btn-sm w-100">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">
+              Aucun message en attente.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— CONTACTS TRAITÉS ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Messages de contact — traités</h2>
+      <table class="table zoo-table table-bordered table-striped align-middle">
+        <thead class="table-success">
+          <tr>
+            <th>Email</th>
+            <th>Motif</th>
+            <th>Message</th>
+            <th>Traité par</th>
+            <th>Reçu le</th>
+            <th style="width: 220px">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in contactsTraites %}
+          <tr>
+            <td>{{ c.email }}</td>
+            <td>{{ c.motif }}</td>
+            <td class="text-wrap" style="max-width: 520px">
+              {{ c.messageContact|length > 180 ? c.messageContact|slice(0,180) ~ '…' : c.messageContact }}
+            </td>
+            <td>{{ c.traitePar ? c.traitePar.email : "—" }}</td>
+            <td>{{ c.date ? c.date|date('d/m/Y H:i') : '—' }}</td>
+            <td class="d-flex gap-2">
+              <form
+                method="post"
+                action="{{ path('employee_contact_reopen', { id: c.id }) }}"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('contact_reopen_' ~ c.id) }}"
+                />
+                <button class="btn btn-outline-warning btn-sm w-100">
+                  Remettre en attente
+                </button>
+              </form>
+              <form
+                method="post"
+                action="{{ path('employee_contact_delete', { id: c.id }) }}"
+                onsubmit="return confirm('Supprimer ce message ?')"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('contact_delete_' ~ c.id) }}"
+                />
+                <button class="btn btn-danger btn-sm w-100">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">
+              Aucun message traité.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— SERVICES ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Services</h2>
+
+      <table class="table zoo-table table-bordered table-striped align-middle">
+        <thead class="table-info">
+          <tr>
+            <th style="width: 80px">ID</th>
+            <th style="width: 120px">Image</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th class="text-end" style="width: 220px">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in services %}
+          <tr id="service-row-{{ s.id }}">
+            <td>{{ s.id }}</td>
+            <td>
+              {% if s.image %}
+              <img
+                src="{{ asset(s.image) }}"
+                alt="Image service {{ s.nom }}"
+                class="img-fluid rounded"
+                style="max-height: 64px; object-fit: cover"
+              />
+              {% else %}
+              <span class="text-muted">—</span>
+              {% endif %}
+            </td>
+            <td>{{ s.nom }}</td>
+            <td class="text-wrap" style="max-width: 520px">
+              {{ s.description ? (s.description|length > 180 ? s.description|slice(0,180) ~ '…' : s.description) : '—' }}
+            </td>
+            <td class="text-end d-flex gap-2 justify-content-end">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary btn-toggle-edit"
+                data-target="edit-form-{{ s.id }}"
+              >
+                Modifier
+              </button>
+
+              <form
+                method="post"
+                action="{{ path('employee_service_delete', { id: s.id }) }}"
+                onsubmit="return confirm('Supprimer le service {{ s.nom|e('js') }} ?')"
+              >
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('service_delete_' ~ s.id) }}"
+                />
+                <button class="btn btn-sm btn-danger">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+
+          {# Formulaire inline (caché par défaut) #}
+          <tr id="edit-form-{{ s.id }}" class="edit-row d-none">
+            <td colspan="5">
+              <form
+                method="post"
+                action="{{ path('employee_service_update') }}"
+              >
+                <input type="hidden" name="id" value="{{ s.id }}" />
+                <input
+                  type="hidden"
+                  name="_token"
+                  value="{{ csrf_token('service_edit_' ~ s.id) }}"
+                />
+
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label class="form-label"
+                      >Nom <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      name="nom"
+                      class="form-control"
+                      value="{{ s.nom }}"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">Description</label>
+                    <textarea
+                      name="description"
+                      class="form-control"
+                      rows="3"
+                      >{{ s.description }}</textarea
+                    >
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Image (lecture seule)</label>
+                    <div class="d-flex align-items-center gap-3">
+                      {% if s.image %}
+                      <img
+                        src="{{ asset(s.image) }}"
+                        alt="Image service {{ s.nom }}"
+                        class="rounded"
+                        style="max-height: 80px"
+                      />
+                      <span class="text-muted small">{{ s.image }}</span>
+                      {% else %}
+                      <span class="text-muted">Aucune image</span>
+                      {% endif %}
+                    </div>
+                    <div class="form-text">
+                      Seuls <strong>Nom</strong> et
+                      <strong>Description</strong> sont modifiables.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-3 d-flex gap-2 justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-link btn-cancel-edit"
+                    data-target="edit-form-{{ s.id }}"
+                  >
+                    Annuler
+                  </button>
+                  <button class="btn btn-success">Enregistrer</button>
+                </div>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">Aucun service.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {# ——— REPAS DES ANIMAUX ——— #}
+    <section class="mt-5">
+      <h2 class="mb-3">Repas des animaux</h2>
+      <div class="row">
+        <div class="col-md-5">
+          <h3 class="mb-3">Enregistrer un repas</h3>
+          <form method="post" action="{{ path('employee_repas_add') }}">
+            <input
+              type="hidden"
+              name="_token"
+              value="{{ csrf_token('repas_add') }}"
+            />
+            <div class="mb-3">
+              <label>Animal</label>
+              <select name="animal_id" class="form-control" required>
+                <option value="" disabled selected>Choisir…</option>
+                {% for a in animaux %}
+                <option value="{{ a.id }}">
+                  {{ a.prenom }} ({{ a.race }})
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label>Nourriture donnée</label>
+              <input
+                type="text"
+                name="nourriture"
+                class="form-control"
+                placeholder="Ex : Foin + carottes"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label>Quantité (g)</label>
+              <input
+                type="number"
+                name="quantite"
+                class="form-control"
+                min="0"
+                step="0.1"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label>Date & heure</label>
+              <input
+                type="datetime-local"
+                name="dateHeure"
+                class="form-control"
+                value="{{ 'now'|date('Y-m-d\\TH:i') }}"
+                required
+              />
+            </div>
+            <button class="btn btn-success w-100">Ajouter</button>
+          </form>
+        </div>
+
+        <div class="col-md-7">
+          <h3 class="mb-3">Derniers repas enregistrés</h3>
+          <table class="table zoo-table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>Animal</th>
+                <th>Nourriture</th>
+                <th>Quantité (g)</th>
+                <th>Commentaire véto</th>
+                <th>Date & heure</th>
+                <th>Ajouté par</th>
+                <th style="width: 120px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in repasRecents %}
+              <tr>
+                <td>{{ r.animal.prenom }}</td>
+                <td>{{ r.nourritureDonnee }}</td>
+                <td>{{ r.quantite }}</td>
+                <td>{{ r.animal.commentaire ?? "—" }}</td>
+                <td>{{ r.dateHeure ? r.dateHeure|date('d/m/Y H:i') : '—' }}</td>
+                <td>{{ r.ajoutePar ? r.ajoutePar.email : "—" }}</td>
+                <td>
+                  <form
+                    method="post"
+                    action="{{ path('employee_repas_delete', { id: r.id }) }}"
+                  >
+                    <input
+                      type="hidden"
+                      name="_token"
+                      value="{{ csrf_token('repas_delete_' ~ r.id) }}"
+                    />
+                    <button class="btn btn-danger btn-sm w-100">
+                      Supprimer
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="7" class="text-center text-muted">
+                  Aucun repas enregistré.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{# /zoo-dashboard #} {% endblock %}

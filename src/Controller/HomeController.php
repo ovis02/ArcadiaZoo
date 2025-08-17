@@ -16,15 +16,15 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home', methods: ['GET','POST'])]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
-        $avis = new Avis();
+        $avis = new Avis(); // ->valide est NULL par défaut (tri-état)
         $form = $this->createForm(AvisFormType::class, $avis);
         $form->handleRequest($request);
 
         // Soumission AJAX
         if ($request->isXmlHttpRequest()) {
             if ($form->isSubmitted() && $form->isValid()) {
-                $avis->setDate(new \DateTime());
-                $avis->setValide(false);
+                $avis->setDate(new \DateTime());      // ou new \DateTimeImmutable()
+                // NE PAS toucher à $avis->setValide(...) -> reste NULL (à modérer)
                 $em->persist($avis);
                 $em->flush();
 
@@ -40,9 +40,10 @@ class HomeController extends AbstractController
             ], 422);
         }
 
+        // Soumission classique
         if ($form->isSubmitted() && $form->isValid()) {
             $avis->setDate(new \DateTime());
-            $avis->setValide(false);
+            // NE PAS toucher à $avis->setValide(...) -> reste NULL (à modérer)
             $em->persist($avis);
             $em->flush();
 
@@ -50,7 +51,7 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        // Affichage des avis validés
+        // Affichage des avis validés uniquement
         $avisValides = $em->getRepository(Avis::class)
             ->findBy(['valide' => true], ['date' => 'DESC']);
 
@@ -60,4 +61,3 @@ class HomeController extends AbstractController
         ]);
     }
 }
-

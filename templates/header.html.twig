@@ -1,3 +1,6 @@
+{% set habitats_routes = ['app_desert', 'app_savane', 'app_jungle',
+'app_mountain', 'app_marais'] %}
+
 <header>
   <a href="/login" id="adminLink" class="admin">Admin</a>
   <div class="background-image"></div>
@@ -16,7 +19,7 @@
           <a href="{{ path('app_home') }}">ACCUEIL</a>
         </li>
         <li
-          class="{% if app.request.attributes.get('_route') == 'app_desert' %}active{% endif %}"
+          class="{% if app.request.attributes.get('_route') in habitats_routes %}active{% endif %}"
         >
           <a href="{{ path('app_desert') }}">Animaux et Habitats</a>
         </li>
@@ -54,7 +57,7 @@
         <a href="{{ path('app_home') }}">ACCUEIL</a>
       </li>
       <li
-        class="{% if app.request.attributes.get('_route') == 'app_desert' %}active{% endif %}"
+        class="{% if app.request.attributes.get('_route') in habitats_routes %}active{% endif %}"
       >
         <a href="{{ path('app_desert') }}">Animaux et Habitats</a>
       </li>

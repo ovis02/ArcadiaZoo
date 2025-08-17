@@ -20,7 +20,8 @@ class Avis
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
 
-    #[ORM\Column]
+    // Champ tri-état : null = en attente, true = validé, false = invalidé
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private ?bool $valide = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -31,6 +32,11 @@ class Avis
 
     #[ORM\Column(type: 'integer')]
     private ?int $note = null;
+
+    public function __construct()
+    {
+        $this->valide = null; // Par défaut : en attente
+    }
 
     public function getId(): ?int
     {
@@ -64,7 +70,7 @@ class Avis
         return $this->valide;
     }
 
-    public function setValide(bool $valide): static
+    public function setValide(?bool $valide): static
     {
         $this->valide = $valide;
         return $this;

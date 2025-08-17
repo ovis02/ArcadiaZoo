@@ -37,6 +37,10 @@ class Animal
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDernierPassage = null;
 
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $commentaire = null;
+
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Habitat $habitat = null;
@@ -72,7 +76,6 @@ class Animal
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -84,7 +87,6 @@ class Animal
     public function setRace(string $race): static
     {
         $this->race = $race;
-
         return $this;
     }
 
@@ -96,7 +98,6 @@ class Animal
     public function setImage(?string $image): static
     {
         $this->image = $image;
-
         return $this;
     }
 
@@ -108,7 +109,6 @@ class Animal
     public function setEtat(?string $etat): static
     {
         $this->etat = $etat;
-
         return $this;
     }
 
@@ -120,7 +120,6 @@ class Animal
     public function setNourritureProposee(?string $nourritureProposee): static
     {
         $this->nourritureProposee = $nourritureProposee;
-
         return $this;
     }
 
@@ -132,7 +131,6 @@ class Animal
     public function setGrammage(?float $grammage): static
     {
         $this->grammage = $grammage;
-
         return $this;
     }
 
@@ -144,7 +142,17 @@ class Animal
     public function setDateDernierPassage(?\DateTimeInterface $dateDernierPassage): static
     {
         $this->dateDernierPassage = $dateDernierPassage;
+        return $this;
+    }
 
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?string $commentaire): static
+    {
+        $this->commentaire = $commentaire;
         return $this;
     }
 
@@ -156,7 +164,6 @@ class Animal
     public function setHabitat(?Habitat $habitat): static
     {
         $this->habitat = $habitat;
-
         return $this;
     }
 
@@ -174,19 +181,16 @@ class Animal
             $this->repas->add($repa);
             $repa->setAnimal($this);
         }
-
         return $this;
     }
 
     public function removeRepa(Repas $repa): static
     {
         if ($this->repas->removeElement($repa)) {
-            // set the owning side to null (unless already changed)
             if ($repa->getAnimal() === $this) {
                 $repa->setAnimal(null);
             }
         }
-
         return $this;
     }
 
@@ -204,19 +208,16 @@ class Animal
             $this->compteRenduVeterinaires->add($compteRenduVeterinaire);
             $compteRenduVeterinaire->setAnimal($this);
         }
-
         return $this;
     }
 
     public function removeCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
     {
         if ($this->compteRenduVeterinaires->removeElement($compteRenduVeterinaire)) {
-            // set the owning side to null (unless already changed)
             if ($compteRenduVeterinaire->getAnimal() === $this) {
                 $compteRenduVeterinaire->setAnimal(null);
             }
         }
-
         return $this;
     }
 }
