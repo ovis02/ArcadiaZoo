@@ -2,17 +2,16 @@
 {% block title %}Interface Vétérinaire{% endblock %}
 
 {% block content %}
-<div class="zoo-dashboard">  {# scope #}
+<div class="zoo-dashboard"> {# scope #}
 
   <header class="bg-light py-3 text-center">
     <h1>Bienvenue, {{ app.user.email }}!</h1>
     <p>Vous êtes connecté en tant que <strong>Vétérinaire</strong>.</p>
-    <a href="{{ path('app_logout') }}" class="logout btn btn-danger">
-      Déconnexion
-    </a>
+    <a href="{{ path('app_logout') }}" class="logout btn btn-danger">Déconnexion</a>
   </header>
 
   <div class="container service-section mt-4">
+
     {% for label, messages in app.flashes %}
       {% for m in messages %}
         <div class="alert alert-{{ label == 'success' ? 'success' : (label == 'error' ? 'danger' : 'info') }}">
@@ -22,93 +21,98 @@
     {% endfor %}
 
     <h2 class="mb-3">Liste des animaux</h2>
+    <div class="table-responsive">
+      <table class="table zoo-table align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Race</th>
+            <th>État</th>
+            <th>Nourriture proposée</th>
+            <th>Grammage (g)</th>
+            <th>Date de passage</th>
+            <th>Commentaire</th>
+            <th class="col-actions">Action</th>
+          </tr>
+        </thead>
 
-    <table class="table zoo-table">  {# scope tableau #}
-      <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Race</th>
-          <th>État</th>
-          <th>Nourriture proposée</th>
-          <th>Grammage (g)</th>
-          <th>Date de passage</th>
-          <th>Commentaire</th>
-          <th style="width:140px;">Action</th>
-        </tr>
-      </thead>
+        <tbody>
+        {% set etats = ['Bon','Moyen','Critique'] %}
+        {% for a in animaux %}
+          <tr class="animal-item">
+            <td>{{ a.prenom }}</td>
+            <td>{{ a.race }}</td>
 
-      <tbody>
-      {% for a in animaux %}
-        <tr class="animal-item">
-          <td>{{ a.prenom }}</td>
-          <td>{{ a.race }}</td>
-          <td>
-            <select name="etat" form="form-{{ a.id }}" class="form-select">
-              {% set etats = ['Bon','Moyen','Critique'] %}
-              <option value="" disabled {{ a.etat ? '' : 'selected' }}>Choisir…</option>
-              {% for e in etats %}
-                <option value="{{ e }}" {{ a.etat == e ? 'selected' : '' }}>{{ e }}</option>
-              {% endfor %}
-            </select>
-          </td>
+            <td>
+              <select name="etat" form="form-{{ a.id }}" class="form-select">
+                <option value="" disabled {{ a.etat ? '' : 'selected' }}>Choisir…</option>
+                {% for e in etats %}
+                  <option value="{{ e }}" {{ a.etat == e ? 'selected' : '' }}>{{ e }}</option>
+                {% endfor %}
+              </select>
+            </td>
 
-          <td>
-            <input type="text"
-                   name="nourriture"
-                   form="form-{{ a.id }}"
-                   class="form-control"
-                   value="{{ a.nourritureProposee ?? '' }}"
-                   placeholder="Ex: Foin + carottes">
-          </td>
+            <td>
+              <input
+                type="text"
+                name="nourriture"
+                form="form-{{ a.id }}"
+                class="form-control"
+                value="{{ a.nourritureProposee ?? '' }}"
+                placeholder="Ex: Foin + carottes">
+            </td>
 
-          <td>
-            <input type="number"
-                   name="grammage"
-                   form="form-{{ a.id }}"
-                   class="form-control"
-                   min="1"
-                   step="1"
-                   value="{{ a.grammage ?? '' }}"
-                   placeholder="en grammes">
-          </td>
+            <td>
+              <input
+                type="number"
+                name="grammage"
+                form="form-{{ a.id }}"
+                class="form-control"
+                min="1"
+                step="1"
+                value="{{ a.grammage ?? '' }}"
+                placeholder="en grammes">
+            </td>
 
-          <td>
-            <input type="date"
-                   name="date"
-                   form="form-{{ a.id }}"
-                   class="form-control"
-                   value="{{ a.dateDernierPassage ? a.dateDernierPassage|date('Y-m-d') : '' }}">
-          </td>
+            <td class="text-nowrap">
+              <input
+                type="date"
+                name="date"
+                form="form-{{ a.id }}"
+                class="form-control"
+                value="{{ a.dateDernierPassage ? a.dateDernierPassage|date('Y-m-d') : '' }}">
+            </td>
 
-          <td>
-            <textarea
-              name="commentaire"
-              form="form-{{ a.id }}"
-              class="form-control"
-              rows="2"
-              placeholder="Commentaire vétérinaire…"
-            >{{ a.commentaire ?? '' }}</textarea>
-          </td>
+            <td>
+              <textarea
+                name="commentaire"
+                form="form-{{ a.id }}"
+                class="form-control"
+                rows="2"
+                placeholder="Commentaire vétérinaire…">{{ a.commentaire ?? '' }}</textarea>
+            </td>
 
-          <td>
-            <form id="form-{{ a.id }}"
-                  method="post"
-                  action="{{ path('app_veterinarian_update', { id: a.id }) }}">
-              <input type="hidden" name="_token" value="{{ csrf_token('vet_update_' ~ a.id) }}">
-              <button class="btn btn-success w-100">Enregistrer</button>
-            </form>
-          </td>
-        </tr>
-      {% else %}
-        <tr>
-          <td colspan="8" class="text-center text-muted">Aucun animal trouvé.</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+            <td>
+              <form
+                id="form-{{ a.id }}"
+                method="post"
+                action="{{ path('app_veterinarian_update', { id: a.id }) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('vet_update_' ~ a.id) }}">
+                <button class="btn btn-success w-100">Enregistrer</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="8" class="text-center text-muted">Aucun animal trouvé.</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-    <a href="{{ path('app_home') }}" class="logout btn btn-secondary">Retour à l’accueil</a>
+    <a href="{{ path('app_home') }}" class="logout btn btn-secondary mt-3">Retour à l’accueil</a>
   </div>
 
-</div>  {# /zoo-dashboard #}
+</div> 
 {% endblock %}

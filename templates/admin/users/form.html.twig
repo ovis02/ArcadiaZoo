@@ -1,0 +1,76 @@
+{% extends 'user_base.html.twig' %} {% block title %}Admin —
+{{ title|default('Créer un utilisateur') }}{% endblock %} {% block content %}
+<div class="zoo-dashboard admin-users-new">
+  <div class="container mt-4 service-section">
+    {# Flashs #} {% for label, msgs in app.flashes %} {% for m in msgs %}
+    <div
+      class="alert alert-{{
+        label == 'success' ? 'success' : label == 'error' ? 'danger' : 'info'
+      }}"
+    >
+      {{ m }}
+    </div>
+    {% endfor %} {% endfor %}
+
+    <h2 class="mb-3">
+      {{ title|default('Nouvel utilisateur (Employé / Vétérinaire)') }}
+    </h2>
+
+    <div class="bg-white p-3 border rounded">
+      {{ form_start(form, { attr: { class: "user-create-form" } }) }}
+
+      <div class="row g-3">
+        <div class="col-12">
+          {{ form_label(form.email, 'Email (identifiant)', {'label_attr': {'class': 'form-label'
+          }}) }}
+          {{ form_widget(form.email, {'attr': {
+            'class': 'form-control',
+            'placeholder': 'employe@zoo.com ou veterinaire@zoo.com'
+
+          }}) }}
+          {{ form_errors(form.email) }}
+        </div>
+
+        <div class="col-12">
+          {{ form_label(form.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'
+          }}) }}
+          {{ form_widget(form.plainPassword, {'attr': {
+            'class': 'form-control',
+            'placeholder': '********'
+
+          }}) }}
+          {{ form_errors(form.plainPassword) }}
+        </div>
+
+        {# ---------- BLOC RÔLES (espacé, propre) ---------- #}
+        <div class="col-12">
+          <label class="form-label d-block">Rôles</label>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 role-options">
+            {% for child in form.roles %}
+            <div class="form-check form-check-inline">
+              {{ form_widget(child, { attr: { class: "form-check-input" } }) }}
+              {{
+                form_label(child, null, {
+                  label_attr: { class: "form-check-label ms-1" }
+                })
+              }}
+            </div>
+            {% endfor %}
+          </div>
+
+          {{ form_errors(form.roles) }}
+        </div>
+        {# ---------- /BLOC RÔLES ---------- #}
+
+        <div class="col-12 d-flex gap-2">
+          <button class="btn btn-success">Créer l’utilisateur</button>
+          <a class="btn btn-secondary" href="{{ path('app_admin') }}">Retour</a>
+        </div>
+      </div>
+
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

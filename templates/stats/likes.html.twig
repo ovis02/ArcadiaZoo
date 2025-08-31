@@ -1,0 +1,81 @@
+{% extends 'user_base.html.twig' %} {% block title %}Statistiques animaux{%
+endblock %} {% block content %}
+<div class="zoo-dashboard">
+  <div class="container my-4">
+    <section class="zoo-section stats-likes service-section">
+      <!-- Header -->
+      <div class="stats-header text-center mb-4">
+        <h2 class="stats-title">Statistiques animaux</h2>
+
+        <div
+          class="stats-badges d-flex flex-wrap justify-content-center gap-2 mt-3"
+        >
+          <span class="badge bg-secondary">Base : {{ dbName }}</span>
+          <span class="badge bg-info text-dark"
+            >Collection : {{ likesCollection }}</span
+          >
+          <span class="badge bg-primary"
+            >Total des J'aime : {{ totalLikes }}</span
+          >
+        </div>
+
+        <a href="{{ path('app_logout') }}" class="btn btn-danger mt-3"
+          >Déconnexion</a
+        >
+      </div>
+
+      <!-- Barre de recherche -->
+      <div class="mb-3">
+        <input
+          id="likes-filter"
+          type="text"
+          class="form-control"
+          placeholder="Rechercher un animal…"
+        />
+      </div>
+
+      <!-- Tableau -->
+      <div class="table-responsive">
+        <table
+          class="table zoo-table table-bordered table-striped align-middle text-center"
+        >
+          <thead>
+            <tr>
+              <th style="width: 80px">ID</th>
+              <th>Animal</th>
+              <th style="width: 140px">J'aime</th>
+            </tr>
+          </thead>
+          <tbody id="likes-tbody">
+            {% for r in tableRows %}
+            <tr id="like-row-{{ r.id }}">
+              <td>{{ r.id }}</td>
+              <td class="fw-semibold">{{ r.name }}</td>
+              <td>
+                <span class="badge bg-success">{{ r.count }}</span>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="3" class="text-center text-muted">
+                Aucune donnée pour le moment.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Boutons -->
+      <div class="mt-4 d-flex justify-content-center gap-3">
+        <a href="{{ path('app_admin') }}" class="btn btn-warning"
+          >Retour à l’interface administrateur</a
+        >
+        <a href="{{ path('app_home') }}" class="btn btn-secondary"
+          >Retour à l’accueil</a
+        >
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

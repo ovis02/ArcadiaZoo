@@ -1,10 +1,402 @@
-{% extends 'user_base.html.twig' %}{% block title %}Interface Employé{% endblock
-%} {% block content %}
-<header class="bg-light py-3 text-center">
-  <h1>Bienvenue, {{ app.user.email }}!</h1>
-  <p>Vous êtes connecté en tant qu'<strong>Administrateur</strong>.</p>
-  <a href="{{ path('app_logout') }}" class="logout btn btn-danger"
-    >Déconnexion</a
-  >
-</header>
+{% extends 'user_base.html.twig' %}
+{% block title %}Admin — Accueil{% endblock %}
+
+{% block content %}
+<div class="zoo-dashboard">
+  {# Header avec logout #}
+  <header class="py-3 text-center">
+    <h1>Bienvenue, {{ app.user.email }}!</h1>
+    <p>Vous êtes connecté en tant qu’<strong>Administrateur</strong>.</p>
+    <a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnexion</a>
+  </header>
+
+  <div class="container mt-4 service-section">
+    {# Flash messages #}
+    {% for label, msgs in app.flashes %}
+      {% for m in msgs %}
+        <div class="alert alert-{{ label == 'success' ? 'success' : label == 'error' ? 'danger' : 'info' }}">
+          {{ m }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+
+    <h2 class="mb-3">Espace Administrateur</h2>
+    <p class="text-muted">Créez ici des comptes Employé ou Vétérinaire.</p>
+
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <a class="btn btn-success" href="{{ path('admin_users_new') }}">Créer un utilisateur</a>
+      <a class="btn btn-outline-primary" href="{{ path('admin_users') }}">Liste des utilisateurs</a>
+      {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-outline-info" href="{{ path('stats_likes') }}">📊 Statistiques J'aime (MongoDB)</a>
+      {% endif %}
+    </div>
+
+    <hr class="my-4" />
+    <small class="text-muted d-block mb-4">
+      Rappel : l’email est l’identifiant (ex. <code>employe@zoo.com</code>, <code>veterinaire@zoo.com</code>).
+      Le mot de passe est défini par l’admin et n’est pas envoyé par email. Aucun compte Administrateur ne peut être
+      créé depuis l’interface.
+    </small>
+
+    {# ——— SERVICES ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Services</h2>
+      <div class="table-responsive">
+        <table class="table zoo-table table-bordered table-striped align-middle">
+          <thead class="table-info">
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th class="text-end actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in services %}
+              <tr id="service-row-{{ s.id }}">
+                <td>{{ s.id }}</td>
+                <td>
+                  {% if s.image %}
+                    <img src="{{ asset(s.image) }}" alt="Image service {{ s.nom }}" class="img-fluid w-auto rounded" style="max-height:64px;object-fit:cover" />
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+                <td>{{ s.nom }}</td>
+                <td class="text-wrap" style="max-width:520px">
+                  {{ s.description ? (s.description|length > 180 ? s.description|slice(0,180) ~ '…' : s.description) : '—' }}
+                </td>
+                <td class="text-end d-flex gap-2 justify-content-end flex-wrap">
+                  <button type="button" class="btn btn-sm btn-primary btn-toggle-edit flex-fill"
+                          data-target="edit-form-{{ s.id }}">Modifier</button>
+
+                  <form method="post"
+                        action="{{ path('admin_service_delete', { id: s.id }) }}"
+                        data-confirm="Supprimer le service {{ s.nom|e('html_attr') }} ?"
+                        class="flex-fill">
+                    <input type="hidden" name="_token" value="{{ csrf_token('service_delete_' ~ s.id) }}" />
+                    <button class="btn btn-sm btn-danger w-100">Supprimer</button>
+                  </form>
+                </td>
+              </tr>
+
+              {# Formulaire inline (caché par défaut) #}
+              <tr id="edit-form-{{ s.id }}" class="edit-row d-none">
+                <td colspan="5">
+                  <form method="post" action="{{ path('admin_service_update') }}">
+                    <input type="hidden" name="id" value="{{ s.id }}" />
+                    <input type="hidden" name="_token" value="{{ csrf_token('service_edit_' ~ s.id) }}" />
+
+                    <div class="row g-3">
+                      <div class="col-md-4">
+                        <label class="form-label">Nom <span class="text-danger">*</span></label>
+                        <input type="text" name="nom" class="form-control" value="{{ s.nom }}" maxlength="255" required />
+                      </div>
+                      <div class="col-md-8">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="3">{{ s.description }}</textarea>
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label">Image (lecture seule)</label>
+                        <div class="d-flex align-items-center gap-3">
+                          {% if s.image %}
+                            <img src="{{ asset(s.image) }}" alt="Image service {{ s.nom }}" class="rounded" style="max-height:80px" />
+                            <span class="text-muted small">{{ s.image }}</span>
+                          {% else %}
+                            <span class="text-muted">Aucune image</span>
+                          {% endif %}
+                        </div>
+                        <div class="form-text">Seuls <strong>Nom</strong> et <strong>Description</strong> sont modifiables.</div>
+                      </div>
+                    </div>
+
+                    <div class="mt-3 d-flex gap-2 justify-content-end flex-wrap">
+                      <button type="button" class="btn btn-link btn-cancel-edit" data-target="edit-form-{{ s.id }}">Annuler</button>
+                      <button class="btn btn-success">Enregistrer</button>
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            {% else %}
+              <tr><td colspan="5" class="text-center text-muted">Aucun service.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {# ——— HABITATS ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Habitats</h2>
+
+      {# Ajout rapide #}
+      <div class="bg-white border rounded p-3 mb-4">
+        <h5 class="mb-3">Ajouter un habitat</h5>
+        <form method="post" action="{{ path('admin_habitat_create') }}">
+          <input type="hidden" name="_token" value="{{ csrf_token('habitat_create') }}" />
+          <div class="row g-2">
+            <div class="col-md-4">
+              <input type="text" name="nom" class="form-control" placeholder="Nom *" required maxlength="255" />
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="description" class="form-control" placeholder="Description (optionnel)" />
+            </div>
+          </div>
+          <div class="mt-2"><button class="btn btn-success">Ajouter</button></div>
+        </form>
+      </div>
+
+      <div class="table-responsive">
+        <table id="habitats-table" class="table zoo-table table-bordered table-striped align-middle no-orange">
+          <thead class="table-info">
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th class="text-center"># Animaux</th>
+              <th class="text-end actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for h in habitats %}
+              <tr id="habitat-row-{{ h.id }}">
+                <td>{{ h.id }}</td>
+                <td>
+                  {% if h.image %}
+                    <img src="{{ asset(h.image) }}" alt="Habitat {{ h.nom }}" class="img-fluid w-auto rounded" style="max-height:64px;object-fit:cover" />
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+                <td>{{ h.nom }}</td>
+                <td class="text-wrap" style="max-width:520px">
+                  {{ h.description ? (h.description|length > 180 ? h.description|slice(0,180) ~ '…' : h.description) : '—' }}
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle-children"
+                          data-target="animals-{{ h.id }}">Voir animaux ({{ h.animals|length }})</button>
+                </td>
+                <td class="text-end d-flex gap-2 justify-content-end flex-wrap">
+                  <button type="button" class="btn btn-sm btn-primary btn-toggle-edit flex-fill"
+                          data-target="edit-form-{{ h.id }}">Modifier</button>
+
+                  <form method="post" action="{{ path('admin_habitat_delete', { id: h.id }) }}"
+                        data-confirm="Supprimer l’habitat « {{ h.nom|e('html_attr') }} » ?" class="flex-fill">
+                    <input type="hidden" name="_token" value="{{ csrf_token('habitat_delete_' ~ h.id) }}" />
+                    <button class="btn btn-sm btn-danger w-100">Supprimer</button>
+                  </form>
+                </td>
+              </tr>
+
+              {# SOUS-TABLEAU : ANIMAUX (caché par défaut) #}
+              <tr id="animals-{{ h.id }}" class="child-row d-none">
+                <td colspan="6">
+                  <div class="bg-white border rounded p-3">
+                    <h5 class="mb-3">Animaux de « {{ h.nom }} »</h5>
+
+                    {# Ajout rapide d’un animal #}
+                    <form class="mb-3" method="post" action="{{ path('admin_animal_create') }}">
+                      <input type="hidden" name="_token" value="{{ csrf_token('animal_create') }}">
+                      <input type="hidden" name="habitat_id" value="{{ h.id }}">
+                      <div class="row g-2">
+                        <div class="col-md-3">
+                          <input type="text" name="prenom" class="form-control" placeholder="Prénom *" required maxlength="255">
+                        </div>
+                        <div class="col-md-3">
+                          <input type="text" name="race" class="form-control" placeholder="Race *" required maxlength="255">
+                        </div>
+                        <div class="col-md-4">
+                          <select name="habitat_id_override" class="form-select">
+                            <option value="">— Rattacher à un autre habitat (facultatif) —</option>
+                            {% for hh in habitats %}
+                              <option value="{{ hh.id }}">{{ hh.nom }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="col-md-2">
+                          <button class="btn btn-success w-100">Ajouter</button>
+                        </div>
+                      </div>
+                    </form>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-light">
+                          <tr>
+                            <th>ID</th>
+                            <th>Prénom</th>
+                            <th>Race</th>
+                            <th class="text-end actions-col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for a in h.animals %}
+                            <tr id="animal-row-{{ a.id }}">
+                              <td>{{ a.id }}</td>
+                              <td>{{ a.prenom }}</td>
+                              <td>{{ a.race }}</td>
+                              <td class="text-end d-flex gap-2 justify-content-end flex-wrap">
+                                <button type="button" class="btn btn-sm btn-primary btn-toggle-edit flex-fill"
+                                        data-target="animal-edit-{{ a.id }}">Modifier</button>
+
+                                <form method="post" action="{{ path('admin_animal_delete', { id: a.id }) }}"
+                                      data-confirm="Supprimer l’animal « {{ a.prenom|e('html_attr') }} » ?"
+                                      class="flex-fill">
+                                  <input type="hidden" name="_token" value="{{ csrf_token('animal_delete_' ~ a.id) }}">
+                                  <button class="btn btn-sm btn-danger w-100">Supprimer</button>
+                                </form>
+                              </td>
+                            </tr>
+
+                            <tr id="animal-edit-{{ a.id }}" class="edit-row d-none">
+                              <td colspan="4">
+                                <form method="post" action="{{ path('admin_animal_update') }}">
+                                  <input type="hidden" name="id" value="{{ a.id }}">
+                                  <input type="hidden" name="_token" value="{{ csrf_token('animal_edit_' ~ a.id) }}">
+
+                                  <div class="row g-3">
+                                    <div class="col-md-4">
+                                      <label class="form-label">Prénom <span class="text-danger">*</span></label>
+                                      <input type="text" name="prenom" class="form-control" value="{{ a.prenom }}" required maxlength="255">
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Race <span class="text-danger">*</span></label>
+                                      <input type="text" name="race" class="form-control" value="{{ a.race }}" required maxlength="255">
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Habitat</label>
+                                      <select name="habitat_id" class="form-select">
+                                        {% for hh in habitats %}
+                                          <option value="{{ hh.id }}" {{ a.habitat and a.habitat.id == hh.id ? 'selected' : '' }}>
+                                            {{ hh.nom }}
+                                          </option>
+                                        {% endfor %}
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="mt-3 d-flex gap-2 justify-content-end flex-wrap">
+                                    <button type="button" class="btn btn-link btn-cancel-edit" data-target="animal-edit-{{ a.id }}">Annuler</button>
+                                    <button class="btn btn-success">Enregistrer</button>
+                                  </div>
+                                </form>
+                              </td>
+                            </tr>
+                          {% else %}
+                            <tr><td colspan="4" class="text-center text-muted">Aucun animal dans cet habitat.</td></tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              {# Édition inline de l’habitat #}
+              <tr id="edit-form-{{ h.id }}" class="edit-row d-none">
+                <td colspan="6">
+                  <form method="post" action="{{ path('admin_habitat_update') }}">
+                    <input type="hidden" name="id" value="{{ h.id }}" />
+                    <input type="hidden" name="_token" value="{{ csrf_token('habitat_edit_' ~ h.id) }}" />
+
+                    <div class="row g-3">
+                      <div class="col-md-4">
+                        <label class="form-label">Nom <span class="text-danger">*</span></label>
+                        <input type="text" name="nom" class="form-control" value="{{ h.nom }}" maxlength="255" required />
+                      </div>
+                      <div class="col-md-8">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="3">{{ h.description }}</textarea>
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label">Image (lecture seule)</label>
+                        <div class="d-flex align-items-center gap-3">
+                          {% if h.image %}
+                            <img src="{{ asset(h.image) }}" alt="Habitat {{ h.nom }}" class="rounded" style="max-height:80px" />
+                            <span class="text-muted small">{{ h.image }}</span>
+                          {% else %}
+                            <span class="text-muted">Aucune image</span>
+                          {% endif %}
+                        </div>
+                        <div class="form-text">Pour l’examen, on modifie juste <strong>Nom</strong> et <strong>Description</strong>.</div>
+                      </div>
+                    </div>
+
+                    <div class="mt-3 d-flex gap-2 justify-content-end flex-wrap">
+                      <button type="button" class="btn btn-link btn-cancel-edit" data-target="edit-form-{{ h.id }}">Annuler</button>
+                      <button class="btn btn-success">Enregistrer</button>
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            {% else %}
+              <tr><td colspan="6" class="text-center text-muted">Aucun habitat.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {# ——— COMPTES RENDUS VÉTÉRINAIRES ——— #}
+    <section class="mb-5">
+      <h2 class="mb-3">Comptes rendus vétérinaires</h2>
+
+      {# Filtre #}
+      <form method="get" class="row g-2 align-items-end mb-3">
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">Filtrer par animal</label>
+          <select name="r_animal" class="form-select">
+            <option value="" {{ rfilters.animal is empty ? 'selected' : '' }}>Tous</option>
+            {% for a in animals %}
+              <option value="{{ a.id }}" {{ rfilters.animal == a.id ? 'selected' : '' }}>
+                {{ a.prenom }} ({{ a.race }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary">Filtrer</button>
+        </div>
+        <div class="col-auto">
+          <a class="btn btn-outline-secondary" href="{{ path('app_admin') }}">Réinitialiser</a>
+        </div>
+      </form>
+
+      <div class="table-responsive">
+        <table class="table zoo-table table-bordered table-striped align-middle">
+          <thead class="table-info">
+            <tr>
+              <th>Date</th>
+              <th>Animal</th>
+              <th>Vétérinaire</th>
+              <th>État</th>
+              <th>Nourriture</th>
+              <th>Grammage (g)</th>
+              <th>Commentaire</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in reports %}
+              <tr>
+                <td>{{ r.date ? r.date|date('d/m/Y H:i') : '—' }}</td>
+                <td>{{ r.animal ? r.animal.prenom ~ ' (' ~ r.animal.race ~ ')' : '—' }}</td>
+                <td>{{ r.veterinaire ? r.veterinaire.email : '—' }}</td>
+                <td>{{ r.etat ?? '—' }}</td>
+                <td>{{ r.nourriture ?? '—' }}</td>
+                <td>{{ r.grammage is not null ? r.grammage : '—' }}</td>
+                <td class="text-wrap" style="max-width:520px;">
+                  {{ r.commentaire ? (r.commentaire|length > 180 ? r.commentaire|slice(0,180) ~ '…' : r.commentaire) : '—' }}
+                </td>
+              </tr>
+            {% else %}
+              <tr><td colspan="7" class="text-center text-muted">Aucun compte rendu trouvé.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
 {% endblock %}

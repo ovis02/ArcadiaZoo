@@ -57,7 +57,16 @@ content %}
           Nourriture proposée : {{ animal1.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-Tembo" class="jaime-btn">❤️ J'aime</button>
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal1.id }) }}"
+            data-id="{{ animal1.id }}"
+            data-name="{{ animal1.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal1.id) }}"
+          >
+            ❤️ J'aime
+          </button>
         </div>
       </article>
       <article class="service">
@@ -102,7 +111,16 @@ content %}
           Nourriture proposée : {{ animal3.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-JasiriKito" class="jaime-btn">❤️ J'aime</button>
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal3.id }) }}"
+            data-id="{{ animal3.id }}"
+            data-name="{{ animal3.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal3.id) }}"
+          >
+            ❤️ J'aime
+          </button>
         </div>
       </article>
     </div>
@@ -123,7 +141,16 @@ content %}
           Nourriture proposée : {{ animal4.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-Raja" class="jaime-btn">❤️ J'aime</button>
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal4.id }) }}"
+            data-id="{{ animal4.id }}"
+            data-name="{{ animal4.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal4.id) }}"
+          >
+            ❤️ J'aime
+          </button>
         </div>
       </article>
       <article class="service">
@@ -156,7 +183,16 @@ content %}
           Nourriture proposée : {{ animal5.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-Simba" class="jaime-btn">❤️ J'aime</button>
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal5.id }) }}"
+            data-id="{{ animal5.id }}"
+            data-name="{{ animal5.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal5.id) }}"
+          >
+            ❤️ J'aime
+          </button>
         </div>
       </article>
     </div>
@@ -177,7 +213,14 @@ content %}
           Nourriture proposée : {{ animal6.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-rhinoFamily" class="jaime-btn">
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal6.id }) }}"
+            data-id="{{ animal6.id }}"
+            data-name="{{ animal6.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal6.id) }}"
+          >
             ❤️ J'aime
           </button>
         </div>
@@ -212,7 +255,16 @@ content %}
           Nourriture proposée : {{ animal7.nourritureProposee }} <br />
         </div>
         <div class="like-button-container">
-          <button id="increment-Zara" class="jaime-btn">❤️ J'aime</button>
+          <button
+            type="button"
+            class="jaime-btn"
+            data-url="{{ path('jaime_incrementer', { id: animal7.id }) }}"
+            data-id="{{ animal7.id }}"
+            data-name="{{ animal7.prenom }}"
+            data-token="{{ csrf_token('like_' ~ animal7.id) }}"
+          >
+            ❤️ J'aime
+          </button>
         </div>
       </article>
     </div>

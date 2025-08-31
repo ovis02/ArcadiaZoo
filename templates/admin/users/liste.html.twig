@@ -1,0 +1,73 @@
+{% extends 'user_base.html.twig' %} {% block title %}Admin — Utilisateurs{%
+endblock %} {% block content %}
+<div class="zoo-dashboard">
+  <div class="container mt-4 service-section">
+    {% for label, msgs in app.flashes %} {% for m in msgs %}
+    <div
+      class="alert alert-{{
+        label == 'success' ? 'success' : label == 'error' ? 'danger' : 'info'
+      }}"
+    >
+      {{ m }}
+    </div>
+    {% endfor %} {% endfor %} {# en tete + retour #}
+    <div
+      class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2"
+    >
+      <h2 class="mb-0">Utilisateurs</h2>
+      <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" href="{{ path('app_admin') }}">
+          ⟵ Retour admin
+        </a>
+        <a class="btn btn-success" href="{{ path('admin_users_new') }}">
+          Nouvel utilisateur
+        </a>
+      </div>
+    </div>
+
+    {% if users is empty %}
+    <p class="text-muted">Aucun utilisateur.</p>
+    {% else %}
+    <table class="table zoo-table align-middle">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Rôles</th>
+          <th>Créé le</th>
+          <th style="width: 180px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.email }}</td>
+          <td>{{ u.roles|join(', ') }}</td>
+          <td>{{ u.dateCreation ? u.dateCreation|date('d/m/Y H:i') : '—' }}</td>
+          <td class="d-flex gap-2">
+            <a
+              class="btn btn-sm btn-primary"
+              href="{{ path('admin_users_edit', { id: u.id }) }}"
+            >
+              Modifier
+            </a>
+            <form
+              method="post"
+              action="{{ path('admin_users_delete', { id: u.id }) }}"
+              onsubmit="return confirm('Supprimer {{ u.email|e('js') }} ?')"
+            >
+              <input
+                type="hidden"
+                name="_token"
+                value="{{ csrf_token('user_delete_' ~ u.id) }}"
+              />
+              <button class="btn btn-sm btn-danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

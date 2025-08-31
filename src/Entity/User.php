@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks] // ⬅️ active les callbacks Doctrine
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -33,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
+    // On garde DATETIME_MUTABLE pour éviter une migration maintenant
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
@@ -50,21 +52,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        // Valeur par défaut immédiate
+        $this->dateCreation = new \DateTimeImmutable();
+
         $this->avis = new ArrayCollection();
         $this->repasAjoutes = new ArrayCollection();
         $this->compteRenduVeterinaires = new ArrayCollection();
         $this->contacts = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    #[ORM\PrePersist]
+    public function initDateCreation(): void
     {
-        return $this->id;
+        if ($this->dateCreation === null) {
+            $this->dateCreation = new \DateTimeImmutable();
+        }
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
+    // ------------------ getters / setters ------------------
+
+    public function getId(): ?int { return $this->id; }
+
+    public function getEmail(): ?string { return $this->email; }
 
     public function setEmail(string $email): static
     {
@@ -72,10 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    public function getPassword(): ?string { return $this->password; }
 
     public function setPassword(string $password): static
     {
@@ -86,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        if (!in_array('ROLE_USER', $roles)) {
+        if (!in_array('ROLE_USER', $roles, true)) {
             $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
@@ -98,42 +104,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function eraseCredentials(): void
-    {
-        // À utiliser si tu stockes temporairement des données sensibles
-    }
+    public function eraseCredentials(): void {}
 
     public function getUserIdentifier(): string
     {
-        return $this->email;
+        return (string) $this->email;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
+    public function getPrenom(): ?string { return $this->prenom; }
+    public function setPrenom(?string $prenom): static { $this->prenom = $prenom; return $this; }
 
-    public function setPrenom(?string $prenom): static
-    {
-        $this->prenom = $prenom;
-        return $this;
-    }
+    public function getNom(): ?string { return $this->nom; }
+    public function setNom(?string $nom): static { $this->nom = $nom; return $this; }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(?string $nom): static
-    {
-        $this->nom = $nom;
-        return $this;
-    }
-
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->dateCreation;
-    }
+    public function getDateCreation(): ?\DateTimeInterface { return $this->dateCreation; }
 
     public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
@@ -141,21 +125,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
+    public function getAvis(): Collection { return $this->avis; }
     public function addAvi(Avis $avi): static
     {
         if (!$this->avis->contains($avi)) {
             $this->avis->add($avi);
             $avi->setValidePar($this);
         }
-
         return $this;
     }
-
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
@@ -163,25 +141,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $avi->setValidePar(null);
             }
         }
-
         return $this;
     }
 
-    public function getRepasAjoutes(): Collection
-    {
-        return $this->repasAjoutes;
-    }
-
+    public function getRepasAjoutes(): Collection { return $this->repasAjoutes; }
     public function addRepasAjoute(Repas $repasAjoute): static
     {
         if (!$this->repasAjoutes->contains($repasAjoute)) {
             $this->repasAjoutes->add($repasAjoute);
             $repasAjoute->setAjoutePar($this);
         }
-
         return $this;
     }
-
     public function removeRepasAjoute(Repas $repasAjoute): static
     {
         if ($this->repasAjoutes->removeElement($repasAjoute)) {
@@ -189,51 +160,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $repasAjoute->setAjoutePar(null);
             }
         }
-
         return $this;
     }
 
-    public function getCompteRenduVeterinaires(): Collection
+    public function getCompteRenduVeterinaires(): Collection { return $this->compteRenduVeterinaires; }
+    public function addCompteRenduVeterinaire(CompteRenduVeterinaire $cr): static
     {
-        return $this->compteRenduVeterinaires;
-    }
-
-    public function addCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
-    {
-        if (!$this->compteRenduVeterinaires->contains($compteRenduVeterinaire)) {
-            $this->compteRenduVeterinaires->add($compteRenduVeterinaire);
-            $compteRenduVeterinaire->setVeterinaire($this);
+        if (!$this->compteRenduVeterinaires->contains($cr)) {
+            $this->compteRenduVeterinaires->add($cr);
+            $cr->setVeterinaire($this);
         }
-
         return $this;
     }
-
-    public function removeCompteRenduVeterinaire(CompteRenduVeterinaire $compteRenduVeterinaire): static
+    public function removeCompteRenduVeterinaire(CompteRenduVeterinaire $cr): static
     {
-        if ($this->compteRenduVeterinaires->removeElement($compteRenduVeterinaire)) {
-            if ($compteRenduVeterinaire->getVeterinaire() === $this) {
-                $compteRenduVeterinaire->setVeterinaire(null);
+        if ($this->compteRenduVeterinaires->removeElement($cr)) {
+            if ($cr->getVeterinaire() === $this) {
+                $cr->setVeterinaire(null);
             }
         }
-
         return $this;
     }
 
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
-
+    public function getContacts(): Collection { return $this->contacts; }
     public function addContact(Contact $contact): static
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts->add($contact);
             $contact->setTraitePar($this);
         }
-
         return $this;
     }
-
     public function removeContact(Contact $contact): static
     {
         if ($this->contacts->removeElement($contact)) {
@@ -241,7 +198,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $contact->setTraitePar(null);
             }
         }
-
         return $this;
     }
 }
