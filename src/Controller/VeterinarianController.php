@@ -35,11 +35,11 @@ class VeterinarianController extends AbstractController
         }
 
         // Données du formulaire
-        $etat = $request->request->get('etat');            // string|null
-        $nour = $request->request->get('nourriture');      // string|null
-        $gram = $request->request->get('grammage');        // number|string|null
-        $date = $request->request->get('date');            // 'YYYY-MM-DD' ou ''
-        $com  = $request->request->get('commentaire');     // string|null
+        $etat = $request->request->get('etat');            
+        $nour = $request->request->get('nourriture');      
+        $gram = $request->request->get('grammage');        
+        $date = $request->request->get('date');            
+        $com  = $request->request->get('commentaire');     
 
         // --- 1) Mise à jour de la fiche ANIMAL (instantané public) ---
         // État
