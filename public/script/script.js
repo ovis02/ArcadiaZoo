@@ -31,10 +31,10 @@ window.addEventListener("resize", () => {
 document.addEventListener("DOMContentLoaded", function () {
   // Liste des chemins d'accès des images à faire défiler
   const imagePaths = [
-    "/assets/images/jungle/tigre.jpg",
-    "/assets/images/savane/elephant.jpg",
-    "/assets/images/marais/hipopotame.jpg",
-    "/assets/images/savane/lion.jpg",
+    "/images/jungle/tigre.jpg",
+    "/images/savane/elephant.jpg",
+    "images/marais/hipopotame.jpg",
+    "/images/savane/lion.jpg",
   ];
 
   // Sélection de l'élément img avec l'ID 'main-image'
