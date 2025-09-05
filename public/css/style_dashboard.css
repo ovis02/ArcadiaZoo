@@ -1,0 +1,280 @@
+/* ================================
+   Thème Dashboard — Arcadia
+   Couleurs + styles communs
+   ================================ */
+
+/* --- Variables --- */
+:root {
+  --color-brown: #3a2418;
+  --color-green: #146c2e;
+  --color-beige: #e67e22;
+  --beige-row: rgba(230, 126, 34, 0.12);
+}
+
+/* --- Portée dashboard --- */
+.zoo-dashboard {
+  color: var(--color-brown);
+  margin-bottom: 30px;
+}
+
+/* Titres */
+.zoo-dashboard h1,
+.zoo-dashboard h2 {
+  color: var(--color-brown);
+  font-weight: bold;
+}
+
+/* --- Sections / cartes --- */
+.zoo-dashboard .service-section {
+  background: rgba(247, 242, 234, 0.6);
+  border: 1px solid #e0d5c5;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* --- Boutons --- */
+.zoo-dashboard .btn-success {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  color: #fff;
+}
+.zoo-dashboard .btn-success:hover {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.zoo-dashboard .btn-secondary {
+  background-color: var(--color-brown);
+  border-color: var(--color-brown);
+  color: #fff;
+}
+.zoo-dashboard .btn-secondary:hover {
+  filter: brightness(1.1);
+}
+
+/* ================================
+   Tableaux
+   ================================ */
+
+.zoo-dashboard .zoo-table {
+  border: 1px solid #e0d5c5;
+  border-radius: 8px;
+  overflow: hidden; /* coins visibles */
+  margin-top: 0.5rem;
+}
+
+/* En-tête : fond vert + texte lisible */
+.zoo-dashboard .zoo-table thead {
+  background-color: var(--color-green);
+}
+.zoo-dashboard .zoo-table thead th {
+  color: #3a2418;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Lignes paires adoucies */
+.zoo-dashboard .zoo-table tbody tr:nth-child(even) {
+  background-color: var(--beige-row);
+}
+
+/* Cellules */
+.zoo-dashboard .zoo-table th,
+.zoo-dashboard .zoo-table td {
+  vertical-align: middle;
+  padding: 0.75rem 1rem;
+}
+
+/* Neutraliser l’orange (beige) uniquement pour la table Habitats */
+#habitats-table tbody tr:nth-child(even),
+#habitats-table tbody tr:nth-child(even) > * {
+  background-color: inherit !important;
+}
+
+/* ================================
+   Formulaires (généraux)
+   ================================ */
+
+.zoo-dashboard .form-control,
+.zoo-dashboard .form-select,
+.zoo-dashboard textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: var(--color-brown);
+}
+
+.zoo-dashboard .form-control:focus,
+.zoo-dashboard .form-select:focus,
+.zoo-dashboard textarea:focus {
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 0.15rem rgba(25, 124, 47, 0.25);
+}
+
+/* ================================
+   Écran de connexion
+   ================================ */
+
+/* Fond d'écran */
+.screen {
+  background-image: url("../images/fondecran/iStock-1019361978.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteneur du formulaire */
+.login-form-container {
+  background: rgba(75, 46, 31, 0.8);
+  border: 2px solid rgba(0, 255, 135, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0, 255, 135, 0.6);
+  animation: glow 2s infinite alternate;
+}
+
+/* Animation de lueur */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(25, 124, 47, 0.6);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(25, 124, 47, 1);
+  }
+}
+
+/* Titre */
+.title-login {
+  font-family: "Zen Tokyo Zoo", sans-serif;
+  font-size: 36px;
+  text-align: center;
+  color: var(--color-beige);
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--color-green);
+}
+
+/* Champs */
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form .form-label {
+  color: var(--color-beige);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+.login-form .form-control {
+  background: rgba(75, 46, 31, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-form .form-control:focus {
+  border-color: var(--color-green);
+  box-shadow: 0 0 10px rgba(25, 124, 47, 0.8);
+}
+
+/* Bouton de soumission (commentaires corrigés) */
+.btn-submit {
+  background: var(--color-beige); /* bouton orange */
+  color: var(--color-green); /* texte vert */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(25, 124, 47, 0.8);
+}
+
+/* ================================
+   Page Stats MongoDB
+   ================================ */
+
+.stats-likes .stats-header {
+  margin-top: 50px;
+  margin-bottom: 24px;
+  row-gap: 12px;
+}
+
+.stats-likes .stats-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* ================================
+   Responsive
+   ================================ */
+
+@media (max-width: 768px) {
+  /* Scroll horizontal propre via le wrapper Bootstrap */
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  /* La table reste une table ; on évite le wrap des cellules */
+  .zoo-dashboard .zoo-table {
+    width: 100%;
+    font-size: 13px;
+    white-space: nowrap; /* chaque ligne reste sur une ligne */
+  }
+
+  /* Un peu moins de padding pour gagner de la place */
+  .zoo-dashboard .zoo-table th,
+  .zoo-dashboard .zoo-table td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Champs dans les cellules : taille compacte + largeur mini pour ne pas se tasser */
+  .zoo-dashboard .zoo-table .form-control,
+  .zoo-dashboard .zoo-table .form-select,
+  .zoo-dashboard .zoo-table textarea {
+    min-width: 140px;
+    max-width: 100%;
+    font-size: 14px;
+    padding: 0.35rem 0.5rem;
+  }
+
+  /* Colonnes spécifiques un peu plus larges */
+  .zoo-dashboard .zoo-table input[type="date"] {
+    min-width: 160px;
+  }
+  .zoo-dashboard .zoo-table .col-actions {
+    min-width: 120px;
+  }
+
+  /* Boutons plein largeur dans les cellules */
+  .zoo-dashboard td .btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Stats (page Mongo) */
+  .stats-likes .stats-title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .stats-likes .stats-badges {
+    gap: 8px 12px;
+  }
+  .stats-likes .badge {
+    font-weight: 600;
+    padding: 8px 12px;
+  }
+}
