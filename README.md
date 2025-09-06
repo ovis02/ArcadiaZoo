@@ -142,7 +142,7 @@ Il démontre la maîtrise de :
 - ✅ MySQL + MongoDB
 - ✅ Gestion des rôles et sécurité
 - ✅ Intégration frontend/backend
-- ✅ Lien de deploiement sur heroku :
+- ✅ Lien de deploiement sur heroku : https://arcazoo-40aeb8b73b17.herokuapp.com/
 ```
 
 ## 🐳 Déploiement avec Docker (alternative professionnelle)
