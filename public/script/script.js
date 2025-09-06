@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Incrémentation "J'aime" (simple & robuste)
+// Incrémentation "J'aime"
 document.addEventListener("click", async (e) => {
   const b = e.target.closest(".jaime-btn");
   if (!b || b.disabled) return;
@@ -164,7 +164,7 @@ document.addEventListener("click", async (e) => {
   const previousLabel = b.textContent;
 
   b.disabled = true;
-  b.textContent = "…"; // petit indicateur de chargement
+  b.textContent = "…";
 
   try {
     const res = await fetch(url, {
@@ -180,20 +180,22 @@ document.addEventListener("click", async (e) => {
     } catch {}
 
     if (!res.ok || !data.ok) {
+      if (data.error === "already_liked") {
+        b.textContent = `❤️ Déjà liké`;
+        b.disabled = true;
+        return;
+      }
       throw new Error(data.message || data.error || `HTTP ${res.status}`);
     }
 
-    // Feedback clair + compteur mis à jour
     b.textContent = `❤️ Merci ! (${data.count})`;
     b.setAttribute("aria-pressed", "true");
     b.classList.add("liked");
     success = true;
   } catch (err) {
     alert(`Erreur: ${err.message || err}`);
-    b.textContent = previousLabel; // on remet l'ancien libellé si échec
+    b.textContent = previousLabel;
   } finally {
-    // Si succès: on garde désactivé (pas de "unlike")
-    // Si échec: on réactive pour retenter
     b.disabled = success ? true : false;
   }
 });

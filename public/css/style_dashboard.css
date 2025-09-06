@@ -7,7 +7,7 @@
 :root {
   --color-brown: #3a2418;
   --color-green: #146c2e;
-  --color-beige: #e67e22;
+  --color-orange: #e67e22;
   --beige-row: rgba(230, 126, 34, 0.12);
 }
 
@@ -59,11 +59,10 @@
 .zoo-dashboard .zoo-table {
   border: 1px solid #e0d5c5;
   border-radius: 8px;
-  overflow: hidden; /* coins visibles */
+  overflow: hidden;
   margin-top: 0.5rem;
 }
 
-/* En-tête : fond vert + texte lisible */
 .zoo-dashboard .zoo-table thead {
   background-color: var(--color-green);
 }
@@ -75,7 +74,7 @@
 
 /* Lignes paires adoucies */
 .zoo-dashboard .zoo-table tbody tr:nth-child(even) {
-  background-color: var(--beige-row);
+  background-color: var(--orange-row);
 }
 
 /* Cellules */
@@ -85,7 +84,6 @@
   padding: 0.75rem 1rem;
 }
 
-/* Neutraliser l’orange (beige) uniquement pour la table Habitats */
 #habitats-table tbody tr:nth-child(even),
 #habitats-table tbody tr:nth-child(even) > * {
   background-color: inherit !important;
@@ -133,6 +131,7 @@
   border-radius: 15px;
   padding: 30px;
   width: 400px;
+  max-width: 420px;
   box-shadow: 0 0 20px rgba(0, 255, 135, 0.6);
   animation: glow 2s infinite alternate;
 }
@@ -152,7 +151,7 @@
   font-family: "Zen Tokyo Zoo", sans-serif;
   font-size: 36px;
   text-align: center;
-  color: var(--color-beige);
+  color: var(--color-orange);
   margin-bottom: 20px;
   text-shadow: 0 0 10px var(--color-green);
 }
@@ -163,7 +162,7 @@
 }
 
 .login-form .form-label {
-  color: var(--color-beige);
+  color: var(--color-orange);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
 }
@@ -183,10 +182,9 @@
   box-shadow: 0 0 10px rgba(25, 124, 47, 0.8);
 }
 
-/* Bouton de soumission (commentaires corrigés) */
 .btn-submit {
-  background: var(--color-beige); /* bouton orange */
-  color: var(--color-green); /* texte vert */
+  background: var(--color-orange);
+  color: var(--color-green);
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -222,25 +220,52 @@
    ================================ */
 
 @media (max-width: 768px) {
-  /* Scroll horizontal propre via le wrapper Bootstrap */
+  /* formulaire de connexion */
+  .screen {
+    background-attachment: scroll;
+    padding: 140px 16px 24px;
+    align-items: flex-start;
+  }
+  .login-form-container {
+    width: 100%;
+    max-width: none;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .title-login {
+    font-size: 28px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .login-form .form-group {
+    margin-bottom: 14px;
+  }
+  .login-form .form-control {
+    font-size: 16px;
+  }
+  .btn-submit {
+    height: 48px;
+  }
+  .text-center .btn {
+    width: 100%;
+  }
+
+  /* dashboard (mobile) */
   .table-responsive {
     overflow-x: auto;
   }
 
-  /* La table reste une table ; on évite le wrap des cellules */
   .zoo-dashboard .zoo-table {
     width: 100%;
     font-size: 13px;
-    white-space: nowrap; /* chaque ligne reste sur une ligne */
+    white-space: nowrap;
   }
 
-  /* Un peu moins de padding pour gagner de la place */
   .zoo-dashboard .zoo-table th,
   .zoo-dashboard .zoo-table td {
     padding: 0.5rem 0.75rem;
   }
 
-  /* Champs dans les cellules : taille compacte + largeur mini pour ne pas se tasser */
   .zoo-dashboard .zoo-table .form-control,
   .zoo-dashboard .zoo-table .form-select,
   .zoo-dashboard .zoo-table textarea {
@@ -250,7 +275,6 @@
     padding: 0.35rem 0.5rem;
   }
 
-  /* Colonnes spécifiques un peu plus larges */
   .zoo-dashboard .zoo-table input[type="date"] {
     min-width: 160px;
   }
@@ -258,7 +282,6 @@
     min-width: 120px;
   }
 
-  /* Boutons plein largeur dans les cellules */
   .zoo-dashboard td .btn {
     width: 100%;
     font-size: 14px;
