@@ -1070,6 +1070,10 @@ button.jaime-btn:hover {
     margin: 0 5px;
   }
 
+  .note-label {
+    display: none;
+  }
+
   .btn.btn-submit,
   .btn.btn-success {
     width: 100%;
