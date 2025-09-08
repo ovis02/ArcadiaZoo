@@ -1074,6 +1074,10 @@ button.jaime-btn:hover {
   .btn.btn-success {
     width: 100%;
   }
+
+  .note-label {
+    display: none;
+  }
   /*footer Mobile*/
 
   .logo-footer {
